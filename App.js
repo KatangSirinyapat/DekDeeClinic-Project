@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import Login from './component/login';
+import Menu from './component/menu';
+import Register from './component/register';
+import PatientProfile from './component/patientprofile';
+import Meet from './component/meet';
+import VisitRecord from './component/visitrecord';
+import Report from './component/report'
+import Setting from './component/setting'
+
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+        <Drawer.Navigator initialRouteName="Home">
+        
+        <Drawer.Screen name="Menu" component={Menu} />
+        <Drawer.Screen name="ลงทะเบียนผู้ป่วยใหม่" component={Register} />
+        <Drawer.Screen name="ข้อมูลผู้ป่วย" component={PatientProfile} />
+        <Drawer.Screen name="ระบบนัดหมาย" component={Meet} />
+        <Drawer.Screen name="บันทึกการให้บริการ" component={VisitRecord} />
+        <Drawer.Screen name="รายงาน" component={Report} />
+        <Drawer.Screen name="ตั้งค่าระบบ" component={Setting} />
+        <Drawer.Screen name="Login" component={Login} />
+       
+     
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
