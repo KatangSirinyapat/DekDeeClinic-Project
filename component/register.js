@@ -31,7 +31,7 @@ export default function Register({ navigation }) {
 
     const postPatient = () => {
         axios
-            .post('http://127.0.0.1:3333/patients', {
+            .post('http://178.128.90.50:3333/patients', {
                 Clinicnumber: Clinicnumber,
                 Fname: Fname,
                 Lname: Lname,
@@ -53,7 +53,8 @@ export default function Register({ navigation }) {
             })
             .then(function (response) {
                 // handle success
-                alert(JSON.stringify(response.data));
+                // alert(JSON.stringify(response.data));
+                alert("ลงทะเบียนผู้ป่วนเสร็จสิ้น")
             })
             .catch(function (error) {
                 // handle error

@@ -3,6 +3,9 @@ import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity }
 import tw from "tailwind-react-native-classnames";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DropDownPicker from 'react-native-dropdown-picker';
+import axios from "axios";
+
+const URL = `http://178.128.90.50:3333/meets`
 
 export default function Meet({ navigation }) {
     // const navigation = useNavigation()
