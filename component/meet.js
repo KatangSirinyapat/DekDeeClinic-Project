@@ -9,7 +9,7 @@ export default function Meet({ navigation }) {
     return (   
         <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
             <View style={tw`flex w-full justify-start items-start ml-16`}>
-                <Button onPress={() => navigation.goBack('Menu')} title="< ย้อนกลับ" />
+                <Button onPress={() => navigation.navigate('Menu')} title="< ย้อนกลับ" />
             </View>
             <Text style={tw`font-semibold text-2xl mt-6`}>นัดหมาย</Text>
             

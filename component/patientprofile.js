@@ -4,95 +4,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import tw from "tailwind-react-native-classnames";
 import axios from 'axios';
 
-// const URL = 'http://127.0.0.1:3333/patients';
+
 export default function PatientProfile({ navigation }) {
 
 
-    // const getPatienprofile = async () => {
-
-    //     try {
-    //         const response = await axios.get(
-    //             `http://127.0.0.1:3333/patients:${params}`
-    //         );
-    //         alert(JSON.stringify(response.data));
-    //     }
-    //     catch (error) {
-    //         alert(error.message);
-    //     }
- 
-    // };
-    // const Print = () => {
-    //     console.log("Test:"+ params)
-    // }
-
-    // const constructor = (props) =>  {
-     
-
-    //     this.state = {
-    //         isLoading: false,
-    //         Clinicnumber: '',
-    //         Fname: '',
-    //         Lname: '',
-    //         Gender: '',
-    //         Bod: '',
-    //         Age: '',
-    //         Telephone: '',
-    //         Drugallergy: '',
-    //         Congenitaldisease: '',
-    //         Homeno: '',
-    //         Moo: '',
-    //         Soi: '',
-    //         Subdistrict: '',
-    //         District: '',
-    //         Province: '',
-    //         Fnameparent: '',
-    //         Lnameparent: '',
-    //         Relation: ''
-    //     }
-    // }
-
-    // const searchPatient = async () => {
-    //     try {
-    //         const response =  getID(this.state)
-
-    //         this.setState({ isLoading: true})
-
-    //         const { data : URL } = await axios.get(`${URL}/${id}`)
-
-    //         const {Data} = URL
-
-    //         this.setState({
-               
-    //             Clinicnumber,
-    //             Fname,
-    //             Lname,
-    //             Gender,
-    //             Bod,
-    //             Age,
-    //             Telephone,
-    //             Drugallergy,
-    //             Congenitaldisease,
-    //             Homeno,
-    //             Moo,
-    //             Soi,
-    //             Subdistrict,
-    //             District,
-    //             Province,
-    //             Fnameparent,
-    //             Lnameparent,
-    //             Relation,
-    //             isLoading: false
-                
-    //         })
-    //     } catch (err) {
-    //         alert(err.message);
-    //     }
-    // }
-    // const navigation = useNavigation()
     return (
         <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
             <View style={tw`flex w-full justify-start items-start ml-16`}>
-                <Button onPress={() => navigation.goBack('Menu')} title="< ย้อนกลับ" />
+                <Button onPress={() => navigation.navigate('Menu')} title="< ย้อนกลับ" />
             </View>
             <Text style={tw`font-semibold text-2xl mt-6`}>ข้อมูลผู้ป่วย</Text>
 
