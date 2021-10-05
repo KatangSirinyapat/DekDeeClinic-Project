@@ -119,8 +119,8 @@ export default function Register({ navigation }) {
                                         placeholder={{ label: "เลือกเพศ", value: null }}
                                         onValueChange={(value) => setGender(value)}
                                         items={[
-                                            { label: "ชาย", value: "male" },
-                                            { label: "หญิง", value: "female" },
+                                            { label: "ชาย", value: "ชาย" },
+                                            { label: "หญิง", value: "หญิง" },
                                         ]}
                                     />
                                 </View>
@@ -199,9 +199,9 @@ export default function Register({ navigation }) {
                                         placeholder={{ label: "ความสัมพันธ์กับผู้ป่วย", value: null }}
                                         onValueChange={(value) => setRelation(value)}
                                         items={[
-                                            { label: "บิดา", value: "dad" },
-                                            { label: "มารดา", value: "mom" },
-                                            { label: "ญาติ", value: "relativen" },
+                                            { label: "บิดา", value: "บิดา" },
+                                            { label: "มารดา", value: "มารดา" },
+                                            { label: "ญาติ", value: "ญาติ" },
                                         ]}
                                     />
                                 </View>

@@ -29,7 +29,7 @@ export default function PatientProfile({ navigation }) {
     const [Relation, setRelation] = useState("");
     const [id, setId] = useState(0)
     const [text, setText] = useState("1")
-    
+
 
     useEffect(() => {
         getPatient()
@@ -143,22 +143,22 @@ export default function PatientProfile({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อ </Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Fname}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setFname(text)} value={Fname} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>สกุล </Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Lname}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setLname(text)} value={Lname} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>เพศ </Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Gender}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setGender(text)} value={Gender} />
                                 </View>
 
                             </View>
@@ -167,22 +167,22 @@ export default function PatientProfile({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>วันเกิด </Text>
-                                <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Bod}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setBod(text)} value={Bod} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>อายุ </Text>
-                                <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Age}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setAge(text)} value={Age} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์ </Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Telephone}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setTelephone(text)} value={Telephone} />
                                 </View>
 
                             </View>
@@ -191,22 +191,22 @@ export default function PatientProfile({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ประวัติการแพ้ยา </Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Drugallergy}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setDrugallergy(text)} value={Drugallergy} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ประวัติโรคประจำตัว </Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Congenitaldisease}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setCongenitaldisease(text)} value={Congenitaldisease} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>จำนวนครั้งในการรักษา</Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>0</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput>0</TextInput>
                                 </View>
 
                             </View>
@@ -215,21 +215,21 @@ export default function PatientProfile({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ที่อยู่ บ้านเลขที่ </Text>
-                                <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`} >
-                                    <Text>{Homeno}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`} >
+                                    <TextInput onChangeText={text => setHomeno(text)} value={Homeno} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>หมู่ที่ </Text>
-                                <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`} >
-                                    <Text>{Moo}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`} >
+                                    <TextInput onChangeText={text => setMoo(text)} value={Moo} />
                                 </View>
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>ตรอก/ซอก/ซอย</Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Soi}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setSoi(text)} value={Soi} />
                                 </View>
 
                             </View>
@@ -238,22 +238,22 @@ export default function PatientProfile({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ตำบล</Text>
-                                <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Subdistrict}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setSubdistrict(text)} value={Subdistrict} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>อำเภอ</Text>
-                                <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{District}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setDistric(text)} value={District} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>จังหวัด</Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Province}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setProvince(text)} value={Province} />
                                 </View>
                             </View>
                         </View>
@@ -261,22 +261,22 @@ export default function PatientProfile({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อผู้ปกครอง</Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Fnameparent}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setFnameparent(text)} value={Fnameparent} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Lnameparent}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setLnameparent(text)} value={Lnameparent} />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>ความสัมพันธ์กับผู้ป่วย</Text>
-                                <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{Relation}</Text>
+                                <View style={tw`flex justify-center items-start h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <TextInput onChangeText={text => setRelation(text)} value={Relation} />
                                 </View>
 
                             </View>
