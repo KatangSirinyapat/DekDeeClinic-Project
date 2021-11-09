@@ -6,50 +6,50 @@ import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios';
 
-
+const URL = `http://178.128.90.50:3333/patients`
 
 export default function Register({ navigation }) {
 
-    const [Clinicnumber, setClinicnumber] = useState("");
-    const [Fname, setFname] = useState("");
-    const [Lname, setLname] = useState("");
-    const [Gender, setGender] = useState("");
-    const [Bod, setBod] = useState("");
-    const [Age, setAge] = useState("");
-    const [Telephone, setTelephone] = useState("");
-    const [Drugallergy, setDrugallergy] = useState("");
-    const [Congenitaldisease, setCongenitaldisease] = useState("");
-    const [Homeno, setHomeno] = useState("");
-    const [Moo, setMoo] = useState("");
-    const [Soi, setSoi] = useState("");
-    const [Subdistrict, setSubdistrict] = useState("");
-    const [District, setDistric] = useState("");
-    const [Province, setProvince] = useState("");
-    const [Fnameparent, setFnameparent] = useState("");
-    const [Lnameparent, setLnameparent] = useState("");
-    const [Relation, setRelation] = useState("");
+    const [clinic_number, setClinic_number] = useState("");
+    const [fname, setfname] = useState("");
+    const [lname, setlname] = useState("");
+    const [gender, setgender] = useState("");
+    const [bod, setbod] = useState("");
+    const [age, setage] = useState("");
+    const [telephone, settelephone] = useState("");
+    const [drug_allergy, setdrug_allergy] = useState("");
+    const [congenital_disease, setcongenital_disease] = useState("");
+    const [home_no, sethome_no] = useState("");
+    const [moo, setmoo] = useState("");
+    const [soi, setsoi] = useState("");
+    const [subdistrict, setsubdistrict] = useState("");
+    const [district, setDistric] = useState("");
+    const [province, setprovince] = useState("");
+    const [fname_parent, setfname_parent] = useState("");
+    const [lname_parent, setlname_parent] = useState("");
+    const [relation, setrelation] = useState("");
 
     const postPatient = () => {
         axios
-            .post('http://178.128.90.50:3333/patients', {
-                Clinicnumber: Clinicnumber,
-                Fname: Fname,
-                Lname: Lname,
-                Gender: Gender,
-                Bod: Bod,
-                Age: Age,
-                Telephone: Telephone,
-                Drugallergy: Drugallergy,
-                Congenitaldisease: Congenitaldisease,
-                Homeno: Homeno,
-                Moo: Moo,
-                Soi: Soi,
-                Subdistrict: Subdistrict,
-                District: District,
-                Province: Province,
-                Fnameparent: Fnameparent,
-                Lnameparent: Lnameparent,
-                Relation: Relation
+            .post(URL, {
+                clinic_number: clinic_number,
+                fname: fname,
+                lname: lname,
+                gender: gender,
+                bod: bod,
+                age: age,
+                telephone: telephone,
+                drug_allergy: drug_allergy,
+                congenital_disease: congenital_disease,
+                home_no: home_no,
+                moo: moo,
+                soi: soi,
+                subdistrict: subdistrict,
+                district: district,
+                province: province,
+                fname_parent: fname_parent,
+                lname_parent: lname_parent,
+                relation: relation
             })
             .then(function (response) {
                 // handle success
@@ -58,14 +58,15 @@ export default function Register({ navigation }) {
             })
             .catch(function (error) {
                 // handle error
+                console.log(error.message);
                 alert(error.message);
             });
     };
 
     //   const Print = () => {
-    //       console.log("Fname:"+ Fname)
-    //       console.log("Lname:"+ Lname)
-    //       console.log("Gender:"+ Gender)
+    //       console.log("fname:"+ fname)
+    //       console.log("lname:"+ lname)
+    //       console.log("gender:"+ gender)
     //   }
 
     // const navigation = useNavigation()
@@ -85,17 +86,17 @@ export default function Register({ navigation }) {
                             <View style={tw`flex flex-col w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อ</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setFname(text)} />
+                                    onChangeText={(text) => setfname(text)} />
                             </View>
                             <View style={tw`flex flex-col w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>สกุล</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setLname(text)} />
+                                    onChangeText={(text) => setlname(text)} />
                             </View>
                             <View style={tw`flex flex-col w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>เลขประจำตัวผู้ป่วย</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setClinicnumber(text)} />
+                                    onChangeText={(text) => setClinic_number(text)} />
                             </View>
                         </View>
 
@@ -103,21 +104,21 @@ export default function Register({ navigation }) {
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>วันเกิด</Text>
                                 <TextInput style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setBod(text)} />
+                                    onChangeText={(text) => setbod(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>อายุ</Text>
                                 <TextInput style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setAge(text)} />
+                                    onChangeText={(text) => setage(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>เพศ</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                          onChangeText={(text) => setGender(text)}/> */}
+                          onChangeText={(text) => setgender(text)}/> */}
                                 <View style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 pt-2`}>
                                     <RNPickerSelect
                                         placeholder={{ label: "เลือกเพศ", value: null }}
-                                        onValueChange={(value) => setGender(value)}
+                                        onValueChange={(value) => setgender(value)}
                                         items={[
                                             { label: "ชาย", value: "male" },
                                             { label: "หญิง", value: "female" },
@@ -131,17 +132,17 @@ export default function Register({ navigation }) {
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ประวัติการแพ้ยา</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setDrugallergy(text)} />
+                                    onChangeText={(text) => setdrug_allergy(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ประวัติโรคประจำตัว</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setCongenitaldisease(text)} />
+                                    onChangeText={(text) => setcongenital_disease(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setTelephone(text)} />
+                                    onChangeText={(text) => settelephone(text)} />
                             </View>
                         </View>
 
@@ -149,17 +150,17 @@ export default function Register({ navigation }) {
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ที่อยู่ บ้านเลขที่</Text>
                                 <TextInput style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setHomeno(text)} />
+                                    onChangeText={(text) => sethome_no(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>หมู่ที่</Text>
                                 <TextInput style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setMoo(text)} />
+                                    onChangeText={(text) => setmoo(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>ตรอก/ซอก/ซอย</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setSoi(text)} />
+                                    onChangeText={(text) => setsoi(text)} />
                             </View>
                         </View>
 
@@ -167,7 +168,7 @@ export default function Register({ navigation }) {
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ตำบล</Text>
                                 <TextInput style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setSubdistrict(text)} />
+                                    onChangeText={(text) => setsubdistrict(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>อำเภอ</Text>
@@ -177,7 +178,7 @@ export default function Register({ navigation }) {
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>จังหวัด</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setProvince(text)} />
+                                    onChangeText={(text) => setprovince(text)} />
                             </View>
                         </View>
 
@@ -185,19 +186,19 @@ export default function Register({ navigation }) {
                             <View style={tw`flex flex-col w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อผู้ปกครอง</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setFnameparent(text)} />
+                                    onChangeText={(text) => setfname_parent(text)} />
                             </View>
                             <View style={tw`flex flex-col w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>สกุล</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setLnameparent(text)} />
+                                    onChangeText={(text) => setlname_parent(text)} />
                             </View>
                             <View style={tw`flex flex-col w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>ความสัมพันธ์กับผู้ป่วย</Text>
                                 <View style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 pt-2`}>
                                     <RNPickerSelect
                                         placeholder={{ label: "ความสัมพันธ์กับผู้ป่วย", value: null }}
-                                        onValueChange={(value) => setRelation(value)}
+                                        onValueChange={(value) => setrelation(value)}
                                         items={[
                                             { label: "บิดา", value: "dad" },
                                             { label: "มารดา", value: "mom" },
