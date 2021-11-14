@@ -32,7 +32,7 @@ export default function Register({ navigation }) {
     const postPatient = () => {
         axios
             .post(URL, {
-                clinic_number: clinic_number,
+                clinic_number: parseInt(clinic_number), 
                 fname: fname,
                 lname: lname,
                 gender: gender,
@@ -120,8 +120,8 @@ export default function Register({ navigation }) {
                                         placeholder={{ label: "เลือกเพศ", value: null }}
                                         onValueChange={(value) => setgender(value)}
                                         items={[
-                                            { label: "ชาย", value: "male" },
-                                            { label: "หญิง", value: "female" },
+                                            { label: "ชาย", value: "ชาย" },
+                                            { label: "หญิง", value: "หญิง" },
                                         ]}
                                     />
                                 </View>
@@ -200,9 +200,9 @@ export default function Register({ navigation }) {
                                         placeholder={{ label: "ความสัมพันธ์กับผู้ป่วย", value: null }}
                                         onValueChange={(value) => setrelation(value)}
                                         items={[
-                                            { label: "บิดา", value: "dad" },
-                                            { label: "มารดา", value: "mom" },
-                                            { label: "ญาติ", value: "relativen" },
+                                            { label: "บิดา", value: "บิดา" },
+                                            { label: "มารดา", value: "มารดา" },
+                                            { label: "ญาติ", value: "ญาติ" },
                                         ]}
                                     />
                                 </View>

@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, Alert, FlatList } from 'react-native';
+import { Text, View, TextInput, Button, TouchableOpacity, Alert, } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import axios from 'axios';
-import { set } from "react-native-reanimated";
-import { SearchBar } from 'react-native-elements';
-import AutoComplete from 'react-native-autocomplete-input'
-
-
+import { Provider } from "react-redux";
 
 const URL = `http://178.128.90.50:3333/patients`
 export default function PatientProfile({ navigation }) {
@@ -32,62 +28,91 @@ export default function PatientProfile({ navigation }) {
     const [fname_parent, setfname_parent] = useState("");
     const [lname_parent, setlname_parent] = useState("");
     const [relation, setrelation] = useState("");
-    const [id, setId] = useState(0)
-    const [text, setText] = useState("1")
+    const [id, setId] = useState()
 
-    
-    const [query, setQuery] = useState('');
-   
+    const [find, setFind] = useState(false);
 
+    // const _fname =" "
 
-
-
- 
-
- 
-
-
-
-    const updateQuery = (input) => {
-        setQuery(input);
-        console.log(query);
+    const onPressHandler = () => {
+        setFind(!find)
     }
 
 
 
+    const updateQuery = (input) => {
+        setId(parseInt(input));
+        console.log(id);
+    }
+
+
     useEffect(() => {
         getPatient()
-    }, [ID]);
+    }, [id]);
 
 
-    let ID = parseInt(query)
+
+    // let ID = parseInt(query)
 
     const getPatient = async () => {
-        await axios.get(`${URL}`)
+        await axios.get(`${URL}/${id}`)
             .then(function (response) {
                 // handle success
                 // alert(JSON.stringify(response.data));
-                // let patientsData = JSON.stringify(response.data)
-                // console.log(patientsData);
-                setPatient(response.data)
-                setPatients(response.data)
+                let obj = JSON.stringify(response.data)
+                let objJson = JSON.parse(obj)
+                // alert(objJson[0].fname)
+                // _fname = objJson[0].fname
+
+                setPatient(objJson[0].fname)
+                setage(objJson[0].age)
+                setbod(objJson[0].bod)
+                setclinic_number(objJson[0].clinic_number)
+                setcongenital_disease(objJson[0].congenital_disease)
+                setDistric(objJson[0].district)
+                setdrug_allergy(objJson[0].drug_allergy)
+                setfname(objJson[0].fname)
+                setfname_parent(objJson[0].fname_parent)
+                setgender(objJson[0].gender)
+                sethome_no(objJson[0].home_no)
+                setlname(objJson[0].lname)
+                setlname_parent(objJson[0].lname_parent)
+                setmoo(objJson[0].moo)
+                setprovince(objJson[0].province)
+                setrelation(objJson[0].relation)
+                setsoi(objJson[0].soi)
+                setsubdistrict(objJson[0].subdistrict)
+                settelephone(objJson[0].telephone)
+
                 // alert("Suscess")
             })
             .catch(function (error) {
                 // handle error
                 // alert(error.message);
+                // Alert.alert('ไม่สามารถค้นหาได้', 'กรุณากรอกรหัสประจำตัวผู้ป่วยให้ถูกต้อง', [
+                //     // {
+                //     //     test: 'Ok',
+                //     //  onPress: () => console.warn('Ok Pressed!')
+                //     // 
+                // ]
+                // )
             });
 
         // let tmp = JSON.stringify(PatientData)
         // setPatient(PatientData)
+        // alert(Patient.fname)
 
-
+        console.log(Patient);
+    //    console.log(_fname);
+        
         PrintPatient()
+
+
+
     }
 
     const editPatient = async () => {
-        let patient = await axios.put(`${URL}/${ID}`, {
-            clinic_number,
+        let patient = await axios.put(`${URL}/${id}`, {
             fname,
             lname,
             gender,
@@ -107,7 +132,6 @@ export default function PatientProfile({ navigation }) {
             relation
         })
 
-        console.log(patient);
 
 
 
@@ -116,85 +140,80 @@ export default function PatientProfile({ navigation }) {
 
     const PrintPatient = () => {
 
-        // setId(parseInt(text))
+        
+     
 
-        // console.log("Testtttttttttttttt--");
-        console.log(Patient.clinic_number)
+        if (id == null || id == "") {
+            Alert.alert('ไม่สามารถค้นหาได้', 'กรุณากรอกรหัสประจำตัวผู้ป่วยให้ถูกต้อง', [
+                // {
+                //     test: 'Ok',
+                //  onPress: () => console.warn('Ok Pressed!')
+                // 
+            ]
+            )
+        }
+        else if(id.toString().length ==  7) 
+        {
+            // setage(Patient[0].age)
+            // setbod(Patient[0].bod)
+            // setclinic_number(Patient[0].clinic_number)
+            // setcongenital_disease(Patient[0].congenital_disease)
+            // setDistric(Patient[0].district)
+            // setdrug_allergy(Patient[0].drug_allergy)
+            // setfname(Patient[0].fname)
+            // setfname_parent(Patient[0].fname_parent)
+            // setgender(Patient[0].gender)
+            // sethome_no(Patient[0].home_no)
+            // setlname(Patient[0].lname)
+            // setlname_parent(Patient[0].lname_parent)
+            // setmoo(Patient[0].moo)
+            // setprovince(Patient[0].province)
+            // setrelation(Patient[0].relation)
+            // setsoi(Patient[0].soi)
+            // setsubdistrict(Patient[0].subdistrict)
+            // settelephone(Patient[0].telephone)
+            // console.log(Patient[0]);
+            console.log("Test1");
+        }
+        else {
+            console.log("TestElse");
+        }
+           
+        // Alert.alert('Mesasge','Data test test',[
+        //     {test: 'Ok',
+        // onPress: () => console.warn('Ok Pressed!')}
+        // ])
 
-        // console.log(Patient);
-        setage(Patient.age)
-        setbod(Patient.bod)
-        setclinic_number(Patient.clinic_number)
-        setcongenital_disease(Patient.congenital_disease)
-        setDistric(Patient.district)
-        setdrug_allergy(Patient.drug_allergy)
-        setfname(Patient.fname)
-        setfname_parent(Patient.fname_parent)
-        setgender(Patient.gender)
-        sethome_no(Patient.home_no)
-        setlname(Patient.lname)
-        setlname_parent(Patient.lname_parent)
-        setmoo(Patient.moo)
-        setprovince(Patient.province)
-        setrelation(Patient.relation)
-        setsoi(Patient.soi)
-        setsubdistrict(Patient.subdistrict)
-        settelephone(Patient.telephone)
     }
 
-    const findPatient = async () => {
-
-        // let tmp = "asd";
-
-        // let result = Object.keys(Patients).map((item, index) => {
-        //     tmp = item.fname
-        // })
-        // console.log(tmp);
+    // const findPatient = async () => {
 
 
-        await axios.get(`${URL}/${ID}`)
-            .then(function (response) {
-                // handle success
-                // alert(JSON.stringify(response.data));
-                // let patientsData = JSON.stringify(response.data)
-                // console.log(patientsData);
-                setPatient(response.data)
-                setPatients(response.data)
-                // alert("Suscess")
-            })
-            .catch(function (error) {
-                // handle error
-                // alert(error.message);
-            });
-    }
 
-   
+    //     await axios.get(`${URL}/${id}`)
+    //         .then(function (response) {
+    //             // handle success
+    //             // alert(JSON.stringify(response.data));
+    //             // let patientsData = JSON.stringify(response.data)
+    //             // console.log(patientsData);
+    //             setPatient(response.data)
+    //             setPatients(response.data)
+    //             // alert("Suscess")
+    //         })
+    //         .catch(function (error) {
+    //             // handle error
+    //             // alert(error.message);
+    //         });
+    // }
+
+
 
 
 
 
     return (
 
-        // <View>
-
-        // <SearchBar
-        //     onChangeText={updateQuery}
-        //     value={query}
-        //     placeholder="Type Here..." />
-
-        // <FlatList data={heroes} keyExtractor={(i) => i.id.toString()}
-        //     extraData={query}
-        //     renderItem={({ item }) =>
-        //         <Text style={styles.flatList}>{filterNames(item)}
-        //         </Text>}
-        // />
-
-        // </View>
-
-
-
         <View>
-
             <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
                 <View style={tw`flex w-full justify-start items-start ml-16`}>
 
@@ -202,26 +221,29 @@ export default function PatientProfile({ navigation }) {
                 </View>
 
                 <Text style={tw`font-semibold text-2xl mt-6`}>ข้อมูลผู้ป่วย</Text>
-
-
-
-
                 <View style={tw`flex w-11/12 h-4/5`}>
                     <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
                         <Text style={tw`font-semibold text-xl`}>Clinic number</Text>
-
-
                         <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                             onChangeText={text => updateQuery(text)}
                             placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                         />
-                        {/* onChangeText={(text) => setParams(text)} */}
+
                         <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}
-                        onPress={findPatient()}
+                        // onPress={PrintPatient()}
                         >
 
                             <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
+
                         </TouchableOpacity>
+                        {/* <Button title={find ? 'ล้าง' : 'ค้นหา'} onPress={onPressHandler}></Button>
+                        {find ?
+                            // <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
+                            PrintPatient()
+
+                            :
+                            null
+                        } */}
                     </View>
 
                     <KeyboardAwareScrollView style={tw`flex mt-8`}>
@@ -370,7 +392,7 @@ export default function PatientProfile({ navigation }) {
 
                             <View style={tw`flex flex-row mt-4 justify-end w-full`}>
                                 <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}
-                                    onPress={editPatient}
+                                // onPress={editPatient}
                                 >
                                     <Text style={tw`text-lg text-black font-bold`}>แก้ไข</Text>
                                 </TouchableOpacity>
@@ -389,13 +411,3 @@ export default function PatientProfile({ navigation }) {
     );
 }
 
-const styles = StyleSheet.create({
-    flatList: {
-        paddingLeft: 15,
-        marginTop: 15,
-        paddingBottom: 15,
-        fontSize: 20,
-        borderBottomColor: '#26a69a',
-        borderBottomWidth: 1
-    }
-});
