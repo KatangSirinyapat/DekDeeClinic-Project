@@ -12,13 +12,13 @@ const URL_COST = `http://178.128.90.50:3333/costs`
 export default function DailyRecord({ navigation }) {
     // const navigation = useNavigation()
 
-  
+
 
     //COSTS API
     const [costs, setCosts] = useState([])
     const [cost, setCost] = useState([])
     const [date, setDate] = useState("")
- 
+
 
     useEffect(() => {
         getCost()
@@ -79,8 +79,12 @@ export default function DailyRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
                                 <Text style={tw`font-semibold text-base pl-4`}>จำนวนคนไข้</Text>
-                                <TextInput style={tw`h-8 w-1/2 bg-purple-300 rounded-md pl-2 ml-2`} />
-                                <Text style={tw`font-semibold text-base pl-2`}>คน</Text>
+                                <View style={tw`flex flex-row w-2/5`}>
+                                    <View style={tw`flex justify-center items-center h-8 w-full bg-purple-300 rounded-md ml-2`}>
+                                        <Text></Text>
+                                    </View>
+                                    <Text style={tw`font-semibold text-base pl-2`}>คน</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -89,8 +93,11 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของแพทย์</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_doctor}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost.cost_of_doctor}</Text>
+                                </View>
                             </View>
+
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4`}>
@@ -98,7 +105,9 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่ายา</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_medicine}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost.cost_of_medicine}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -109,7 +118,9 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ชื่อนักจิตวิทยา 1</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_psychologist}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost.cost_of_psychologist}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -118,7 +129,9 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ชื่อนักจิตวิทยา 2</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text></Text>
+                                </View>
                             </View>
                         </View>
 
@@ -127,7 +140,9 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ชื่อนักจิตวิทยา 3</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text></Text>
+                                </View>
                             </View>
                         </View>
 
@@ -136,7 +151,9 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของนักฝึกพูด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_practitioner}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost.cost_of_practitioner}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -145,7 +162,9 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของนักกิจกรรมบำบัด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_occupational_therapist}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost.cost_of_occupational_therapist}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -154,7 +173,9 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของครูการศึกษาพิเศษ</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_teacher}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost.cost_of_teacher}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -163,7 +184,9 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>เงินโอน</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.bank_transfer}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost.bank_transfer}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -171,25 +194,39 @@ export default function DailyRecord({ navigation }) {
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
                                 <Text style={tw`font-semibold text-base`}>เงินสด</Text>
                             </View>
+                        
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cash}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost.cash}</Text>
+                                </View>
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4`}>
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={tw`font-semibold text-base`}>คิดเป็นเงินทั้งสิ้น</Text>
+                                <Text style={tw`font-semibold text-base text-red-600`}>คิดเป็นเงินทั้งสิ้น</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.total}</Text>
-                                <Text style={tw`font-semibold text-base ml-2`}>บาท</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text  style={tw`font-semibold text-base`}>{cost.total}</Text>
+                                </View>
+                                <Text style={tw`font-semibold text-base ml-2 text-red-600`}>บาท</Text>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row mt-4 justify-end w-full mt-4`}>
+                        {/* <View style={tw`flex flex-row mt-4 justify-end w-full mt-4`}>
                             <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}>
                                 <Text style={tw`text-lg text-black font-bold`}>Print</Text>
                             </TouchableOpacity>
+                        </View> */}
+                        <View style={tw`flex flex-row justify-end w-full mt-4`}>
+                            <View style={styles.printButton}>
+                                <Button
+                                    color="black"
+                                    title="Print"
+                                    accessibilityLabel="Learn more about this purple button"
+                                />
+                            </View>
                         </View>
                     </View>
                 </KeyboardAwareScrollView>
@@ -198,3 +235,19 @@ export default function DailyRecord({ navigation }) {
 
     );
 }
+
+const styles = StyleSheet.create({
+
+    printButton: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingHorizontal: 30,
+        borderRadius: 4,
+        elevation: 10,
+        backgroundColor: '#FBCFE8',
+        borderWidth: 4,
+        borderColor: "#EF4444",
+        marginLeft: 12,
+
+    },
+});

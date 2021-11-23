@@ -52,9 +52,8 @@ export default function PatientMeet({ navigation }) {
 
 
     const findDoctor = () => {
-        doctors.map((item,index) => {
-            if(item.doctor_id === meets.user_id)
-            {
+        doctors.map((item, index) => {
+            if (item.doctor_id === meets.user_id) {
                 setFnameDoctor(item.fname)
                 setLnameDoctor(item.lname)
             }
@@ -74,7 +73,7 @@ export default function PatientMeet({ navigation }) {
                     setMeets(item)
                 })
 
-                console.log(meets.user_id);       
+                console.log(meets.user_id);
             }
             else if (item.doctor_id != idDoctor) {
                 // alert('กรุณากรอกรหัสประจำตัวแพทย์ให้ถูกต้อง')
@@ -139,11 +138,19 @@ export default function PatientMeet({ navigation }) {
                         placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                     />
                     {/* onChangeText={(text) => setParams(text)} */}
-                    <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}
+                    {/* <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}
                     >
-                        {/* onPress={getPatienprofile}  */}
+                        onPress={getPatienprofile} 
                         <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+                        <View style={styles.searchButton}>
+                            <Button
+                                color="black"
+                                title="ค้นหา"
+                                accessibilityLabel="Learn more about this purple button"
+                            />
+                        </View>
+
                 </View>
 
                 <KeyboardAwareScrollView style={tw`flex mt-8`}>
@@ -151,23 +158,23 @@ export default function PatientMeet({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อ</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md pl-2`}>
+                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-300 rounded-md pl-2`}>
                                     <Text>{patient.fname}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                <View style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                     <Text>{patient.lname}</Text>
                                 </View>
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>วันที่นัดหมาย</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`} /> */}
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
+                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
                                     <Text>{meets.date_meet}</Text>
                                 </View>
                             </View>
@@ -175,27 +182,27 @@ export default function PatientMeet({ navigation }) {
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เวลา ตั้งแต่</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`} /> */}
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
+                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
                                     <Text>{meets.time}</Text>
                                 </View>
                             </View>
-                            <View style={tw`flex flex-col w-1/2`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>ถึง</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md pl-2`} /> */}
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
+                                <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-300 rounded-md  pl-2`}>
                                     <Text>{meets.time_to}</Text>
                                 </View>
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์</Text>
-                                
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
+
+                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
                                     <Text>{patient.telephone}</Text>
                                 </View>
                             </View>
@@ -205,32 +212,44 @@ export default function PatientMeet({ navigation }) {
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อแพทย์</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
-                                    <Text>{fnameDoctor} {lnameDoctor}</Text>
+                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
+                                    <Text>{fnameDoctor}</Text>
                                 </View>
-                               
+
                             </View>
-                            {/* <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>ชื่อครูฝึก</Text>
-                                <TextInput style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md  pl-2`} />
-                            </View> */}
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
+                                <Text style={tw`font-semibold text-base`}>สกุลแพทย์</Text>
+                                <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-300 rounded-md  pl-2`}>
+                                    <Text>{lnameDoctor}</Text>
+                                </View>
+                            </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-full`}>
+                            <View style={tw`flex flex-col w-full mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>หมายเหตุ</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
+                                <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-300 rounded-md  pl-2`}>
                                     <Text>{meets.details}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-end w-full mt-2`}>
+                        {/* <View style={tw`flex flex-row justify-end w-full mt-2`}>
                             <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}>
                                 <Text style={tw`text-lg text-black font-bold`}>Print</Text>
                             </TouchableOpacity>
+                        </View> */}
+
+                        <View style={tw`flex flex-row justify-end w-full mt-4`}>
+                            <View style={styles.printButton}>
+                                <Button
+                                    color="black"
+                                    title="Print"
+                                    accessibilityLabel="Learn more about this purple button"
+                                />
+                            </View>
                         </View>
                     </View>
                 </KeyboardAwareScrollView>
@@ -242,3 +261,33 @@ export default function PatientMeet({ navigation }) {
 
     );
 }
+
+
+const styles = StyleSheet.create({
+
+    searchButton: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingHorizontal: 10,
+        borderRadius: 4,
+        elevation: 10,
+        backgroundColor: '#EDE9FE',
+        borderWidth: 4,
+        borderColor: "#8B5CF6",
+        marginLeft: 12,
+
+    },
+
+    printButton: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingHorizontal: 30,
+        borderRadius: 4,
+        elevation: 10,
+        backgroundColor: '#FBCFE8',
+        borderWidth: 4,
+        borderColor: "#EF4444",
+        marginLeft: 12,
+
+    },
+});

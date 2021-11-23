@@ -124,7 +124,7 @@ export default function Register({ navigation }) {
                                             { label: "หญิง", value: "หญิง" },
                                         ]}
                                     />
-                                </View>
+                                </View> 
                             </View>
                         </View>
 

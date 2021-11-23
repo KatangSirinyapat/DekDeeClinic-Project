@@ -165,16 +165,16 @@ export default function VisitRecord({ navigation }) {
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                        <View style={tw`flex flex-col w-1/4`}>
+                        <View style={tw`flex flex-col w-1/4 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เลขประจำตัวแพทย์</Text>
-                                <TextInput style={tw`h-8 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <TextInput style={tw`h-8 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 mt-2`}
                                     onChangeText={text => setIdDoctor(parseInt(text))} 
                                     placeholder="โปรดกรอกเลขประจำตัวแพทย์"
                                 />
                             </View>
-                            <View style={tw`flex flex-col w-1/4`}>
+                            <View style={tw`flex flex-col w-1/4 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เลขประจำตัวผู้ป่วย</Text>
-                                <TextInput style={tw`h-8 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <TextInput style={tw`h-8 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 mt-2`}
                                     onChangeText={text => updateIdPatient(text)}
                                     placeholder="โปรดกรอกเลขประจำตัวผู้ป่วย"
                                 />
@@ -183,29 +183,29 @@ export default function VisitRecord({ navigation }) {
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                        <View style={tw`flex flex-col w-1/3`}>
+                        <View style={tw`flex flex-col w-1/3 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อ</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
-                                    <Text style={tw`font-semibold text-base`}>
+                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
+                                    <Text style={tw`text-base`}>
                                         {patient.fname}
                                     </Text>
 
                                 </View>
                             </View>
-                            <View style={tw`flex flex-col w-1/3`}>
+                            <View style={tw`flex flex-col w-1/3 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
-                                    <Text style={tw`font-semibold text-base`}>
+                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
+                                    <Text style={tw`text-base`}>
                                         {patient.lname}
                                     </Text>
 
                                 </View>
                             </View>
                             
-                            <View style={tw`flex flex-col w-1/3`}>
+                            <View style={tw`flex flex-col w-1/3 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>อายุ</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
-                                    <Text style={tw`font-semibold text-base`}>
+                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
+                                    <Text style={tw`text-base`}>
                                         {patient.age}
                                     </Text>
 
@@ -315,23 +315,21 @@ export default function VisitRecord({ navigation }) {
                         </View>
                         <View style={tw`flex flex-row justify-between w-full mt-4`}>
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={tw`font-semibold text-base`}>รวมทั้งหมด</Text>
-
+                                <Text style={tw`font-semibold text-base text-red-600`}>รวมทั้งหมด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={tw`h-8 mt-2 w-1/3 bg-purple-100 rounded-md pl-2`}>
+                                <View style={tw`flex justify-center h-8 w-1/3 bg-purple-100 rounded-md pl-2`}>
                                     <Text style={tw`font-semibold text-base`}>
                                         {calculate_total_cost()}
                                     </Text>
-
                                 </View>
-                                <Text style={tw`font-semibold text-base ml-2`}>บาท</Text>
+                                <Text style={tw`font-semibold text-base ml-2 text-red-600`}>บาท</Text>
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4`}>
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={tw`font-semibold text-base`}>ช่องทางชำระเงิน</Text>
+                                <Text style={tw`font-semibold text-lg`}>ช่องทางชำระเงิน</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 {/* <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`} /> */}
@@ -362,14 +360,22 @@ export default function VisitRecord({ navigation }) {
                             </View>
                         </View>
 
-                     
-
-                        <View style={tw`flex flex-row mt-4 justify-end w-full mt-4`}>
+                        {/* <View style={tw`flex flex-row mt-4 justify-end w-full mt-4`}>
                             <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}
                                 onPress={postCost()}
                             >
                                 <Text style={tw`text-lg text-black font-bold`}>บันทึก</Text>
                             </TouchableOpacity>
+                        </View> */}
+                           <View style={tw`flex flex-row justify-end w-full mt-4`}>
+                            <View style={styles.button}>
+                                <Button
+                                    onPress={postCost}
+                                    color="black"
+                                    title="บันทึก"
+                                    accessibilityLabel="Learn more about this purple button"
+                                />
+                            </View>
                         </View>
                     </View>
                 </KeyboardAwareScrollView>
@@ -378,3 +384,19 @@ export default function VisitRecord({ navigation }) {
 
     );
 }
+
+const styles = StyleSheet.create({
+
+    button: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingHorizontal: 30,
+        borderRadius: 4,
+        elevation: 10,
+        backgroundColor: '#FBCFE8',
+        borderWidth: 4,
+        borderColor: "#EF4444",
+        marginLeft: 12,
+        
+    },
+});
