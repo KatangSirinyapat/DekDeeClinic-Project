@@ -1,10 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
+import axios from "axios";
+
+
+const URL_MEET = `http://178.128.90.50:3333/meets`
+
+const URL_DOCTOR = `http://178.128.90.50:3333/users`
+
+const URL_PATIENT = `http://178.128.90.50:3333/patients`
+
+const URL_COST = `http://178.128.90.50:3333/costs`
 
 export default function DailyRecord({ navigation }) {
     // const navigation = useNavigation()
+
+  
+
+    //COSTS API
+    const [costs, setCosts] = useState([])
+    const [cost, setCost] = useState([])
+    const [date, setDate] = useState("")
+ 
+
+    useEffect(() => {
+        getCost()
+    }, [])
+
+
+    const inputDate = (input) => {
+        setDate(input)
+        findCost()
+    }
+
+    const findCost = () => {
+        costs.map((item, index) => {
+            if (item.date === date.concat("T00:00:00.000Z")) {
+                setCost(item)
+
+            }
+        })
+        // console.log(cost.id);
+    }
+
+    const getCost = async () => {
+        await axios.get(`${URL_COST}`)
+            .then(function (response) {
+
+                let obj = JSON.stringify(response.data)
+                let objJson = JSON.parse(obj)
+
+
+                setCosts(objJson)
+            })
+            .catch(function (error) {
+                // alert(error.message);
+            })
+
+    }
+
+
     return (
         <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
             <View style={tw`flex w-full justify-start items-start ml-16`}>
@@ -17,7 +73,10 @@ export default function DailyRecord({ navigation }) {
                         <View style={tw`flex flex-row w-full justify-start items-center`}>
                             <View style={tw`flex flex-row w-2/5 justify-start items-center`}>
                                 <Text style={tw`font-semibold text-base`}>รายวัน</Text>
-                                <TextInput style={tw`h-8 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`} />
+                                <TextInput style={tw`h-8 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`}
+                                    onChangeText={text => inputDate(text)}
+                                    placeholder="YYY-MM-DD"
+                                />
                             </View>
                             <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
                                 <Text style={tw`font-semibold text-base pl-4`}>จำนวนคนไข้</Text>
@@ -31,7 +90,7 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของแพทย์</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_doctor}</Text>
                             </View>
                         </View>
 
@@ -40,7 +99,7 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่ายา</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_medicine}</Text>
                             </View>
                         </View>
 
@@ -51,7 +110,7 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ชื่อนักจิตวิทยา 1</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_psychologist}</Text>
                             </View>
                         </View>
 
@@ -78,7 +137,7 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของนักฝึกพูด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_practitioner}</Text>
                             </View>
                         </View>
 
@@ -87,7 +146,7 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของนักกิจกรรมบำบัด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_occupational_therapist}</Text>
                             </View>
                         </View>
 
@@ -96,7 +155,7 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของครูการศึกษาพิเศษ</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cost_of_teacher}</Text>
                             </View>
                         </View>
 
@@ -105,7 +164,7 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>เงินโอน</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.bank_transfer}</Text>
                             </View>
                         </View>
 
@@ -114,7 +173,7 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>เงินสด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.cash}</Text>
                             </View>
                         </View>
 
@@ -123,7 +182,7 @@ export default function DailyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>คิดเป็นเงินทั้งสิ้น</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>{cost.total}</Text>
                                 <Text style={tw`font-semibold text-base ml-2`}>บาท</Text>
                             </View>
                         </View>

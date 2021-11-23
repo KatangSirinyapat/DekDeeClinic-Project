@@ -5,13 +5,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import axios from "axios";
 
 
-const URL_MEET = `http://178.128.90.50:3333/meets`
+
 
 const URL_DOCTOR = `http://178.128.90.50:3333/users`
 
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 
-const URL_COST = `http://178.128.90.50:3333/costs`
+
 
 
 export default function PatientMeet({ navigation }) {
