@@ -5,11 +5,7 @@ import tw from "tailwind-react-native-classnames";
 import axios from "axios";
 
 
-const URL_MEET = `http://178.128.90.50:3333/meets`
 
-const URL_DOCTOR = `http://178.128.90.50:3333/users`
-
-const URL_PATIENT = `http://178.128.90.50:3333/patients`
 
 const URL_COST = `http://178.128.90.50:3333/costs`
 
@@ -35,9 +31,12 @@ export default function DailyRecord({ navigation }) {
     }
 
     const findCost = () => {
+        let tmp = "";
         costs.map((item, index) => {
             if (item.date === date.concat("T00:00:00.000Z")) {
                 setCost(item)
+                // tmp = item.date
+                // console.log(tmp.substring(0,7));
 
             }
         })
