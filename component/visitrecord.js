@@ -99,6 +99,7 @@ export default function VisitRecord({ navigation }) {
             cost_of_occupational_therapist +
             cost_of_teacher 
 
+       
 
         return result
     }
@@ -131,7 +132,7 @@ export default function VisitRecord({ navigation }) {
             cost_of_teacher: cost_of_teacher,
             bank_transfer: bank_transfer,
             cash: cash,
-            total: total,
+            total: calculate_total_cost(),
             user_id: idDoctor,
             patient_id: idPatient,
 
