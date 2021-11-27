@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity }
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import axios from "axios";
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 
 
@@ -18,6 +20,36 @@ export default function DailyRecord({ navigation }) {
     const [costs, setCosts] = useState([])
     const [cost, setCost] = useState([])
     const [date, setDate] = useState("")
+
+    //Date time
+    const [date1, setDate1] = useState(new Date(2021, 10, 27, 12, 0, 0, 0));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate1(currentDate);
+
+        let curDate = new Date().toString()
+        let tmpDate = currentDate.toString()
+
+        let data = currentDate.toJSON()
+        let dataBoD = JSON.stringify(data);
+        let tmp = dataBoD.substring(1, 11)
+        setDate(tmp.toString())
+
+        costs.map((item, index) => {
+            if (item.date === date.concat("T00:00:00.000Z")) {
+                setCost(item)
+                // tmp = item.date
+                // console.log(tmp.substring(0,7));
+
+            }
+        })
+
+        // console.log(dataBoD.substring(1,11)); 
+    };
 
 
     useEffect(() => {
@@ -72,10 +104,19 @@ export default function DailyRecord({ navigation }) {
                         <View style={tw`flex flex-row w-full justify-start items-center`}>
                             <View style={tw`flex flex-row w-2/5 justify-start items-center`}>
                                 <Text style={tw`font-semibold text-base`}>รายวัน</Text>
-                                <TextInput style={tw`h-8 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`}
+                                {/* <TextInput style={tw`h-8 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`}
                                     onChangeText={text => inputDate(text)}
                                     placeholder="YYY-MM-DD"
+                                /> */}
+                                <DateTimePicker themeVariant="light" style={tw`h-8 w-1/3  rounded-md pl-2 ml-2`}
+                                    testID="dateTimePicker"
+                                    value={date1}
+                                    mode={'date'}
+                                    is24Hour={true}
+                                    display="default"
+                                    onChange={onChange}
                                 />
+
                             </View>
                             <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
                                 <Text style={tw`font-semibold text-base pl-4`}>จำนวนคนไข้</Text>
@@ -194,7 +235,7 @@ export default function DailyRecord({ navigation }) {
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
                                 <Text style={tw`font-semibold text-base`}>เงินสด</Text>
                             </View>
-                        
+
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
                                     <Text>{cost.cash}</Text>
@@ -208,7 +249,7 @@ export default function DailyRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
-                                    <Text  style={tw`font-semibold text-base`}>{cost.total}</Text>
+                                    <Text style={tw`font-semibold text-base`}>{cost.total}</Text>
                                 </View>
                                 <Text style={tw`font-semibold text-base ml-2 text-red-600`}>บาท</Text>
                             </View>

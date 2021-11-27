@@ -59,9 +59,6 @@ export default function VisitRecord({ navigation }) {
         setDate(tmp.toString())
         
         // console.log(dataBoD.substring(1,11)); 
-
-
-
     };
 
     const updateIdPatient = (input) => {
