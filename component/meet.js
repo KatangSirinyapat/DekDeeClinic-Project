@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import DropDownPicker from 'react-native-dropdown-picker';
 import axios from "axios";
 import RNPickerSelect from "react-native-picker-select";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const URL_MEET = `http://178.128.90.50:3333/meets`
 
@@ -33,12 +34,77 @@ export default function Meet({ navigation }) {
     const [time, setTime] = useState("")
     const [time_to, setTime_to] = useState("")
 
+    const [date, setDate] = useState(new Date(2021, 10, 27, 12, 0, 0, 0));
+    const [date2, setDate2] = useState(new Date(2021, 10, 27, 12, 0, 0, 0));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+
+        let curDate = new Date().toString()
+        let tmpDate = currentDate.toString()
+
+        let data = currentDate.toJSON()
+        let dataBoD = JSON.stringify(data);
+        let tmp = dataBoD.substring(1, 11)
+
+        setDate_meet(tmp.toString())
+        console.log(date_meet);
+        // console.log(dataBoD.substring(1,11)); 
+
+
+
+    };
+
+    const onChangeTime = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+
+        let data = currentDate.toJSON()
+        let dataBoD = JSON.stringify(data);
+        let tmp = dataBoD.substring(12, 17)
+        setTime(tmp)
+        // console.log(tmp);
+
+    };
+
+    const onChangeTime_to = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate2(currentDate);
+
+        let data = currentDate.toJSON()
+        let dataBoD = JSON.stringify(data);
+        let tmp = dataBoD.substring(12, 17)
+        setTime_to(tmp)
+        // console.log(tmp);
+
+    };
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
+
+
 
 
 
     useEffect(() => {
         getDoctors(),
-        getPatient()
+            getPatient()
     }, [])
 
     const updateTopic = (input) => {
@@ -146,7 +212,7 @@ export default function Meet({ navigation }) {
             })
             .catch(function (error) {
 
-                // alert(error.message);
+                alert(error.message);
             })
     }
 
@@ -247,9 +313,17 @@ export default function Meet({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>วันที่นัดหมาย</Text>
-                                <TextInput style={tw`flex justify-center h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                {/* <TextInput style={tw`flex justify-center h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setDate_meet(text)}
                                     placeholder="YYYY-MM-DD"
+                                /> */}
+                                <DateTimePicker themeVariant="light" style={tw`h-10 mt-0 w-2/4 border-2   rounded-md pl-0`}
+                                    testID="dateTimePicker"
+                                    value={date}
+                                    mode={'date'}
+                                    is24Hour={true}
+                                    display="default"
+                                    onChange={onChange}
                                 />
                             </View>
                             <View style={tw`flex flex-col w-1/2`}></View>
@@ -258,16 +332,33 @@ export default function Meet({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เวลา ตั้งแต่</Text>
-                                <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setTime(text)}
                                     placeholder="กรอกเวลา. . ."
+                                /> */}
+
+                                <DateTimePicker style={tw`h-10 mt-2 w-4/12  rounded-md pl-2`}
+                                    testID="dateTimePicker"
+                                    value={date}
+                                    mode={'time'}
+                                    is24Hour={true}
+                                    display="default"
+                                    onChange={onChangeTime}
                                 />
                             </View>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>ถึง</Text>
-                                <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setTime_to(text)}
                                     placeholder="กรอกเวลา. . ."
+                                /> */}
+                                <DateTimePicker style={tw`h-10 mt-2 w-4/12  rounded-md pl-2`}
+                                    testID="dateTimePicker"
+                                    value={date2}
+                                    mode={'time'}
+                                    is24Hour={true}
+                                    display="default"
+                                    onChange={onChangeTime_to}
                                 />
                             </View>
                         </View>
@@ -327,7 +418,7 @@ export default function Meet({ navigation }) {
                                 <Text style={tw`text-lg text-black font-bold`}>บันทึก</Text>
                             </TouchableOpacity>
                         </View> */}
-                        
+
                         <View style={tw`flex flex-row justify-end w-full mt-4`}>
                             <View style={styles.button}>
                                 <Button
@@ -366,6 +457,6 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         borderColor: "#EF4444",
         marginLeft: 12,
-        
+
     },
 });

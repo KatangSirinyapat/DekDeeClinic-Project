@@ -42,26 +42,26 @@ export default function Register({ navigation }) {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
-
-
+       
+       
         let curDate = new Date().toString()
         let tmpDate = currentDate.toString()
-        let tmpAge = parseInt(curDate.substring(10, 15).trim()) - parseInt(tmpDate.substring(10, 15).trim())
-
+        let tmpAge =  parseInt(curDate.substring(10,15).trim()) - parseInt(tmpDate.substring(10,15).trim())
+        
         // console.log(tmpAge)   
-
+       
 
         let data = currentDate.toJSON()
         let dataBoD = JSON.stringify(data);
-        let tmp = dataBoD.substring(1, 11)
+        let tmp = dataBoD.substring(1,11)
 
-        setage(tmpAge.toString())
+         setage(tmpAge.toString())
         setbod(tmp.toString())
         // console.log(dataBoD.substring(1,11)); 
         // console.log(bod); 
         // console.log(age);
 
-
+        
     };
 
     const showMode = (currentMode) => {
@@ -80,7 +80,7 @@ export default function Register({ navigation }) {
 
 
 
-
+    
 
     const postPatient = () => {
         axios
@@ -153,25 +153,22 @@ export default function Register({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>วันเกิด</Text>
                                 {/* <TextInput 
                                     onChangeText={(text) => setbod(text)} /> */}
-                                <View style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}>
-                                    <DateTimePicker
-                                        testID="dateTimePicker"
-                                        value={date}
-                                        mode={'date'}
-                                        is24Hour={true}
-                                        display="default"
-                                        onChange={onChange}
-                                    />
-                                </View>
-                            </View>
+                               
+                                <DateTimePicker  themeVariant="light"  style={tw`h-10 mt-0 w-2/4 border-2   rounded-md pl-0`}
+                                            testID="dateTimePicker"
+                                            value={date}
+                                            mode={'date'}
+                                            is24Hour={true}
+                                            display="default"
+                                            onChange={onChange}
+                                        />
 
+                            </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>อายุ</Text>
-                                <View style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}>
-                                    {/* <TextInput 
+                                {/* <TextInput 
                                     onChangeText={(text) => setage(text)} /> */}
-                                    <Text style={tw`mt-2`}>{age} ปี</Text>
-                                </View>
+                                <Text style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}>{age} ปี</Text>
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>เพศ</Text>
@@ -186,7 +183,7 @@ export default function Register({ navigation }) {
                                             { label: "หญิง", value: "หญิง" },
                                         ]}
                                     />
-                                </View>
+                                </View> 
                             </View>
                         </View>
 
@@ -288,6 +285,7 @@ export default function Register({ navigation }) {
 
     );
 }
+
 
 
 
