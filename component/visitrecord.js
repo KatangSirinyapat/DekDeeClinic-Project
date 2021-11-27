@@ -3,10 +3,9 @@ import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity }
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import axios from "axios";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-const URL_MEET = `http://178.128.90.50:3333/meets`
 
-const URL_DOCTOR = `http://178.128.90.50:3333/users`
 
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 
@@ -40,6 +39,30 @@ export default function VisitRecord({ navigation }) {
     const [cost_of_psychologist2, setCost_of_psychologist2] = useState(0)
     const [cost_of_psychologist3, setCost_of_psychologist3] = useState(0)
 
+    //Date time
+    const [date1, setDate1] = useState(new Date(2021, 10, 27, 12, 0, 0, 0));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate1(currentDate);
+
+        let curDate = new Date().toString()
+        let tmpDate = currentDate.toString()
+
+        let data = currentDate.toJSON()
+        let dataBoD = JSON.stringify(data);
+        let tmp = dataBoD.substring(1, 11)
+
+        setDate(tmp.toString())
+        
+        // console.log(dataBoD.substring(1,11)); 
+
+
+
+    };
 
     const updateIdPatient = (input) => {
         setIdPatient(parseInt(input));
@@ -77,13 +100,11 @@ export default function VisitRecord({ navigation }) {
     const calculate_money = () => {
         let result;
 
-        if(bank_transfer> 0)
-        {
+        if (bank_transfer > 0) {
             result = total - bank_transfer
             setCash(result)
         }
-        else if(cash > 0)
-        {
+        else if (cash > 0) {
             result = total - cash
             setBank_transfer(result)
         }
@@ -97,9 +118,9 @@ export default function VisitRecord({ navigation }) {
             calculate_cost_of_psychologist() +
             cost_of_practitioner +
             cost_of_occupational_therapist +
-            cost_of_teacher 
+            cost_of_teacher
 
-       
+
 
         return result
     }
@@ -158,17 +179,25 @@ export default function VisitRecord({ navigation }) {
                     <View style={tw`flex flex-col justify-between items-start w-full h-full p-4 rounded-xl border-4 border-black`}>
                         <View style={tw`flex flex-row w-full justify-end items-center`}>
                             <Text style={tw`font-semibold text-base`}>วันที่</Text>
-                            <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`}
+                            {/* <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`}
                                 onChangeText={text => setDate(text)}
                                 placeholder="ปปป-ดดด-ววว"
+                            /> */}
+                            <DateTimePicker themeVariant="light" style={tw`h-8 w-1/3  rounded-md pl-2 ml-2`}
+                                testID="dateTimePicker"
+                                value={date1}
+                                mode={'date'}
+                                is24Hour={true}
+                                display="default"
+                                onChange={onChange}
                             />
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                        <View style={tw`flex flex-col w-1/4 mt-2`}>
+                            <View style={tw`flex flex-col w-1/4 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เลขประจำตัวแพทย์</Text>
                                 <TextInput style={tw`h-8 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 mt-2`}
-                                    onChangeText={text => setIdDoctor(parseInt(text))} 
+                                    onChangeText={text => setIdDoctor(parseInt(text))}
                                     placeholder="โปรดกรอกเลขประจำตัวแพทย์"
                                 />
                             </View>
@@ -179,11 +208,11 @@ export default function VisitRecord({ navigation }) {
                                     placeholder="โปรดกรอกเลขประจำตัวผู้ป่วย"
                                 />
                             </View>
-                          
+
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                        <View style={tw`flex flex-col w-1/3 mt-2`}>
+                            <View style={tw`flex flex-col w-1/3 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อ</Text>
                                 <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
                                     <Text style={tw`text-base`}>
@@ -201,7 +230,7 @@ export default function VisitRecord({ navigation }) {
 
                                 </View>
                             </View>
-                            
+
                             <View style={tw`flex flex-col w-1/3 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>อายุ</Text>
                                 <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
@@ -367,7 +396,7 @@ export default function VisitRecord({ navigation }) {
                                 <Text style={tw`text-lg text-black font-bold`}>บันทึก</Text>
                             </TouchableOpacity>
                         </View> */}
-                           <View style={tw`flex flex-row justify-end w-full mt-4`}>
+                        <View style={tw`flex flex-row justify-end w-full mt-4`}>
                             <View style={styles.button}>
                                 <Button
                                     onPress={postCost}
@@ -397,6 +426,6 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         borderColor: "#EF4444",
         marginLeft: 12,
-        
+
     },
 });

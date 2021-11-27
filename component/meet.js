@@ -34,6 +34,7 @@ export default function Meet({ navigation }) {
     const [time, setTime] = useState("")
     const [time_to, setTime_to] = useState("")
 
+    //Date time
     const [date, setDate] = useState(new Date(2021, 10, 27, 12, 0, 0, 0));
     const [date2, setDate2] = useState(new Date(2021, 10, 27, 12, 0, 0, 0));
     const [mode, setMode] = useState('date');
