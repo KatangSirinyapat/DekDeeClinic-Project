@@ -3,7 +3,7 @@ import { Text, View, TextInput, Button, TouchableOpacity, Alert, } from 'react-n
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import axios from 'axios';
-import { Provider } from "react-redux";
+
 
 const URL = `http://178.128.90.50:3333/patients`
 export default function PatientProfile({ navigation }) {

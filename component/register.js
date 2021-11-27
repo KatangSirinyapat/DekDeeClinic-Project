@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, ScrollView } from 'react-native';
+
 import tw from "tailwind-react-native-classnames";
-import DateTimePicker from '@react-native-community/datetimepicker';
+
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+
+
 
 const URL = `http://178.128.90.50:3333/patients`
 
 export default function Register({ navigation }) {
 
+
+    const [date, setDate] = useState(new Date(2021, 10, 27, 12, 0, 0, 0));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
     const [clinic_number, setClinic_number] = useState("");
     const [fname, setfname] = useState("");
     const [lname, setlname] = useState("");
@@ -29,10 +38,54 @@ export default function Register({ navigation }) {
     const [lname_parent, setlname_parent] = useState("");
     const [relation, setrelation] = useState("");
 
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+       
+       
+        let curDate = new Date().toString()
+        let tmpDate = currentDate.toString()
+        let tmpAge =  parseInt(curDate.substring(10,15).trim()) - parseInt(tmpDate.substring(10,15).trim())
+        
+        // console.log(tmpAge)   
+       
+
+        let data = currentDate.toJSON()
+        let dataBoD = JSON.stringify(data);
+        let tmp = dataBoD.substring(1,11)
+
+         setage(tmpAge.toString())
+        setbod(tmp.toString())
+        // console.log(dataBoD.substring(1,11)); 
+        // console.log(bod); 
+        // console.log(age);
+
+        
+    };
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
+
+
+
+
+    
+
     const postPatient = () => {
         axios
             .post(URL, {
-                clinic_number: parseInt(clinic_number), 
+                clinic_number: parseInt(clinic_number),
                 fname: fname,
                 lname: lname,
                 gender: gender,
@@ -63,17 +116,12 @@ export default function Register({ navigation }) {
             });
     };
 
-    //   const Print = () => {
-    //       console.log("fname:"+ fname)
-    //       console.log("lname:"+ lname)
-    //       console.log("gender:"+ gender)
-    //   }
 
-    // const navigation = useNavigation()
 
     return (
 
         <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
+
             <View style={tw`flex w-full justify-start items-start ml-16`}>
                 <Button onPress={() => navigation.navigate('Menu')} title="< ย้อนกลับ" />
             </View>
@@ -103,13 +151,24 @@ export default function Register({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>วันเกิด</Text>
-                                <TextInput style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setbod(text)} />
+                                {/* <TextInput 
+                                    onChangeText={(text) => setbod(text)} /> */}
+                               
+                                <DateTimePicker style={tw`h-10 mt-0 w-2/4 border-2   rounded-md pl-0`}
+                                            testID="dateTimePicker"
+                                            value={date}
+                                            mode={'date'}
+                                            is24Hour={true}
+                                            display="default"
+                                            onChange={onChange}
+                                        />
+
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>อายุ</Text>
-                                <TextInput style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setage(text)} />
+                                {/* <TextInput 
+                                    onChangeText={(text) => setage(text)} /> */}
+                                <Text style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}>{age} ปี</Text>
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>เพศ</Text>
@@ -214,13 +273,39 @@ export default function Register({ navigation }) {
                                 onPress={postPatient}>
                                 <Text style={tw`text-lg text-black font-bold`}>บันทึก</Text>
                             </TouchableOpacity>
+                            {/* <Button title="บันทึก" onPress={postPatient}></Button> */}
                         </View>
 
                     </View>
                 </KeyboardAwareScrollView>
             </View>
+
+
         </View>
 
     );
 }
 
+
+
+
+//------------date time picker
+
+{/* <View>
+<View>
+    <Button onPress={showDatepicker} title="Show date picker!" />
+</View>
+<View>
+    <Button onPress={showTimepicker} title="Show time picker!" />
+</View>
+{show && (
+    <DateTimePicker
+        testID="dateTimePicker"
+        value={date}
+        mode={'date'}
+        is24Hour={true}
+        display="default"
+        onChange={onChange}
+    />
+)}
+</View> */}

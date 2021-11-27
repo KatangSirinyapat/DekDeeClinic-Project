@@ -26,9 +26,65 @@ export default function PatientMeet({ navigation }) {
     const [lnameDoctor, setLnameDoctor] = useState("")
     //PATIENT
     const [patients, setPatients] = useState([])
-    const [patient, setPatient] = useState([])
+    const [patient, setPatient] = useState([{
+        "clinic_number": 25640007,
+        "fname": "นนทิวัชร",
+        "lname": "บุญวงศ์",
+        "gender": "ชาย",
+        "bod": "2004-01-06",
+        "age": "18",
+        "telephone": "0814000000",
+        "drug_allergy": "ไม่มี",
+        "congenital_disease": "ไม่มี",
+        "home_no": "1350",
+        "moo": "-",
+        "soi": "-",
+        "subdistrict": "หาดใหญ่",
+        "district": "หาดใหญ่",
+        "province": "สงขลา",
+        "fname_parent": "กกก",
+        "lname_parent": "กกก",
+        "relation": "มารดา",
+        "created_at": "2021-11-21T05:56:47.000+00:00",
+        "updated_at": "2021-11-21T05:56:47.000+00:00",
+        "meets": [
+            {
+                "id": 15,
+                "details": "ไม่มี",
+                "topic": "Topic3",
+                "date_meet": "2021-11-21T00:00:00.000Z",
+                "time": "00:00:18",
+                "time_to": "00:00:19",
+                "user_id": 1003,
+                "patient_id": 25640007,
+                "created_at": "2021-11-21T06:05:01.000+00:00",
+                "updated_at": "2021-11-21T06:05:01.000+00:00"
+            }
+        ],
+        "costs": [
+            {
+                "id": 19,
+                "date": "2021-11-21T00:00:00.000Z",
+                "cost_of_doctor": 1000,
+                "cost_of_medicine": 500,
+                "cost_of_psychologist": 0,
+                "cost_of_practitioner": 0,
+                "cost_of_occupational_therapist": 0,
+                "cost_of_teacher": 0,
+                "bank_transfer": 1000,
+                "cash": 500,
+                "total": 1500,
+                "user_id": 1003,
+                "patient_id": 25640007,
+                "created_at": "2021-11-21T06:07:32.000+00:00",
+                "updated_at": "2021-11-21T06:07:32.000+00:00"
+            }
+        ]
+    }])
     const [idPatient, setIdPatient] = useState()
     const [fnamePatient, setFnamePatient] = useState("")
+    const [lnamePatient, setLnamePatient] = useState("")
+    const [telephone, setTelephone] = useState("")
     //MEET
     const [meets, setMeets] = useState([])
     const [details, setDetails] = useState("")
@@ -44,25 +100,32 @@ export default function PatientMeet({ navigation }) {
 
     const updateIdPatient = (input) => {
         setIdPatient(parseInt(input));
-        findPatient()
+
         // console.log('---------------------');
         // console.log('ID: ' + idPatient);
         // console.log('PatientId: ' + patient.clinic_number);
     }
 
+    let tmpFnameDoctor = " "
+    let tmpLnameDoctor = " "
+    
+    
+
 
     const findDoctor = () => {
-        doctors.map((item,index) => {
-            if(item.doctor_id === meets.user_id)
-            {
-                setFnameDoctor(item.fname)
-                setLnameDoctor(item.lname)
-            }
+       
+      
+    }
 
+    const findMeet = async () => {
+        await patient.meets.map((item, index) => {
+            setMeets(item)
         })
     }
 
-
+    const handle = async () => {
+       await findPatient()
+    }
 
     const findPatient = () => {
         patients.map((item, index) => {
@@ -70,11 +133,9 @@ export default function PatientMeet({ navigation }) {
                 setPatient(item)
                 console.log("------------");
                 // console.log(patient.meets[0].topic);
-                patient.meets.map((item, index) => {
-                    setMeets(item)
-                })
 
-                console.log(meets.user_id);       
+                findMeet()
+                console.log(meets.user_id);
             }
             else if (item.doctor_id != idDoctor) {
                 // alert('กรุณากรอกรหัสประจำตัวแพทย์ให้ถูกต้อง')
@@ -82,7 +143,24 @@ export default function PatientMeet({ navigation }) {
                 console.log("ItemIDpatient: " + item.clinic_number);
             }
         })
-        findDoctor()
+        doctors.map((item, index) => {
+            if (item.doctor_id === meets.user_id) {
+                tmpFnameDoctor = item.fname
+                tmpLnameDoctor = item.lname
+            }
+
+        })
+       
+
+        setFnamePatient(patient.fname)
+        setLnamePatient(patient.lname)
+        setTelephone(patient.telephone)
+        setDate_meet(meets.date_meet)
+        setTime(meets.time)
+        setTime_to(meets.time_to)
+        setDetails(meets.details)
+        setFnameDoctor(tmpFnameDoctor)
+        setLnameDoctor(tmpLnameDoctor)
     }
 
     const getDoctors = async () => {
@@ -138,12 +216,14 @@ export default function PatientMeet({ navigation }) {
                         onChangeText={text => updateIdPatient(text)}
                         placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                     />
-                    {/* onChangeText={(text) => setParams(text)} */}
-                    <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}
-                    >
-                        {/* onPress={getPatienprofile}  */}
-                        <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
-                    </TouchableOpacity>
+
+                    <Button
+
+                        onPress={handle}
+                        title="ค้นหา"
+                        color="#841584"
+
+                    />
                 </View>
 
                 <KeyboardAwareScrollView style={tw`flex mt-8`}>
@@ -152,13 +232,13 @@ export default function PatientMeet({ navigation }) {
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อ</Text>
                                 <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{patient.fname}</Text>
+                                    <Text>{fnamePatient}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>สกุล</Text>
                                 <View style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{patient.lname}</Text>
+                                    <Text>{lnamePatient}</Text>
                                 </View>
                             </View>
                         </View>
@@ -168,7 +248,7 @@ export default function PatientMeet({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>วันที่นัดหมาย</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`} /> */}
                                 <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
-                                    <Text>{meets.date_meet}</Text>
+                                    <Text>{date_meet}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}></View>
@@ -179,14 +259,14 @@ export default function PatientMeet({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>เวลา ตั้งแต่</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`} /> */}
                                 <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
-                                    <Text>{meets.time}</Text>
+                                    <Text>{time}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>ถึง</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md pl-2`} /> */}
                                 <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
-                                    <Text>{meets.time_to}</Text>
+                                    <Text>{time_to}</Text>
                                 </View>
                             </View>
                         </View>
@@ -194,9 +274,9 @@ export default function PatientMeet({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์</Text>
-                                
+
                                 <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
-                                    <Text>{patient.telephone}</Text>
+                                    <Text>{telephone}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
@@ -210,7 +290,7 @@ export default function PatientMeet({ navigation }) {
                                 <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
                                     <Text>{fnameDoctor} {lnameDoctor}</Text>
                                 </View>
-                               
+
                             </View>
                             {/* <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อครูฝึก</Text>
@@ -222,7 +302,7 @@ export default function PatientMeet({ navigation }) {
                             <View style={tw`flex flex-col w-full`}>
                                 <Text style={tw`font-semibold text-base`}>หมายเหตุ</Text>
                                 <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`}>
-                                    <Text>{meets.details}</Text>
+                                    <Text>{details}</Text>
                                 </View>
                             </View>
                         </View>
