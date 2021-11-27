@@ -38,7 +38,7 @@ export default function Meet({ navigation }) {
 
     useEffect(() => {
         getDoctors(),
-            getPatient()
+        getPatient()
     }, [])
 
     const updateTopic = (input) => {
@@ -176,7 +176,7 @@ export default function Meet({ navigation }) {
                     <View style={tw`flex flex-col justify-around items-start w-full h-full  p-4 rounded-xl border-4 border-black`}>
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>บุคลากรที่ต้องการนัด โปรดกรอกรหัสประจำตัวแพทย์</Text>
+                                <Text style={tw`font-semibold text-base`}>บุคลากรที่ต้องการนัด</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-5/6 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}/> */}
                                 {/* <DropDownPicker style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeItem={item => console.log(item.label, item.value)}
@@ -185,7 +185,7 @@ export default function Meet({ navigation }) {
                                         { label: "'item2'", value: "'Item2'" },
                                     ]} /> */}
 
-                                <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 pt-2`}
+                                <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateQuery(text)}
                                     placeholder="กรอกรหัสประจำตัวแพทย์. . ."
                                 />
@@ -217,7 +217,7 @@ export default function Meet({ navigation }) {
                                     items={[{ label: 'item1', value: 'Item1' },
                                     { label: 'item2', value: 'Item2' },]} /> */}
 
-                                <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 pt-2`}
+                                <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateTopic(text)}
                                     placeholder="กรอกหัวข้อนัดหมาย. . ."
                                 />
@@ -225,19 +225,19 @@ export default function Meet({ navigation }) {
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>ชื่อ</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
-                                    <Text style={tw`font-semibold text-base`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
+                                <Text style={tw`font-semibold text-base`}>ชื่อแพทย์</Text>
+                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
+                                    <Text style={tw`text-base`}>
                                         {doctor.fname}
                                     </Text>
 
                                 </View>
                             </View>
-                            <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                <View style={tw`h-10 mt-2 w-full bg-purple-100 rounded-md pl-2`}>
-                                    <Text style={tw`font-semibold text-base`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2 `}>
+                                <Text style={tw`font-semibold text-base`}>สกุลแพทย์</Text>
+                                <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-100 rounded-md pl-2`}>
+                                    <Text style={tw`text-base`}>
                                         {doctor.lname}
                                     </Text>
                                 </View>
@@ -245,25 +245,25 @@ export default function Meet({ navigation }) {
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>วันที่นัดหมาย</Text>
-                                <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <TextInput style={tw`flex justify-center h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setDate_meet(text)}
-                                    placeholder="กรอกวันที่นัดหมาย. . ."
+                                    placeholder="YYYY-MM-DD"
                                 />
                             </View>
                             <View style={tw`flex flex-col w-1/2`}></View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เวลา ตั้งแต่</Text>
                                 <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setTime(text)}
                                     placeholder="กรอกเวลา. . ."
                                 />
                             </View>
-                            <View style={tw`flex flex-col w-1/2`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>ถึง</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setTime_to(text)}
@@ -272,17 +272,17 @@ export default function Meet({ navigation }) {
                             </View>
                         </View>
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>Clinic number</Text>
                                 <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateIdPatient(text)}
                                     placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                                 />
                             </View>
-                            <View style={tw`flex flex-col w-1/2`}>
+                            <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เบอร์ติดต่อ</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`} >
-                                    <Text style={tw`font-semibold text-base`}>
+                                <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-100 rounded-md pl-2`} >
+                                    <Text style={tw`text-base`}>
                                         {patient.telephone}
                                     </Text>
                                 </View>
@@ -291,17 +291,17 @@ export default function Meet({ navigation }) {
 
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>ข้อมูลผู้ป่วย ชื่อ</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`} >
-                                    <Text style={tw`font-semibold text-base`}>
+                                <Text style={tw`mt-2 font-semibold text-base`}>ชื่อผู้ป่วย</Text>
+                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`} >
+                                    <Text style={tw`text-base`}>
                                         {patient.fname}
                                     </Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`} >
-                                    <Text style={tw`font-semibold text-base`}>
+                                <Text style={tw`font-semibold text-base mt-2`}>สกุลผู้ป่วย</Text>
+                                <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-100 rounded-md pl-2`} >
+                                    <Text style={tw`text-base`}>
                                         {patient.lname}
                                     </Text>
                                 </View>
@@ -311,7 +311,7 @@ export default function Meet({ navigation }) {
 
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-full`}>
+                            <View style={tw`flex flex-col w-full mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>รายละเอียดเพิ่มเติม</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setDetails(text)}
@@ -320,13 +320,25 @@ export default function Meet({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-end w-full mt-2`}>
+                        {/* <View style={tw`flex flex-row justify-end w-full mt-2`}>
                             <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}
                                 onPress={postmeet}
                             >
                                 <Text style={tw`text-lg text-black font-bold`}>บันทึก</Text>
                             </TouchableOpacity>
+                        </View> */}
+                        
+                        <View style={tw`flex flex-row justify-end w-full mt-4`}>
+                            <View style={styles.button}>
+                                <Button
+                                    onPress={postmeet}
+                                    color="black"
+                                    title="บันทึก"
+                                    accessibilityLabel="Learn more about this purple button"
+                                />
+                            </View>
                         </View>
+
                     </View>
                 </KeyboardAwareScrollView>
             </View>
@@ -336,4 +348,24 @@ export default function Meet({ navigation }) {
 
 
     );
+
+
+
+
 }
+
+const styles = StyleSheet.create({
+
+    button: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingHorizontal: 30,
+        borderRadius: 4,
+        elevation: 10,
+        backgroundColor: '#FBCFE8',
+        borderWidth: 4,
+        borderColor: "#EF4444",
+        marginLeft: 12,
+        
+    },
+});

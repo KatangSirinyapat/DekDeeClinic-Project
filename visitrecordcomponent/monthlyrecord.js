@@ -118,9 +118,13 @@ export default function MonthlyRecord({ navigation }) {
                                 />
                             </View>
                             <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
-                                <Text style={tw`font-semibold text-base pl-6`}>จำนวนคนไข้</Text>
-                                <TextInput style={tw`h-8 w-1/2 bg-purple-300 rounded-md pl-2 ml-2`} />
-                                <Text style={tw`font-semibold text-base pl-2`}>คน</Text>
+                            <Text style={tw`font-semibold text-base pl-4`}>จำนวนคนไข้</Text>
+                                <View style={tw`flex flex-row w-2/5`}>
+                                    <View style={tw`flex justify-center items-center h-8 w-full bg-purple-300 rounded-md ml-2`}>
+                                        <Text></Text>
+                                    </View>
+                                    <Text style={tw`font-semibold text-base pl-2`}>คน</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -129,7 +133,9 @@ export default function MonthlyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของแพทย์</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} > {cost_of_doctor}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost_of_doctor}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -138,7 +144,9 @@ export default function MonthlyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่ายา</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} > {cost_of_medicine}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost_of_medicine}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -149,7 +157,9 @@ export default function MonthlyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ชื่อนักจิตวิทยา 1</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} > {cost_of_psychologist}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost_of_psychologist}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -158,7 +168,9 @@ export default function MonthlyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ชื่อนักจิตวิทยา 2</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text></Text>
+                                </View>
                             </View>
                         </View>
 
@@ -167,7 +179,9 @@ export default function MonthlyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ชื่อนักจิตวิทยา 3</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} />
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text></Text>
+                                </View>
                             </View>
                         </View>
 
@@ -176,7 +190,9 @@ export default function MonthlyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของนักฝึกพูด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} > {cost_of_practitioner}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost_of_practitioner}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -185,7 +201,9 @@ export default function MonthlyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของนักกิจกรรมบำบัด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} > {cost_of_occupational_therapist}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost_of_occupational_therapist}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -193,8 +211,10 @@ export default function MonthlyRecord({ navigation }) {
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
                                 <Text style={tw`font-semibold text-base`}>ค่าบริการของครูการศึกษาพิเศษ</Text>
                             </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} > {cost_of_teacher}</Text>
+                            <View style={tw`flex flex-row items-center w-3/5`}>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cost_of_teacher}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -202,8 +222,10 @@ export default function MonthlyRecord({ navigation }) {
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
                                 <Text style={tw`font-semibold text-base`}>เงินโอน</Text>
                             </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} > {bank_transfer}</Text>
+                            <View style={tw`flex flex-row items-center w-3/5`}>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{bank_transfer}</Text>
+                                </View>
                             </View>
                         </View>
 
@@ -212,17 +234,21 @@ export default function MonthlyRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>เงินสด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} > {cash}</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text>{cash}</Text>
+                                </View>
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4`}>
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={tw`font-semibold text-base`}>คิดเป็นเงินทั้งสิ้น</Text>
+                                <Text style={tw`font-semibold text-base text-red-600`}>คิดเป็นเงินทั้งสิ้น</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                            <Text style={tw`h-8 w-2/5 bg-purple-300 rounded-md pl-2`} > {total}</Text>
-                                <Text style={tw`font-semibold text-base ml-2`}>บาท</Text>
+                                <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={tw`font-semibold text-base`}>{total}</Text>
+                                </View>
+                                    <Text style={tw`font-semibold text-base ml-2 text-red-600`}>บาท</Text>
                             </View>
                         </View>
 

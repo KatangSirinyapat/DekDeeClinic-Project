@@ -229,13 +229,14 @@ export default function PatientProfile({ navigation }) {
                             placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                         />
 
-                        <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}
+                        {/* <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}
                         // onPress={PrintPatient()}
                         >
 
                             <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
 
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
+                        
                         {/* <Button title={find ? 'ล้าง' : 'ค้นหา'} onPress={onPressHandler}></Button>
                         {find ?
                             // <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
@@ -251,21 +252,21 @@ export default function PatientProfile({ navigation }) {
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>ชื่อ </Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{fname}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>สกุล </Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{lname}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col w-1/4`}>
                                     <Text style={tw`font-semibold text-base`}>เพศ </Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{gender}</Text>
                                     </View>
 
@@ -275,21 +276,21 @@ export default function PatientProfile({ navigation }) {
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>วันเกิด </Text>
-                                    <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
                                         <Text>{bod}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>อายุ </Text>
-                                    <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
                                         <Text>{age}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/4`}>
                                     <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์ </Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{telephone}</Text>
                                     </View>
 
@@ -299,21 +300,21 @@ export default function PatientProfile({ navigation }) {
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>ประวัติการแพ้ยา </Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{drug_allergy}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>ประวัติโรคประจำตัว </Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{congenital_disease}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/4`}>
                                     <Text style={tw`font-semibold text-base`}>จำนวนครั้งในการรักษา</Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>0</Text>
                                     </View>
 
@@ -323,20 +324,20 @@ export default function PatientProfile({ navigation }) {
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>ที่อยู่ บ้านเลขที่ </Text>
-                                    <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`} >
+                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`} >
                                         <Text>{home_no}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>หมู่ที่ </Text>
-                                    <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`} >
+                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`} >
                                         <Text>{moo}</Text>
                                     </View>
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/4`}>
                                     <Text style={tw`font-semibold text-base`}>ตรอก/ซอก/ซอย</Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{soi}</Text>
                                     </View>
 
@@ -346,21 +347,21 @@ export default function PatientProfile({ navigation }) {
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>ตำบล</Text>
-                                    <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
                                         <Text>{subdistrict}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>อำเภอ</Text>
-                                    <View style={tw`h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
                                         <Text>{district}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/4`}>
                                     <Text style={tw`font-semibold text-base`}>จังหวัด</Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{province}</Text>
                                     </View>
                                 </View>
@@ -369,21 +370,21 @@ export default function PatientProfile({ navigation }) {
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>ชื่อผู้ปกครอง</Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{fname_parent}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col w-1/3`}>
                                     <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{lname_parent}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col w-1/4`}>
                                     <Text style={tw`font-semibold text-base`}>ความสัมพันธ์กับผู้ป่วย</Text>
-                                    <View style={tw`h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
                                         <Text>{relation}</Text>
                                     </View>
 
@@ -394,7 +395,7 @@ export default function PatientProfile({ navigation }) {
                                 <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}
                                 // onPress={editPatient}
                                 >
-                                    <Text style={tw`text-lg text-black font-bold`}>แก้ไข</Text>
+                                    <Text style={tw`flex justify-center text-lg text-black font-bold`}>แก้ไข</Text>
                                 </TouchableOpacity>
                             </View>
 
@@ -403,10 +404,6 @@ export default function PatientProfile({ navigation }) {
                 </View>
             </View>
         </View>
-
-
-
-
 
     );
 }
