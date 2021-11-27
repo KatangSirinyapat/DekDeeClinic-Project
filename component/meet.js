@@ -67,8 +67,37 @@ export default function Meet({ navigation }) {
         let data = currentDate.toJSON()
         let dataBoD = JSON.stringify(data);
         let tmp = dataBoD.substring(12, 17)
-        setTime(tmp)
-        // console.log(tmp);
+        let tmp1 = tmp.substring(0, 2)
+        let tmp2 = tmp.substring(2,5)
+        let tmp1Int = parseInt(tmp1) + 7
+   
+        switch (tmp1Int) {
+            case 30:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 29:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 28:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 27:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 26:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 25:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 24:
+                tmp1Int = tmp1Int - 24
+                break;
+        }
+        let tmpString = tmp1Int.toString() + tmp2
+
+        setTime(tmpString)
+        // console.log(tmp1Int);
 
     };
 
@@ -80,8 +109,41 @@ export default function Meet({ navigation }) {
         let data = currentDate.toJSON()
         let dataBoD = JSON.stringify(data);
         let tmp = dataBoD.substring(12, 17)
-        setTime_to(tmp)
-        // console.log(tmp);
+        let tmp1 = tmp.substring(0, 2)
+        let tmp2 = tmp.substring(2,5)
+        let tmp1Int = parseInt(tmp1) + 7
+        // if(tmp1Int >= 17 && tmp1Int <=23)
+        // {
+        //     tmp1Int = tmp1Int 
+        // }
+        switch (tmp1Int) {
+            case 30:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 29:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 28:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 27:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 26:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 25:
+                tmp1Int = tmp1Int - 24
+                break;
+            case 24:
+                tmp1Int = tmp1Int - 24
+                break;
+        }
+        let tmpString = tmp1Int.toString() + tmp2
+
+        setTime_to(tmpString)
+        // console.log(tmp1Int);
+        // console.log(tmpString);
 
     };
 
