@@ -59,6 +59,9 @@ export default function VisitRecord({ navigation }) {
         setDate(tmp.toString())
         
         // console.log(dataBoD.substring(1,11)); 
+
+
+
     };
 
     const updateIdPatient = (input) => {
@@ -174,13 +177,14 @@ export default function VisitRecord({ navigation }) {
             <View style={tw`flex w-3/4 h-4/5`}>
                 <KeyboardAwareScrollView style={tw`flex mt-8`}>
                     <View style={tw`flex flex-col justify-between items-start w-full h-full p-4 rounded-xl border-4 border-black`}>
-                        <View style={tw`flex flex-row w-full justify-end items-center`}>
+                        <View style={tw`flex flex-row w-full justify-end items-center pl-36`}>
                             <Text style={tw`font-semibold text-base`}>วันที่</Text>
                             {/* <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`}
                                 onChangeText={text => setDate(text)}
                                 placeholder="ปปป-ดดด-ววว"
                             /> */}
-                            <DateTimePicker themeVariant="light" style={tw`h-8 w-1/3  rounded-md pl-2 ml-2`}
+                         
+                            <DateTimePicker themeVariant="light" style={tw`h-8 w-1/4 ml-2`}
                                 testID="dateTimePicker"
                                 value={date1}
                                 mode={'date'}
@@ -188,6 +192,7 @@ export default function VisitRecord({ navigation }) {
                                 display="default"
                                 onChange={onChange}
                             />
+                           
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>

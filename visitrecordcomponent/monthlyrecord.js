@@ -187,7 +187,7 @@ export default function MonthlyRecord({ navigation }) {
                                     onChangeText={text => inputDate(text)}
                                     placeholder="YYY-MM"
                                 /> */}
-                                <DateTimePicker themeVariant="light" style={tw`h-8 w-1/3  rounded-md pl-2 ml-2`}
+                                <DateTimePicker themeVariant="light" style={tw`h-8 w-1/2 rounded-md pl-2 ml-2`}
                                     testID="dateTimePicker"
                                     value={date1}
                                     mode={'date'}
@@ -197,7 +197,7 @@ export default function MonthlyRecord({ navigation }) {
                                 />
                             </View>
                             <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
-                                <Text style={tw`font-semibold text-base pl-4`}>จำนวนคนไข้</Text>
+                                <Text style={tw`font-semibold text-base`}>จำนวนคนไข้</Text>
                                 <View style={tw`flex flex-row w-2/5`}>
                                     <View style={tw`flex justify-center items-center h-8 w-full bg-purple-300 rounded-md ml-2`}>
                                         <Text></Text>

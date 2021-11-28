@@ -69,9 +69,9 @@ export default function Meet({ navigation }) {
         let dataBoD = JSON.stringify(data);
         let tmp = dataBoD.substring(12, 17)
         let tmp1 = tmp.substring(0, 2)
-        let tmp2 = tmp.substring(2,5)
+        let tmp2 = tmp.substring(2, 5)
         let tmp1Int = parseInt(tmp1) + 7
-   
+
         switch (tmp1Int) {
             case 30:
                 tmp1Int = tmp1Int - 24
@@ -111,7 +111,7 @@ export default function Meet({ navigation }) {
         let dataBoD = JSON.stringify(data);
         let tmp = dataBoD.substring(12, 17)
         let tmp1 = tmp.substring(0, 2)
-        let tmp2 = tmp.substring(2,5)
+        let tmp2 = tmp.substring(2, 5)
         let tmp1Int = parseInt(tmp1) + 7
         // if(tmp1Int >= 17 && tmp1Int <=23)
         // {
@@ -380,14 +380,16 @@ export default function Meet({ navigation }) {
                                     onChangeText={text => setDate_meet(text)}
                                     placeholder="YYYY-MM-DD"
                                 /> */}
-                                <DateTimePicker themeVariant="light" style={tw`h-10 mt-0 w-2/4 border-2   rounded-md pl-0`}
-                                    testID="dateTimePicker"
-                                    value={date}
-                                    mode={'date'}
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={onChange}
-                                />
+                               
+                                    <DateTimePicker themeVariant="light" style={tw`h-10 mt-2 w-2/4`}
+                                        testID="dateTimePicker"
+                                        value={date}
+                                        mode={'date'}
+                                        is24Hour={true}
+                                        display="default"
+                                        onChange={onChange}
+                                    />
+                              
                             </View>
                             <View style={tw`flex flex-col w-1/2`}></View>
                         </View>

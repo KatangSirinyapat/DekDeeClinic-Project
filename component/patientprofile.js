@@ -391,13 +391,13 @@ export default function PatientProfile({ navigation }) {
                                 </View>
                             </View>
 
-                            <View style={tw`flex flex-row mt-4 justify-end w-full`}>
+                            {/* <View style={tw`flex flex-row mt-4 justify-end w-full`}>
                                 <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}
                                 // onPress={editPatient}
                                 >
                                     <Text style={tw`flex justify-center text-lg text-black font-bold`}>แก้ไข</Text>
                                 </TouchableOpacity>
-                            </View>
+                            </View> */}
 
                         </View>
                     </KeyboardAwareScrollView>
