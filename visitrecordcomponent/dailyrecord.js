@@ -11,12 +11,23 @@ const URL_COST = `http://178.128.90.50:3333/costs`
 export default function DailyRecord({ navigation }) {
     // const navigation = useNavigation()
 
-
+    let tmpDate = " "
+ 
+    let costOBJ = []
 
     //COSTS API
     const [costs, setCosts] = useState([])
     const [cost, setCost] = useState([])
     const [date, setDate] = useState("")
+    const [cost_of_doctor, setCost_of_doctor] = useState(0)
+    const [cost_of_medicine, setCost_of_medicine] = useState(0)
+    const [cost_of_psychologist, setCost_of_psychologist] = useState(0)
+    const [cost_of_practitioner, setCost_of_practitioner] = useState(0)
+    const [cost_of_occupational_therapist, setCost_of_occupational_therapist] = useState(0)
+    const [cost_of_teacher, setCost_of_teacher] = useState(0)
+    const [bank_transfer, setBank_transfer] = useState(0)
+    const [cash, setCash] = useState(0)
+    const [total, setTotal] = useState(0)
 
     //Date time
     const [date1, setDate1] = useState(new Date(2020, 12, 1, 0, 0, 0, 0));
@@ -35,15 +46,17 @@ export default function DailyRecord({ navigation }) {
         let dataBoD = JSON.stringify(data);
         let tmp = dataBoD.substring(1, 11)
         setDate(tmp.toString())
+        tmpDate = tmp.toString()
 
-        costs.map((item, index) => {
-            if (item.date === date.concat("T00:00:00.000Z")) {
-                setCost(item)
-                // tmp = item.date
-                // console.log(tmp.substring(0,7));
+        // costs.map((item, index) => {
+        //     if (item.date === date.concat("T00:00:00.000Z")) {
+        //         setCost(item)
+        //         costOBJ.push(item)
+        //         // tmp = item.date
+        //         // console.log(tmp.substring(0,7));
 
-            }
-        })
+        //     }
+        // })
 
         // console.log(dataBoD.substring(1,11)); 
     };
@@ -56,20 +69,70 @@ export default function DailyRecord({ navigation }) {
 
     const inputDate = (input) => {
         setDate(input)
-        findCost()
+        // findCost()
     }
 
     const findCost = () => {
-        let tmp = "";
+        
+        let tmp = 0
+   
         costs.map((item, index) => {
+           tmp += item.cost_of_doctor
             if (item.date === date.concat("T00:00:00.000Z")) {
                 setCost(item)
+                console.log("T"+index);
+                costOBJ.push(item)
                 // tmp = item.date
                 // console.log(tmp.substring(0,7));
-
+                
             }
+            else{
+                console.log("F"+index);
+            }
+            
         })
         // console.log(cost.id);
+        calculate_cost()
+        console.log("Test: "+ tmp);
+    }
+
+    const calculate_cost = () => {
+        // console.log(costOBJ);
+        let tmp_cost_of_doctor = 0
+        let tmp_cost_of_medicine = 0
+        let tmp_cost_of_psychologist = 0
+        let tmp_cost_of_practitioner = 0
+        let tmp_cost_of_occupational_therapist = 0
+        let tmp_cost_of_teacher = 0
+        let tmp_bank_transfer = 0
+        let tmp_cash = 0
+        let tmp_total = 0
+        costOBJ.map((item,index)=>{
+            
+            tmp_cost_of_doctor += item.cost_of_doctor
+            tmp_cost_of_medicine += item.cost_of_medicine
+            tmp_cost_of_psychologist += item.cost_of_psychologist
+            tmp_cost_of_practitioner += item.cost_of_practitioner
+            tmp_cost_of_occupational_therapist += item.cost_of_occupational_therapist
+            tmp_cost_of_teacher += item.cost_of_teacher
+            tmp_bank_transfer += item.bank_transfer
+            tmp_cash += item.cash
+            tmp_total += item.total
+
+            console.log(tmp_cost_of_doctor);
+
+      
+
+        })
+        setCost_of_doctor(tmp_cost_of_doctor)
+        setCost_of_medicine(tmp_cost_of_medicine)
+        setCost_of_psychologist(tmp_cost_of_psychologist)
+        setCost_of_practitioner(tmp_cost_of_practitioner)
+        setCost_of_occupational_therapist(tmp_cost_of_occupational_therapist)
+        setCost_of_teacher(tmp_cost_of_teacher)
+        setBank_transfer(tmp_bank_transfer)
+        setCash(tmp_cash)
+        setTotal(tmp_total)
     }
 
     const getCost = async () => {
@@ -132,6 +195,7 @@ export default function DailyRecord({ navigation }) {
                                    
                                     color="black"
                                     title="ค้นหา"
+                                    onPress={findCost}
                                 />
                             </View>
                         </View>
@@ -144,7 +208,7 @@ export default function DailyRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{cost.cost_of_doctor}</Text>
+                                    <Text>{cost_of_doctor}</Text>
                                 </View>
                             </View>
 
@@ -156,7 +220,7 @@ export default function DailyRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{cost.cost_of_medicine}</Text>
+                                    <Text>{cost_of_medicine}</Text>
                                 </View>
                             </View>
                         </View>
@@ -169,7 +233,7 @@ export default function DailyRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{cost.cost_of_psychologist}</Text>
+                                    <Text>{cost_of_psychologist}</Text>
                                 </View>
                             </View>
                         </View>
@@ -202,7 +266,7 @@ export default function DailyRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{cost.cost_of_practitioner}</Text>
+                                    <Text>{cost_of_practitioner}</Text>
                                 </View>
                             </View>
                         </View>
@@ -213,7 +277,7 @@ export default function DailyRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{cost.cost_of_occupational_therapist}</Text>
+                                    <Text>{cost_of_occupational_therapist}</Text>
                                 </View>
                             </View>
                         </View>
@@ -224,7 +288,7 @@ export default function DailyRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{cost.cost_of_teacher}</Text>
+                                    <Text>{cost_of_teacher}</Text>
                                 </View>
                             </View>
                         </View>
@@ -235,7 +299,7 @@ export default function DailyRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{cost.bank_transfer}</Text>
+                                    <Text>{bank_transfer}</Text>
                                 </View>
                             </View>
                         </View>
@@ -247,7 +311,7 @@ export default function DailyRecord({ navigation }) {
 
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
-                                    <Text>{cost.cash}</Text>
+                                    <Text>{cash}</Text>
                                 </View>
                             </View>
                         </View>
@@ -258,7 +322,7 @@ export default function DailyRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={tw`flex justify-center h-8 w-2/5 bg-purple-300 rounded-md pl-2`}>
-                                    <Text style={tw`font-semibold text-base`}>{cost.total}</Text>
+                                    <Text style={tw`font-semibold text-base`}>{total}</Text>
                                 </View>
                                 <Text style={tw`font-semibold text-base ml-2 text-red-600`}>บาท</Text>
                             </View>
