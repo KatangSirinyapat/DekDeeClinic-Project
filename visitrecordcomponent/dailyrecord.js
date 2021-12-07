@@ -12,7 +12,7 @@ export default function DailyRecord({ navigation }) {
     // const navigation = useNavigation()
 
     let tmpDate = " "
- 
+
     let costOBJ = []
 
     //COSTS API
@@ -45,8 +45,14 @@ export default function DailyRecord({ navigation }) {
         let data = currentDate.toJSON()
         let dataBoD = JSON.stringify(data);
         let tmp = dataBoD.substring(1, 11)
+        let tmp0 = tmp.substring(0,8)
+        let tmp1 = tmp.substring(8,11)
+        
+        let int_tmp1 = parseInt(tmp1)+1 
+        tmp = tmp0+int_tmp1
+        console.log(tmp);
         setDate(tmp.toString())
-        tmpDate = tmp.toString()
+        // tmpDate = tmp.toString()
 
         // costs.map((item, index) => {
         //     if (item.date === date.concat("T00:00:00.000Z")) {
@@ -73,27 +79,27 @@ export default function DailyRecord({ navigation }) {
     }
 
     const findCost = () => {
-        
+
         let tmp = 0
-   
+
         costs.map((item, index) => {
-           tmp += item.cost_of_doctor
+            tmp += item.cost_of_doctor
             if (item.date === date.concat("T00:00:00.000Z")) {
                 setCost(item)
-                console.log("T"+index);
+                console.log("T" + index);
                 costOBJ.push(item)
                 // tmp = item.date
                 // console.log(tmp.substring(0,7));
-                
+
             }
-            else{
-                console.log("F"+index);
+            else {
+                console.log("F" + index);
             }
-            
+
         })
         // console.log(cost.id);
         calculate_cost()
-        console.log("Test: "+ tmp);
+        console.log("Test: " + tmp);
     }
 
     const calculate_cost = () => {
@@ -107,8 +113,8 @@ export default function DailyRecord({ navigation }) {
         let tmp_bank_transfer = 0
         let tmp_cash = 0
         let tmp_total = 0
-        costOBJ.map((item,index)=>{
-            
+        costOBJ.map((item, index) => {
+
             tmp_cost_of_doctor += item.cost_of_doctor
             tmp_cost_of_medicine += item.cost_of_medicine
             tmp_cost_of_psychologist += item.cost_of_psychologist
@@ -121,7 +127,7 @@ export default function DailyRecord({ navigation }) {
 
             console.log(tmp_cost_of_doctor);
 
-      
+
 
         })
         setCost_of_doctor(tmp_cost_of_doctor)
@@ -151,7 +157,7 @@ export default function DailyRecord({ navigation }) {
 
     }
 
-   
+
 
 
     return (
@@ -190,16 +196,16 @@ export default function DailyRecord({ navigation }) {
                                 </View>
                             </View> */}
                             <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
-                            <View style={styles.searchButton}>
-                                <Button
-                                   
-                                    color="black"
-                                    title="ค้นหา"
-                                    onPress={findCost}
-                                />
+                                <View style={styles.searchButton}>
+                                    <Button
+
+                                        color="black"
+                                        title="ค้นหา"
+                                        onPress={findCost}
+                                    />
+                                </View>
                             </View>
-                        </View>
-                            
+
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4`}>

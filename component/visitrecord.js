@@ -55,6 +55,13 @@ export default function VisitRecord({ navigation }) {
         let data = currentDate.toJSON()
         let dataBoD = JSON.stringify(data);
         let tmp = dataBoD.substring(1, 11)
+        let tmp0 = tmp.substring(0,8)
+        let tmp1 = tmp.substring(8,11)
+        
+        let int_tmp1 = parseInt(tmp1)+1 
+        tmp = tmp0+int_tmp1
+        console.log(tmp);
+
 
         setDate(tmp.toString())
         

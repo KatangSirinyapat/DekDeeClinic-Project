@@ -39,57 +39,11 @@ export default function MonthlyRecord({ navigation }) {
 
         let data = currentDate.toJSON()
         let dataBoD = JSON.stringify(data);
-        let tmp1 = dataBoD.substring(1, 11)
+        let tmp1 = dataBoD.substring(1, 8)
+        
+        // console.log(tmp1);
         setDate(tmp1.toString())
 
-
-        let tmp = "";
-        let cost_of_doctor = 0
-        let cost_of_medicine = 0
-        let cost_of_psychologist = 0
-        let cost_of_practitioner = 0
-        let cost_of_occupational_therapist = 0
-        let cost_of_teacher = 0
-        let bank_transfer = 0
-        let cash = 0
-        let total = 0
-
-
-        costs.map((item, index) => {
-            tmp = item.date
-            tmp = tmp.substring(0, 7)
-            // console.log("------------");
-            // console.log(tmp);
-            if (tmp == date) {
-
-                cost_of_doctor += item.cost_of_doctor
-                cost_of_medicine += item.cost_of_medicine
-                cost_of_psychologist += item.cost_of_psychologist
-                cost_of_practitioner += item.cost_of_practitioner
-                cost_of_occupational_therapist += item.cost_of_occupational_therapist
-                cost_of_teacher += item.cost_of_teacher
-                bank_transfer += item.bank_transfer
-                cash += item.cash
-                total += item.total
-
-                console.log(cost_of_doctor);
-            }
-            // console.log("-----------------------");
-        })
-
-        setCost_of_doctor(cost_of_doctor)
-        setCost_of_medicine(cost_of_medicine)
-        setCost_of_psychologist(cost_of_psychologist)
-        setCost_of_practitioner(cost_of_practitioner)
-        setCost_of_occupational_therapist(cost_of_occupational_therapist)
-        setCost_of_teacher(cost_of_teacher)
-        setBank_transfer(bank_transfer)
-        setCash(cash)
-        setTotal(total)
-
-        // console.log(total);
-
-        // console.log(dataBoD.substring(1,11)); 
     };
 
 
@@ -103,54 +57,54 @@ export default function MonthlyRecord({ navigation }) {
 
     const inputDate = (input) => {
         setDate(input)
-        findCost()
+        // findCost()
     }
 
     const findCost = () => {
 
         let tmp = "";
-        let cost_of_doctor = 0
-        let cost_of_medicine = 0
-        let cost_of_psychologist = 0
-        let cost_of_practitioner = 0
-        let cost_of_occupational_therapist = 0
-        let cost_of_teacher = 0
-        let bank_transfer = 0
-        let cash = 0
-        let total = 0
+        let tmp_cost_of_doctor = 0
+        let tmp_cost_of_medicine = 0
+        let tmp_cost_of_psychologist = 0
+        let tmp_cost_of_practitioner = 0
+        let tmp_cost_of_occupational_therapist = 0
+        let tmp_cost_of_teacher = 0
+        let tmp_bank_transfer = 0
+        let tmp_cash = 0
+        let tmp_total = 0
 
 
         costs.map((item, index) => {
             tmp = item.date
             tmp = tmp.substring(0, 7)
             // console.log("------------");
-            // console.log(tmp);
+            console.log(tmp);
+            console.log(date);
             if (tmp == date) {
 
-                cost_of_doctor += item.cost_of_doctor
-                cost_of_medicine += item.cost_of_medicine
-                cost_of_psychologist += item.cost_of_psychologist
-                cost_of_practitioner += item.cost_of_practitioner
-                cost_of_occupational_therapist += item.cost_of_occupational_therapist
-                cost_of_teacher += item.cost_of_teacher
-                bank_transfer += item.bank_transfer
-                cash += item.cash
-                total += item.total
+                tmp_cost_of_doctor += item.cost_of_doctor
+                tmp_cost_of_medicine += item.cost_of_medicine
+                tmp_cost_of_psychologist += item.cost_of_psychologist
+                tmp_cost_of_practitioner += item.cost_of_practitioner
+                tmp_cost_of_occupational_therapist += item.cost_of_occupational_therapist
+                tmp_cost_of_teacher += item.cost_of_teacher
+                tmp_bank_transfer += item.bank_transfer
+                tmp_cash += item.cash
+                tmp_total += item.total
 
-                console.log(cost_of_doctor);
+
             }
             // console.log("-----------------------");
         })
-
-        setCost_of_doctor(cost_of_doctor)
-        setCost_of_medicine(cost_of_medicine)
-        setCost_of_psychologist(cost_of_psychologist)
-        setCost_of_practitioner(cost_of_practitioner)
-        setCost_of_occupational_therapist(cost_of_occupational_therapist)
-        setCost_of_teacher(cost_of_teacher)
-        setBank_transfer(bank_transfer)
-        setCash(cash)
-        setTotal(total)
+        setCost_of_doctor(tmp_cost_of_doctor)
+        setCost_of_medicine(tmp_cost_of_medicine)
+        setCost_of_psychologist(tmp_cost_of_psychologist)
+        setCost_of_practitioner(tmp_cost_of_practitioner)
+        setCost_of_occupational_therapist(tmp_cost_of_occupational_therapist)
+        setCost_of_teacher(tmp_cost_of_teacher)
+        setBank_transfer(tmp_bank_transfer)
+        setCash(tmp_cash)
+        setTotal(tmp_total)
 
         // console.log(total);
     }
@@ -196,13 +150,22 @@ export default function MonthlyRecord({ navigation }) {
                                     onChange={onChange}
                                 />
                             </View>
-                            <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
+                            {/* <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
                                 <Text style={tw`font-semibold text-base`}>จำนวนคนไข้</Text>
                                 <View style={tw`flex flex-row w-2/5`}>
                                     <View style={tw`flex justify-center items-center h-8 w-full bg-purple-300 rounded-md ml-2`}>
                                         <Text></Text>
                                     </View>
                                     <Text style={tw`font-semibold text-base pl-2`}>คน</Text>
+                                </View>
+                            </View> */}
+                            <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
+                                <View style={styles.searchButton}>
+                                    <Button
+                                        color="black"
+                                        title="ค้นหา"
+                                        onPress={findCost}
+                                    />
                                 </View>
                             </View>
                         </View>
@@ -343,3 +306,29 @@ export default function MonthlyRecord({ navigation }) {
 
     );
 }
+
+const styles = StyleSheet.create({
+
+    printButton: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingHorizontal: 30,
+        borderRadius: 4,
+        elevation: 10,
+        backgroundColor: '#FBCFE8',
+        borderWidth: 4,
+        borderColor: "#EF4444",
+        marginLeft: 12,
+
+    },
+
+    searchButton: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingHorizontal: 5,
+        borderRadius: 4,
+        backgroundColor: '#FBCFE8',
+        borderWidth: 2,
+        borderColor: "#EF4444",
+    }
+});
