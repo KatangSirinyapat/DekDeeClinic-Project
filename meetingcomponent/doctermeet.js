@@ -4,8 +4,11 @@ import tw from "tailwind-react-native-classnames";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DropDownPicker from 'react-native-dropdown-picker';
 
+
 export default function DocterMeet({ navigation }) {
     // const navigation = useNavigation()
+
+    
     return (   
         <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
             <View style={tw`flex w-full justify-start items-start ml-16`}>
@@ -24,6 +27,7 @@ export default function DocterMeet({ navigation }) {
                         <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
                     </TouchableOpacity>
                 </View>
+            
         </View>
         
         

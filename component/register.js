@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, ScrollView } from 'react-native';
-
 import tw from "tailwind-react-native-classnames";
-
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios';
@@ -193,13 +191,33 @@ export default function Register({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ประวัติการแพ้ยา</Text>
-                                <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setdrug_allergy(text)} />
+                                {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                    onChangeText={(text) => setdrug_allergy(text)} /> */}
+                                <View style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 py-2`}>
+                                    <RNPickerSelect
+                                        placeholder={{ label: "ประวัติการแพ้ยา", value: null }}
+                                        onValueChange={(value) => setdrug_allergy(value)}
+                                        items={[
+                                            { label: "ไม่มีประวัติการแพ้ยา", value: "ไม่มีประวัติการแพ้ยา" },
+                                            { label: "แพ้ยากลุ่ม Penicillins", value: "แพ้ยากลุ่ม Penicillins" },
+                                        ]}
+                                    />
+                                </View>
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ประวัติโรคประจำตัว</Text>
-                                <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setcongenital_disease(text)} />
+                                {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                    onChangeText={(text) => setcongenital_disease(text)} /> */}
+                                <View style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 py-2`}>
+                                    <RNPickerSelect
+                                        placeholder={{ label: "โรคประจำตัว", value: null }}
+                                        onValueChange={(value) => setcongenital_disease(value)}
+                                        items={[
+                                            { label: "ไม่มีโรคประจำตัว", value: "ไม่มีโรคประจำตัว" },
+                                            { label: "หอบหืด", value: "หอบหืด" },
+                                        ]}
+                                    />
+                                </View>
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์</Text>

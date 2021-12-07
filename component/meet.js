@@ -490,7 +490,7 @@ export default function Meet({ navigation }) {
                                     onPress={postmeet}
                                     color="black"
                                     title="บันทึก"
-                                    accessibilityLabel="Learn more about this purple button"
+                                    
                                 />
                             </View>
                         </View>

@@ -6,9 +6,6 @@ import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
-
-
-
 const URL_COST = `http://178.128.90.50:3333/costs`
 
 export default function DailyRecord({ navigation }) {
@@ -22,7 +19,7 @@ export default function DailyRecord({ navigation }) {
     const [date, setDate] = useState("")
 
     //Date time
-    const [date1, setDate1] = useState(new Date(2021, 10, 27, 12, 0, 0, 0));
+    const [date1, setDate1] = useState(new Date(2021, 11, 27, 0, 0, 0, 0));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
@@ -91,6 +88,8 @@ export default function DailyRecord({ navigation }) {
 
     }
 
+   
+
 
     return (
         <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
@@ -118,7 +117,7 @@ export default function DailyRecord({ navigation }) {
                                 />
 
                             </View>
-                            <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
+                            {/* <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
                                 <Text style={tw`font-semibold text-base`}>จำนวนคนไข้</Text>
                                 <View style={tw`flex flex-row w-2/5`}>
                                     <View style={tw`flex justify-center items-center h-8 w-full bg-purple-300 rounded-md ml-2`}>
@@ -126,7 +125,17 @@ export default function DailyRecord({ navigation }) {
                                     </View>
                                     <Text style={tw`font-semibold text-base pl-2`}>คน</Text>
                                 </View>
+                            </View> */}
+                            <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
+                            <View style={styles.searchButton}>
+                                <Button
+                                   
+                                    color="black"
+                                    title="ค้นหา"
+                                />
                             </View>
+                        </View>
+                            
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4`}>
@@ -291,4 +300,14 @@ const styles = StyleSheet.create({
         marginLeft: 12,
 
     },
+
+    searchButton: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingHorizontal: 5,
+        borderRadius: 4,
+        backgroundColor: '#FBCFE8',
+        borderWidth: 2,
+        borderColor: "#EF4444",
+    }
 });
