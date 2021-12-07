@@ -45,11 +45,21 @@ export default function DailyRecord({ navigation }) {
         let data = currentDate.toJSON()
         let dataBoD = JSON.stringify(data);
         let tmp = dataBoD.substring(1, 11)
-        // let tmp0 = tmp.substring(0,8)
-        // let tmp1 = tmp.substring(8,11)
+        let tmp0 = tmp.substring(0,8)
+        let tmp1 = tmp.substring(8,11)
         
-        // let int_tmp1 = parseInt(tmp1)+1 
-        // tmp = tmp0+int_tmp1
+        let int_tmp1 = parseInt(tmp1)+1
+        // console.log(int_tmp1);
+        if(int_tmp1 >= 0 && int_tmp1 <=9)
+        {
+            tmp = tmp0+0+int_tmp1
+            
+        }
+        else
+        {
+            tmp = tmp0+int_tmp1
+        }
+        
         console.log(tmp);
         setDate(tmp.toString())
         // tmpDate = tmp.toString()
@@ -83,7 +93,7 @@ export default function DailyRecord({ navigation }) {
         let tmp = 0
 
         costs.map((item, index) => {
-            tmp += item.cost_of_doctor
+           
             if (item.date === date.concat("T00:00:00.000Z")) {
                 setCost(item)
                 console.log("T" + index);
@@ -99,7 +109,7 @@ export default function DailyRecord({ navigation }) {
         })
         // console.log(cost.id);
         calculate_cost()
-        console.log("Test: " + tmp);
+       
     }
 
     const calculate_cost = () => {
@@ -125,7 +135,7 @@ export default function DailyRecord({ navigation }) {
             tmp_cash += item.cash
             tmp_total += item.total
 
-            console.log(tmp_cost_of_doctor);
+            // console.log(tmp_cost_of_doctor);
 
 
 
@@ -139,6 +149,7 @@ export default function DailyRecord({ navigation }) {
         setBank_transfer(tmp_bank_transfer)
         setCash(tmp_cash)
         setTotal(tmp_total)
+        console.log(tmp_total);
     }
 
     const getCost = async () => {
