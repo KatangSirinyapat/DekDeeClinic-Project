@@ -54,9 +54,9 @@ export default function Meet({ navigation }) {
         let tmp0 = tmp.substring(0,8)
         let tmp1 = tmp.substring(8,11)
         
-        let int_tmp1 = parseInt(tmp1)+1 
-        tmp = tmp0+int_tmp1
-        // console.log(tmp);
+        // let int_tmp1 = parseInt(tmp1)+1
+        // tmp = tmp0+int_tmp1
+        // // // console.log(tmp);
         
 
         setDate_meet(tmp.toString())
