@@ -40,7 +40,7 @@ export default function VisitRecord({ navigation }) {
     const [cost_of_psychologist3, setCost_of_psychologist3] = useState(0)
 
     //Date time
-    const [date1, setDate1] = useState(new Date(2021, 10, 27, 12, 0, 0, 0));
+    const [date1, setDate1] = useState(new Date(2020, 12, 1, 0, 0, 0, 0));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 

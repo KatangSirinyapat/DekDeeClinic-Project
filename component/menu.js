@@ -42,11 +42,11 @@ export default function Menu({ navigation }) {
             <Text style={tw`text-lg text-black font-bold`}>รายงาน</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={tw`h-12 w-1/3 bg-white rounded-md items-center justify-center border-2 border-gray-500`}
+          {/* <TouchableOpacity style={tw`h-12 w-1/3 bg-white rounded-md items-center justify-center border-2 border-gray-500`}
            onPress={() => navigation.navigate('ตั้งค่าระบบ')}
            title="ตั้งค่าระบบ">
             <Text style={tw`text-lg text-black font-bold`}>ตั้งค่าระบบ</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           
           <TouchableOpacity style={tw`h-12 w-1/3 bg-white rounded-md items-center justify-center border-2 border-gray-500`}
            onPress={() => navigation.navigate('Login')}>

@@ -14,7 +14,7 @@ const URL = `http://178.128.90.50:3333/patients`
 export default function Register({ navigation }) {
 
 
-    const [date, setDate] = useState(new Date(2021, 10, 27, 12, 0, 0, 0));
+    const [date, setDate] = useState(new Date(2020, 12, 1, 0, 0, 0, 0));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [clinic_number, setClinic_number] = useState("");
@@ -105,7 +105,7 @@ export default function Register({ navigation }) {
             .then(function (response) {
                 // handle success
                 // alert(JSON.stringify(response.data));
-                alert("ลงทะเบียนผู้ป่วนเสร็จสิ้น")
+                alert("ลงทะเบียนผู้ป่วยเสร็จสิ้น")
             })
             .catch(function (error) {
                 // handle error
@@ -191,9 +191,9 @@ export default function Register({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ประวัติการแพ้ยา</Text>
-                                {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setdrug_allergy(text)} /> */}
-                                <View style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 py-2`}>
+                                <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                    onChangeText={(text) => setdrug_allergy(text)} />
+                                {/* <View style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 py-2`}>
                                     <RNPickerSelect
                                         placeholder={{ label: "ประวัติการแพ้ยา", value: null }}
                                         onValueChange={(value) => setdrug_allergy(value)}
@@ -202,13 +202,13 @@ export default function Register({ navigation }) {
                                             { label: "แพ้ยากลุ่ม Penicillins", value: "แพ้ยากลุ่ม Penicillins" },
                                         ]}
                                     />
-                                </View>
+                                </View> */}
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ประวัติโรคประจำตัว</Text>
-                                {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={(text) => setcongenital_disease(text)} /> */}
-                                <View style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 py-2`}>
+                                <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                    onChangeText={(text) => setcongenital_disease(text)} />
+                                {/* <View style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 py-2`}>
                                     <RNPickerSelect
                                         placeholder={{ label: "โรคประจำตัว", value: null }}
                                         onValueChange={(value) => setcongenital_disease(value)}
@@ -217,7 +217,7 @@ export default function Register({ navigation }) {
                                             { label: "หอบหืด", value: "หอบหืด" },
                                         ]}
                                     />
-                                </View>
+                                </View> */}
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์</Text>

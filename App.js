@@ -49,7 +49,7 @@ export default function App() {
             <Drawer.Screen name="การให้บริการกำหนดเอง" component={ManualRecord} />
           <Drawer.Screen name="รายละเอียดคนไข้" component={PatientDetails} />
           <Drawer.Screen name="สรุปรายปี" component={AnnualReport} />
-        <Drawer.Screen name="ตั้งค่าระบบ" component={Setting} />
+        {/* <Drawer.Screen name="ตั้งค่าระบบ" component={Setting} /> */}
         <Drawer.Screen name="Login" component={Login} />
        
      

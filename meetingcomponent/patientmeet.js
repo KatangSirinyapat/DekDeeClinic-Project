@@ -108,13 +108,13 @@ export default function PatientMeet({ navigation }) {
 
     let tmpFnameDoctor = " "
     let tmpLnameDoctor = " "
-    
-    
+
+
 
 
     const findDoctor = () => {
-       
-      
+
+
     }
 
     const findMeet = async () => {
@@ -124,7 +124,7 @@ export default function PatientMeet({ navigation }) {
     }
 
     const handle = async () => {
-       await findPatient()
+        await findPatient()
     }
 
     const findPatient = () => {
@@ -150,7 +150,7 @@ export default function PatientMeet({ navigation }) {
             }
 
         })
-       
+
 
         setFnamePatient(patient.fname)
         setLnamePatient(patient.lname)
@@ -216,14 +216,14 @@ export default function PatientMeet({ navigation }) {
                         onChangeText={text => updateIdPatient(text)}
                         placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                     />
-
-                    <Button
-
-                        onPress={handle}
-                        title="ค้นหา"
-                        color="#841584"
-
-                    />
+                 
+                        <Button 
+                            onPress={handle}
+                            title="ค้นหา"
+                            color="#841584"
+                        
+                        />
+                   
                 </View>
 
                 <KeyboardAwareScrollView style={tw`flex mt-8`}>
@@ -324,3 +324,4 @@ export default function PatientMeet({ navigation }) {
 
     );
 }
+

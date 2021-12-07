@@ -19,7 +19,7 @@ export default function DailyRecord({ navigation }) {
     const [date, setDate] = useState("")
 
     //Date time
-    const [date1, setDate1] = useState(new Date(2021, 11, 27, 0, 0, 0, 0));
+    const [date1, setDate1] = useState(new Date(2020, 12, 1, 0, 0, 0, 0));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
