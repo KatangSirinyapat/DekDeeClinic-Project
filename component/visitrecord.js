@@ -383,7 +383,7 @@ export default function VisitRecord({ navigation }) {
                                     onChangeText={text => setBank_transfer(parseInt(text))}
                                     placeholder="จำนวนเงิน"
                                 />
-                            </View>
+                            </View>overflow-auto touch-pan-x
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4`}>

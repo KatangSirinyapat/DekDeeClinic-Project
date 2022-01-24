@@ -57,7 +57,7 @@ export default function Meet({ navigation }) {
         // let int_tmp1 = parseInt(tmp1)+1 
         // tmp = tmp0+int_tmp1
         
-        
+
 
         setDate_meet(tmp.toString())
         // console.log(date_meet);
@@ -203,7 +203,7 @@ export default function Meet({ navigation }) {
             if (item.clinic_number == idPatient) {
                 setPatient(item)
             }
-            else if (item.doctor_id != idDoctor) {
+            else if (item.doctor_id != idPatient) {
                 // alert('กรุณากรอกรหัสประจำตัวแพทย์ให้ถูกต้อง')
 
                 console.log("ItemIDpatient: " + item.clinic_number);
