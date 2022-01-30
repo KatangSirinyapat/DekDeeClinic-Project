@@ -4,6 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import RNPickerSelect from "react-native-picker-select";
 import tw from "tailwind-react-native-classnames";
 import axios from 'axios';
+import { set } from "react-native-reanimated";
 
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 const URL_DETAILS = `http://178.128.90.50:3333/details`
@@ -38,7 +39,11 @@ export default function PatientDetails({ navigation }) {
 
     useEffect(() => {
         getPatient()
+        getDetail()
+       
     }, [id]);
+
+
 
     const getPatient = async () => {
         await axios.get(`${URL_PATIENT}/${id}`)
@@ -55,6 +60,7 @@ export default function PatientDetails({ navigation }) {
                 setlname(objJson[0].lname)
 
                 // alert("Suscess")
+
             })
             .catch(function (error) {
 
@@ -65,17 +71,50 @@ export default function PatientDetails({ navigation }) {
         // PrintPatient()
     }
 
+
+
+    const getDetail = async () => {
+        await axios.get(`${URL_DETAILS}`)
+            .then(function (response) {
+
+                let obj = JSON.stringify(response.data)
+                let objJson = JSON.parse(obj)
+                let flag = 0;
+                objJson.map((item) => {
+                    
+                    if(item.patient_id === id && flag == 0)
+                    {
+                        flag = 1;
+                        setWeight(item.weight)
+                        setHigh(item.high)
+                        setBp(item.bp)
+                        setBt(item.bt)
+                        setPr(item.pr)
+                        setRr(item.rr)
+                        setSymptom(item.symptom)
+                        console.log(item.rr);
+                    }
+                })
+
+
+            })
+            .catch(function (error) {
+
+            });
+
+    }
+
     const postDetail = async () => {
         await axios.post(URL_DETAILS, {
-           
-                weight: weight,
-                high: high,
-                bp: bp,
-                bt: bt,
-                pr: pr,
-                rr: rr,
-                symptom: symptom,
-                patient_id: parseInt(id)
+
+            weight: weight,
+            high: high,
+            bp: bp,
+            bt: bt,
+            pr: pr,
+            rr: rr,
+            symptom: symptom,
+            patient_id: parseInt(id)
 
         })
             .then(function (response) {
@@ -184,18 +223,21 @@ export default function PatientDetails({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>น้ำหนัก</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setWeight(text)}
+                                    value={weight}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ส่วนสูง</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setHigh(text)}
+                                    value= {high}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>BP</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setBp(text)}
+                                    value= {bp}
                                 />
                             </View>
                         </View>
@@ -205,18 +247,21 @@ export default function PatientDetails({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>BT</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setBt(text)}
+                                    value= {bt}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>PR</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setPr(text)}
+                                    value= {pr}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>RR</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setRr(text)}
+                                    value= {rr}
 
                                 />
                             </View>
@@ -227,6 +272,7 @@ export default function PatientDetails({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>อาการที่มาพบแพทย์</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setSymptom(text)}
+                                    value= {symptom}
                                 />
                             </View>
                         </View>
@@ -236,7 +282,7 @@ export default function PatientDetails({ navigation }) {
                             >
                                 <Text style={tw`text-lg text-black font-bold`}>แก้ไข</Text>
                             </TouchableOpacity> */}
-                            
+
                             <View style={styles.button}>
                                 <Button
                                     onPress={postDetail}
@@ -245,7 +291,7 @@ export default function PatientDetails({ navigation }) {
                                     accessibilityLabel="Learn more about this purple button"
                                 />
                             </View>
-                        
+
                         </View>
 
                     </View>

@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import DropDownPicker from 'react-native-dropdown-picker';
 import { DataTable } from 'react-native-paper';
 import axios from "axios";
+import moment from "moment";
 
 const URL_DOCTOR = `http://178.128.90.50:3333/users`
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
@@ -37,7 +38,7 @@ export default function DocterMeet({ navigation }) {
 
     useEffect(() => {
         getDoctors(),
-            getPatient()
+        getPatient()
     }, [idDoctor])
 
 
@@ -91,16 +92,17 @@ export default function DocterMeet({ navigation }) {
         // }))
 
         return (meets.map((item, index) => (
-            
+           
             <DataTable key={index}>
-                <DataTable.Row>
+              
+                <DataTable.Row >
                     <DataTable.Cell>{item.date_meet}</DataTable.Cell>
                     <DataTable.Cell>{item.time} ถึง {item.time_to}</DataTable.Cell>
                     <DataTable.Cell >{item.topic}</DataTable.Cell>
                     <DataTable.Cell >{item.details}</DataTable.Cell>
                 </DataTable.Row>
             </DataTable>
-            // console.log("Test" + item.date_meet + item.topic))
+            
         )))
 
 
@@ -162,9 +164,9 @@ export default function DocterMeet({ navigation }) {
                <DataTable.Title>รายละเอียด</DataTable.Title>
            </DataTable.Header>
 
-           <DataTable.Row>
+         
            {printMeets()}
-           </DataTable.Row>
+           
        </DataTable>
 
             
