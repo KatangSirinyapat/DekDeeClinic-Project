@@ -30,7 +30,7 @@ export default function Login({ navigation }) {
           </TouchableOpacity>
           <View style={tw`flex flex-row w-full justify-center items-center mt-6 mb-6`}>
             <Text>Don't have an account?</Text>
-            <Text style={tw`font-semibold ml-2`}>Register</Text>
+            <Text style={tw`font-semibold ml-2`} onPress={() => navigation.navigate('ลงทะเบียนแพทย์')}>Register</Text>
           </View>
         </View>
       </View>

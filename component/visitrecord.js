@@ -4,19 +4,28 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import tw from "tailwind-react-native-classnames";
 import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
+import { Keyboard, Platform } from 'react-native';
+import { concat, set } from "react-native-reanimated";
 
 
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 
 const URL_COST = `http://178.128.90.50:3333/costs`
 
+const URL_DOCTOR = `http://178.128.90.50:3333/users`
+
+
+
 export default function VisitRecord({ navigation }) {
     // const navigation = useNavigation()
 
     //DOCTOR
+    const [doctors, setDoctors] = useState([])
+    const [doctor, setDoctor] = useState([])
     const [idDoctor, setIdDoctor] = useState()
-
+    const [fnameDoctor, setFnameDoctor] = useState("")
+    const [lnameDoctor, setLnameDoctor] = useState("")
 
     //PATIENT
     const [patients, setPatients] = useState([])
@@ -55,16 +64,16 @@ export default function VisitRecord({ navigation }) {
         let data = currentDate.toJSON()
         let dataBoD = JSON.stringify(data);
         let tmp = dataBoD.substring(1, 11)
-        let tmp0 = tmp.substring(0,8)
-        let tmp1 = tmp.substring(8,11)
-        
-        let int_tmp1 = parseInt(tmp1)+1 
-        tmp = tmp0+int_tmp1
+        let tmp0 = tmp.substring(0, 8)
+        let tmp1 = tmp.substring(8, 11)
+
+        let int_tmp1 = parseInt(tmp1) + 1
+        tmp = tmp0 + int_tmp1
         console.log(tmp);
 
 
         setDate(tmp.toString())
-        
+
         // console.log(dataBoD.substring(1,11)); 
 
 
@@ -95,7 +104,8 @@ export default function VisitRecord({ navigation }) {
 
 
     useEffect(() => {
-        getPatient()
+        getPatient(),
+            getDoctors()
     }, [])
 
     const calculate_cost_of_psychologist = () => {
@@ -132,6 +142,35 @@ export default function VisitRecord({ navigation }) {
         return result
     }
 
+    const getDoctors = async () => {
+        await axios.get(`${URL_DOCTOR}`)
+            .then(function (response) {
+                // alert(JSON.stringify(response.data));
+
+                let obj = JSON.stringify(response.data)
+                let objJson = JSON.parse(obj)
+
+
+                setDoctors(objJson)
+                // setFnameDoctor(objJson[0].fname)
+                // setLnameDoctor(objJson[0].lname)
+
+                // console.log(objJson[0].meets);
+                // alert(doctors[0].doctor_id)
+                // console.log(doctors[0].doctor_id);3
+                
+                // console.log(doctors_arr[0]);
+            })
+            .catch(function (error) {
+                // alert(error.message);
+            });
+
+        // doctors.map((item, index) => {
+        //     console.log(item.doctor_id + 'index: ' + index);
+        // })
+
+    };
+
 
     const getPatient = async () => {
         await axios.get(`${URL_PATIENT}`)
@@ -139,9 +178,11 @@ export default function VisitRecord({ navigation }) {
 
                 let obj = JSON.stringify(response.data)
                 let objJson = JSON.parse(obj)
-
+               
 
                 setPatients(objJson)
+
+                alert(patients[0].clinic_number)
             })
             .catch(function (error) {
                 // alert(error.message);
@@ -171,9 +212,97 @@ export default function VisitRecord({ navigation }) {
 
             })
             .catch(function (error) {
-                // alert(error.message)
+                alert(error.message)
             })
     }
+
+
+
+    const showEvent = Platform.select({
+        android: 'keyboardDidShow',
+        default: 'keyboardWillShow',
+    });
+
+    const hideEvent = Platform.select({
+        android: 'keyboardDidHide',
+        default: 'keyboardWillHide',
+    });
+
+    //Doctors Autocomplete
+    const [value, setValue] = React.useState(null);
+    const [data, setData] = React.useState(doctors);
+    const [placement, setPlacement] = React.useState('bottom');
+
+    React.useEffect(() => {
+        const keyboardShowListener = Keyboard.addListener(showEvent, () => {
+            setPlacement('top');
+        });
+
+        const keyboardHideListener = Keyboard.addListener(hideEvent, () => {
+            setPlacement('bottom');
+        });
+
+        return () => {
+            keyboardShowListener.remove();
+            keyboardHideListener.remove();
+        };
+    });
+
+    const filter = (item, query) => item.fname.toLowerCase().includes(query.toLowerCase());
+
+    const onSelect = (index) => {
+        setValue(doctors[index].fname);
+        setIdDoctor(doctors[index].doctor_id)
+
+
+    };
+
+    const onChangeText = (query) => {
+
+        setValue(query);
+        setData(doctors.filter(item => filter(item, query)));
+
+    };
+
+    const renderOption = (item, index) => (
+        <AutocompleteItem
+            key={index}
+            title={item.doctor_id + " " + item.fname + " " + item.lname}
+        />
+    );
+
+
+    //Patients Autocomplete
+    const [value_patient, setValue_patient] = React.useState(null);
+    const [data_patient, setData_patient] = React.useState(patients);
+    
+
+    const filter_patient = (item, query) => item.fname.toLowerCase().includes(query.toLowerCase());
+
+    const onSelect_patient = (index) => {
+        setValue_patient(patients[index].fname);
+        setIdPatient(patients[index].clinic_number)
+        findPatient()
+
+
+    };
+
+    const onChangeText_patient = (query) => {
+
+        setValue_patient(query);
+        setData_patient(patients.filter(item => filter_patient(item, query)));
+
+    };
+
+    const renderOption_patient = (item, index) => (
+        <AutocompleteItem
+            key={index}
+            title={item.clinic_number + " " + item.fname + " " + item.lname}
+        />
+    );
+
+
+
 
     return (
         <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
@@ -186,11 +315,8 @@ export default function VisitRecord({ navigation }) {
                     <View style={tw`flex flex-col justify-between items-start w-full h-full p-4 rounded-xl border-4 border-black`}>
                         <View style={tw`flex flex-row w-full justify-end items-center pl-36`}>
                             <Text style={tw`font-semibold text-base`}>วันที่</Text>
-                            {/* <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`}
-                                onChangeText={text => setDate(text)}
-                                placeholder="ปปป-ดดด-ววว"
-                            /> */}
-                         
+
+
                             <DateTimePicker themeVariant="light" style={tw`h-8 w-1/4 ml-2`}
                                 testID="dateTimePicker"
                                 value={date1}
@@ -199,23 +325,40 @@ export default function VisitRecord({ navigation }) {
                                 display="default"
                                 onChange={onChange}
                             />
-                           
+
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/4 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>เลขประจำตัวแพทย์</Text>
-                                <TextInput style={tw`h-8 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 mt-2`}
+                                <Text style={tw`font-semibold text-base`}>รายชื่อแพทย์</Text>
+                                {/* <TextInput style={tw`h-8 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 mt-2`}
                                     onChangeText={text => setIdDoctor(parseInt(text))}
                                     placeholder="โปรดกรอกเลขประจำตัวแพทย์"
-                                />
+                                /> */}
+                                <Autocomplete
+                                    placeholder='โปรดระบุชื่อแพทย์'
+                                    value={value}
+                                    placement={placement}
+                                    onChangeText={onChangeText}
+                                    onSelect={onSelect}>
+                                    {data.map(renderOption)}
+                                </Autocomplete>
                             </View>
                             <View style={tw`flex flex-col w-1/4 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>เลขประจำตัวผู้ป่วย</Text>
-                                <TextInput style={tw`h-8 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 mt-2`}
+                                <Text style={tw`font-semibold text-base`}>รายชื่อผู้ป่วย</Text>
+                                {/* <TextInput style={tw`h-8 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 mt-2`}
                                     onChangeText={text => updateIdPatient(text)}
                                     placeholder="โปรดกรอกเลขประจำตัวผู้ป่วย"
-                                />
+                                /> */}
+
+                                <Autocomplete
+                                    placeholder='โปรดระบุชื่อผู้ป่วย'
+                                    value={value_patient}
+                                    placement={placement}
+                                    onChangeText={onChangeText_patient}
+                                    onSelect={onSelect_patient}>
+                                    {data_patient.map(renderOption_patient)}
+                                </Autocomplete>
                             </View>
 
                         </View>
@@ -370,7 +513,7 @@ export default function VisitRecord({ navigation }) {
                                 <Text style={tw`font-semibold text-lg`}>ช่องทางชำระเงิน</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                {/* <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`} /> */}
+
                             </View>
                         </View>
 
@@ -383,7 +526,7 @@ export default function VisitRecord({ navigation }) {
                                     onChangeText={text => setBank_transfer(parseInt(text))}
                                     placeholder="จำนวนเงิน"
                                 />
-                            </View>overflow-auto touch-pan-x
+                            </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4`}>
@@ -417,6 +560,8 @@ export default function VisitRecord({ navigation }) {
                         </View>
                     </View>
                 </KeyboardAwareScrollView>
+
+
             </View>
         </View>
 
