@@ -6,12 +6,23 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import axios from "axios";
 import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import AwesomeDebouncePromise from 'awesome-debounce-promise';
+import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
 
-const URL_MEET = `http://178.128.90.50:3333/meets`
+import { TouchableWithoutFeedback } from 'react-native';
+
+const URL_PATIENT = `http://178.128.90.50:3333/patients`
+
+const URL_COST = `http://178.128.90.50:3333/costs`
 
 const URL_DOCTOR = `http://178.128.90.50:3333/users`
 
-const URL_PATIENT = `http://178.128.90.50:3333/patients`
+const URL_MEET = `http://178.128.90.50:3333/meets`
+
+const StarIcon = (props) => (
+    <Icon {...props} name='star' />
+);
+
 
 
 
@@ -22,11 +33,16 @@ export default function Meet({ navigation }) {
     const [doctors, setDoctors] = useState([])
     const [doctor, setDoctor] = useState([])
     const [idDoctor, setIdDoctor] = useState()
-    const [fnameDoctor, setFnameDoctor] = useState("")
+    const [fname_doctor, setFname_doctor] = useState("")
+    const [lname_doctor, setLname_doctor] = useState("")
+
     //PATIENT
     const [patients, setPatients] = useState([])
     const [patient, setPatient] = useState([])
     const [idPatient, setIdPatient] = useState()
+    const [fname_patient, setFname_patient] = useState("")
+    const [lname_patient, setLname_patient] = useState("")
+    const [telephone_patient, setTelephone_patient] = useState("")
     //MEET
     const [details, setDetails] = useState("")
     const [topic, setTopic] = useState("")
@@ -51,12 +67,12 @@ export default function Meet({ navigation }) {
         let data = currentDate.toJSON()
         let dataBoD = JSON.stringify(data);
         let tmp = dataBoD.substring(1, 11)
-        let tmp0 = tmp.substring(0,8)
-        let tmp1 = tmp.substring(8,11)
+        let tmp0 = tmp.substring(0, 8)
+        let tmp1 = tmp.substring(8, 11)
         console.log(tmp);
         // let int_tmp1 = parseInt(tmp1)+1 
         // tmp = tmp0+int_tmp1
-        
+
 
 
         setDate_meet(tmp.toString())
@@ -286,17 +302,123 @@ export default function Meet({ navigation }) {
             })
     }
 
-    const printDoctors = () => {
-        return doctors.map((item, index) => {
-            return (
-                <View>
-                    <Text style={tw`font-semibold text-2xl mt-6`} >
-                        {item.doctor_id}
-                    </Text>
-                </View>
-            );
-        });
+
+    //Doctors Autocomplete
+
+    const requestData = () => fetch(URL_DOCTOR);
+    const requestDataWithDebounce = AwesomeDebouncePromise(requestData, 400);
+
+    const [query, setQuery] = React.useState(null);
+    const [data, setData] = React.useState([]);
+
+    const updateData = () => {
+        requestDataWithDebounce()
+            .then(response => response.json())
+            .then(json => json)
+            .then(applyFilter)
+            .then(setData);
     };
+
+    React.useEffect(updateData, [query]);
+
+    const onSelect = (index) => {
+        setQuery(data[index].fname + " " + data[index].lname);
+        setIdDoctor(data[index].doctor_id)
+        setFname_doctor(data[index].fname)
+        setLname_doctor(data[index].lname)
+
+        
+    };
+
+    const onChangeText = (nextQuery) => {
+        setQuery(nextQuery);
+    };
+
+    const applyFilter = (options) => {
+        return options.filter(item => item.fname.toLowerCase().includes(query.toLowerCase()));
+    };
+
+    const clearInput = () => {
+        setQuery('');
+        setFname_doctor('')
+        setLname_doctor('')
+        setData(doctors);
+    };
+
+    const renderCloseIcon = (props) => (
+        <TouchableWithoutFeedback onPress={clearInput}>
+            <Icon {...props} name='close' />
+        </TouchableWithoutFeedback>
+    );
+
+    const renderOption = (item, index) => (
+        <AutocompleteItem
+            key={index}
+            title={item.doctor_id + " " + item.fname + " " + item.lname}
+            accessoryLeft={StarIcon}
+        />
+    );
+
+    //Patient Autocomplete
+
+    const requestData_patient = () => fetch(URL_PATIENT);
+    const requestDataWithDebounce_patient = AwesomeDebouncePromise(requestData_patient, 400);
+
+    const [query_patient, setQuery_patient] = React.useState(null);
+    const [data_patient, setData_patient] = React.useState([]);
+
+    const updateData_patient = () => {
+        requestDataWithDebounce_patient()
+            .then(response => response.json())
+            .then(json => json)
+            .then(applyFilter_patient)
+            .then(setData_patient);
+    };
+
+    React.useEffect(updateData_patient, [query_patient]);
+
+    const onSelect_patient = (index) => {
+        setQuery_patient(data_patient[index].fname + " " + data_patient[index].lname);
+        setIdPatient(data_patient[index].clinic_number)
+        setFname_patient(data_patient[index].fname)
+        setLname_patient(data_patient[index].lname)
+        setTelephone_patient(data_patient[index].telephone)
+        
+
+    };
+
+    const onChangeText_patient = (nextQuery) => {
+        setQuery_patient(nextQuery);
+    };
+
+    const applyFilter_patient = (options) => {
+        return options.filter(item => item.fname.toLowerCase().includes(query_patient.toLowerCase()));
+    };
+
+    const clearInput_patient = () => {
+        setQuery_patient('');
+        setFname_patient('')
+        setLname_patient('')
+        setTelephone_patient('')
+        setData_patient(patients);
+    };
+
+    const renderCloseIcon_patient = (props) => (
+        <TouchableWithoutFeedback onPress={clearInput_patient}>
+            <Icon {...props} name='close' />
+        </TouchableWithoutFeedback>
+    );
+
+    const renderOption_patient = (item, index) => (
+        <AutocompleteItem
+            key={index}
+            title={item.clinic_number + " " + item.fname + " " + item.lname}
+            accessoryLeft={StarIcon}
+        />
+    );
+
+
+
 
     return (
         <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
@@ -313,36 +435,21 @@ export default function Meet({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>บุคลากรที่ต้องการนัด</Text>
-                                {/* <TextInput style={tw`h-10 mt-2 w-5/6 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}/> */}
-                                {/* <DropDownPicker style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeItem={item => console.log(item.label, item.value)}
-                                    items={[
-                                        { label: "Test1", value: "Test1" },
-                                        { label: "'item2'", value: "'Item2'" },
-                                    ]} /> */}
 
-                                <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+
+                                {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateQuery(text)}
                                     placeholder="กรอกรหัสประจำตัวแพทย์. . ."
-                                />
+                                /> */}
 
-                                {/* <RNPickerSelect
-                                        placeholder={{ label: "เลือกเพศ", value: null }}
-                                        onValueChange={(value) => setSelectedValue(value)}
-                                        items={[
-                                            { label: "ชาย", value: "ชาย" },
-                                            { label: "หญิง", value: "หญิง" },
-                                        ]}
-                                    /> */}
-                                {/* {<Picker
-                                        selectedValue={selectedValue}
-                                        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)} >
-                                        {pickerValue.map((item, key) =>
-                                            <Picker.Item label={item} value={item} key={key} />
-                                        )}
-                                    </Picker>} */}
-
-
+                                <Autocomplete
+                                    placeholder='โปรดระบุชื่อแพทย์'
+                                    value={query}
+                                    onChangeText={onChangeText}
+                                    accessoryRight={renderCloseIcon}
+                                    onSelect={onSelect}>
+                                    {data.map(renderOption)}
+                                </Autocomplete>
 
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
@@ -365,7 +472,7 @@ export default function Meet({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ชื่อแพทย์</Text>
                                 <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
                                     <Text style={tw`text-base`}>
-                                        {doctor.fname}
+                                        {fname_doctor}
                                     </Text>
 
                                 </View>
@@ -374,7 +481,7 @@ export default function Meet({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>สกุลแพทย์</Text>
                                 <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-100 rounded-md pl-2`}>
                                     <Text style={tw`text-base`}>
-                                        {doctor.lname}
+                                        {lname_doctor}
                                     </Text>
                                 </View>
                             </View>
@@ -387,16 +494,16 @@ export default function Meet({ navigation }) {
                                     onChangeText={text => setDate_meet(text)}
                                     placeholder="YYYY-MM-DD"
                                 /> */}
-                               
-                                    <DateTimePicker themeVariant="light" style={tw`h-10 mt-2 w-2/4`}
-                                        testID="dateTimePicker"
-                                        value={date}
-                                        mode={'date'}
-                                        is24Hour={true}
-                                        display="default"
-                                        onChange={onChange}
-                                    />
-                              
+
+                                <DateTimePicker themeVariant="light" style={tw`h-10 mt-2 w-2/4`}
+                                    testID="dateTimePicker"
+                                    value={date}
+                                    mode={'date'}
+                                    is24Hour={true}
+                                    display="default"
+                                    onChange={onChange}
+                                />
+
                             </View>
                             <View style={tw`flex flex-col w-1/2`}></View>
                         </View>
@@ -437,16 +544,26 @@ export default function Meet({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>Clinic number</Text>
-                                <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+
+                                {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateIdPatient(text)}
                                     placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
-                                />
+                                /> */}
+
+                                <Autocomplete
+                                    placeholder='โปรดระบุชื่อผู้ป่วย'
+                                    value={query_patient}
+                                    onChangeText={onChangeText_patient}
+                                    accessoryRight={renderCloseIcon_patient}
+                                    onSelect={onSelect_patient}>
+                                    {data_patient.map(renderOption_patient)}
+                                </Autocomplete>
                             </View>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เบอร์ติดต่อ</Text>
                                 <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-100 rounded-md pl-2`} >
                                     <Text style={tw`text-base`}>
-                                        {patient.telephone}
+                                        {telephone_patient}
                                     </Text>
                                 </View>
                             </View>
@@ -457,7 +574,7 @@ export default function Meet({ navigation }) {
                                 <Text style={tw`mt-2 font-semibold text-base`}>ชื่อผู้ป่วย</Text>
                                 <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`} >
                                     <Text style={tw`text-base`}>
-                                        {patient.fname}
+                                        {fname_patient}
                                     </Text>
                                 </View>
                             </View>
@@ -465,7 +582,7 @@ export default function Meet({ navigation }) {
                                 <Text style={tw`font-semibold text-base mt-2`}>สกุลผู้ป่วย</Text>
                                 <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-100 rounded-md pl-2`} >
                                     <Text style={tw`text-base`}>
-                                        {patient.lname}
+                                        {lname_patient}
                                     </Text>
                                 </View>
                             </View>
@@ -497,7 +614,7 @@ export default function Meet({ navigation }) {
                                     onPress={postmeet}
                                     color="black"
                                     title="บันทึก"
-                                    
+
                                 />
                             </View>
                         </View>

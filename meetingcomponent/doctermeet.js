@@ -6,9 +6,20 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { DataTable } from 'react-native-paper';
 import axios from "axios";
 import moment from "moment";
+import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
 
-const URL_DOCTOR = `http://178.128.90.50:3333/users`
+import { TouchableWithoutFeedback } from 'react-native';
+import AwesomeDebouncePromise from 'awesome-debounce-promise';
+
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
+const URL_DOCTOR = `http://178.128.90.50:3333/users`
+
+const StarIcon = (props) => (
+    <Icon {...props} name='star' />
+);
+
+
+
 
 export default function DocterMeet({ navigation }) {
     // const navigation = useNavigation()
@@ -37,8 +48,8 @@ export default function DocterMeet({ navigation }) {
 
 
     useEffect(() => {
-        getDoctors(),
-        getPatient()
+        getDoctorsID(),
+            getPatient()
     }, [idDoctor])
 
 
@@ -51,7 +62,7 @@ export default function DocterMeet({ navigation }) {
         // console.log('PatientId: ' + patient.clinic_number);
     }
 
-    const getDoctors = async () => {
+    const getDoctorsID = async () => {
         await axios.get(`${URL_DOCTOR}/${idDoctor}`)
             .then(function (response) {
                 // alert(JSON.stringify(response.data));
@@ -92,9 +103,9 @@ export default function DocterMeet({ navigation }) {
         // }))
 
         return (meets.map((item, index) => (
-           
+
             <DataTable key={index}>
-              
+
                 <DataTable.Row >
                     <DataTable.Cell>{item.date_meet}</DataTable.Cell>
                     <DataTable.Cell>{item.time} ถึง {item.time_to}</DataTable.Cell>
@@ -102,7 +113,7 @@ export default function DocterMeet({ navigation }) {
                     <DataTable.Cell >{item.details}</DataTable.Cell>
                 </DataTable.Row>
             </DataTable>
-            
+
         )))
 
 
@@ -128,6 +139,80 @@ export default function DocterMeet({ navigation }) {
     }
 
 
+
+    //Doctors Autocomplete
+
+    const requestData = () => fetch(URL_DOCTOR);
+    const requestDataWithDebounce = AwesomeDebouncePromise(requestData, 400);
+
+    const [query, setQuery] = React.useState(null);
+    const [data, setData] = React.useState([]);
+
+    const getDoctors = async () => {
+        await axios.get(`${URL_DOCTOR}`)
+            .then(function (response) {
+                // alert(JSON.stringify(response.data));
+
+                let obj = JSON.stringify(response.data)
+                let objJson = JSON.parse(obj)
+
+
+                setDoctors(objJson)
+
+            })
+            .catch(function (error) {
+                // alert(error.message);
+            });
+
+    };
+
+    useEffect(() => {
+        getDoctors()
+    }, [])
+
+    const updateData = () => {
+        requestDataWithDebounce()
+            .then(response => response.json())
+            .then(json => json)
+            .then(applyFilter)
+            .then(setData);
+    };
+
+    React.useEffect(updateData, [query]);
+
+    const onSelect = (index) => {
+        setQuery(data[index].fname + " " + data[index].lname);
+        setIdDoctor(data[index].doctor_id)
+    };
+
+    const onChangeText = (nextQuery) => {
+        setQuery(nextQuery);
+    };
+
+    const applyFilter = (options) => {
+        return options.filter(item => item.fname.toLowerCase().includes(query.toLowerCase()));
+    };
+
+    const clearInput = () => {
+        setQuery('');
+        setData(doctors);
+    };
+
+    const renderCloseIcon = (props) => (
+        <TouchableWithoutFeedback onPress={clearInput}>
+            <Icon {...props} name='close' />
+        </TouchableWithoutFeedback>
+    );
+
+    const renderOption = (item, index) => (
+        <AutocompleteItem
+            key={index}
+            title={item.doctor_id + " " + item.fname + " " + item.lname}
+            accessoryLeft={StarIcon}
+        />
+    );
+
+
     return (
         <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
             <View style={tw`flex w-full justify-start items-start ml-16`}>
@@ -138,10 +223,22 @@ export default function DocterMeet({ navigation }) {
 
             <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
                 <Text style={tw`font-semibold text-xl`}>ค้นหาแพทย์</Text>
-                <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
+                {/* <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                     onChangeText={text => updateIdDoctor(text)}
                     placeholder="กรอกรหัสประแพทย์. . ."
-                />
+                /> */}
+
+                <View style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}>
+                    <Autocomplete
+                        placeholder='โปรดระบุชื่อแพทย์'
+                        value={query}
+                        onChangeText={onChangeText}
+                        accessoryRight={renderCloseIcon}
+                        onSelect={onSelect}>
+                        {data.map(renderOption)}
+                    </Autocomplete>
+                </View>
+
                 {/* onChangeText={(text) => setParams(text)} */}
                 <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}
                 >
@@ -153,31 +250,20 @@ export default function DocterMeet({ navigation }) {
 
             <Text style={tw`font-semibold text-xl mt-6`}>ตารางนัด  </Text>
 
-
-
             <DataTable >
-           
-           <DataTable.Header>
-               <DataTable.Title>วันที่</DataTable.Title>
-               <DataTable.Title>เวลา</DataTable.Title>
-               <DataTable.Title >หัวข้อ</DataTable.Title>
-               <DataTable.Title>รายละเอียด</DataTable.Title>
-           </DataTable.Header>
 
-         
-           {printMeets()}
-           
-       </DataTable>
+                <DataTable.Header>
+                    <DataTable.Title>วันที่</DataTable.Title>
+                    <DataTable.Title>เวลา</DataTable.Title>
+                    <DataTable.Title >หัวข้อ</DataTable.Title>
+                    <DataTable.Title>รายละเอียด</DataTable.Title>
+                </DataTable.Header>
 
-            
-               
 
-            
+                {printMeets()}
 
+            </DataTable>
         </View>
-
-
-
 
     );
 }

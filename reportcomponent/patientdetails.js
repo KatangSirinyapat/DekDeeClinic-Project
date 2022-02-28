@@ -6,6 +6,17 @@ import tw from "tailwind-react-native-classnames";
 import axios from 'axios';
 import { set } from "react-native-reanimated";
 
+import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
+
+import { TouchableWithoutFeedback } from 'react-native';
+import AwesomeDebouncePromise from 'awesome-debounce-promise';
+
+
+
+const StarIcon = (props) => (
+    <Icon {...props} name='star' />
+);
+
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 const URL_DETAILS = `http://178.128.90.50:3333/details`
 
@@ -14,6 +25,7 @@ export default function PatientDetails({ navigation }) {
     //PATIENT
 
     const [patient, setPatient] = useState([])
+    const [patients, setPatients] = useState([])
     const [fname, setfname] = useState("");
     const [lname, setlname] = useState("");
     const [congenital_disease, setcongenital_disease] = useState("");
@@ -38,14 +50,14 @@ export default function PatientDetails({ navigation }) {
     }
 
     useEffect(() => {
-        getPatient()
+      
         getDetail()
-       
+
     }, [id]);
 
 
 
-    const getPatient = async () => {
+    const getPatientID = async () => {
         await axios.get(`${URL_PATIENT}/${id}`)
             .then(function (response) {
 
@@ -81,9 +93,8 @@ export default function PatientDetails({ navigation }) {
                 let objJson = JSON.parse(obj)
                 let flag = 0;
                 objJson.map((item) => {
-                    
-                    if(item.patient_id === id && flag == 0)
-                    {
+
+                    if (item.patient_id === id && flag == 0) {
                         flag = 1;
                         setWeight(item.weight)
                         setHigh(item.high)
@@ -126,18 +137,98 @@ export default function PatientDetails({ navigation }) {
             })
     }
 
+    //Patient Autocomplete
+
+    const requestData_patient = () => fetch(URL_PATIENT);
+    const requestDataWithDebounce_patient = AwesomeDebouncePromise(requestData_patient, 400);
+
+    const [query_patient, setQuery_patient] = React.useState(null);
+    const [data_patient, setData_patient] = React.useState([]);
+
+
+    useEffect(() => {
+        getPatient()
+    }, [])
 
 
 
+    const getPatient = async () => {
+        await axios.get(`${URL_PATIENT}`)
+            .then(function (response) {
+
+                let obj = JSON.stringify(response.data)
+                let objJson = JSON.parse(obj)
 
 
 
+                setPatients(objJson)
 
+                // alert(patients[0].clinic_number)
+            })
+            .catch(function (error) {
+                // alert(error.message);
+            })
 
+    }
 
+    const updateData_patient = () => {
+        requestDataWithDebounce_patient()
+            .then(response => response.json())
+            .then(json => json)
+            .then(applyFilter_patient)
+            .then(setData_patient);
+    };
 
+    React.useEffect(updateData_patient, [query_patient]);
 
+    const onSelect_patient = (index) => {
+        setQuery_patient(data_patient[index].fname + " " + data_patient[index].lname);
+        setId(data_patient[index].clinic_number)
+        setfname(data_patient[index].fname)
+        setlname(data_patient[index].lname)
+        setdrug_allergy(data_patient[index].drug_allergy)
+        setcongenital_disease(data_patient[index].congenital_disease)
 
+    };
+
+    const onChangeText_patient = (nextQuery) => {
+        setQuery_patient(nextQuery);
+    };
+
+    const applyFilter_patient = (options) => {
+        return options.filter(item => item.fname.toLowerCase().includes(query_patient.toLowerCase()));
+    };
+
+    const clearInput_patient = () => {
+        setQuery_patient('');
+        setId('')
+        setfname('')
+        setlname('')
+        setdrug_allergy('')
+        setcongenital_disease('')
+        setWeight('')
+        setHigh('')
+        setBp('')
+        setBt('')
+        setPr('')
+        setRr('')
+        setSymptom('')
+        setData_patient(patients);
+    };
+
+    const renderCloseIcon_patient = (props) => (
+        <TouchableWithoutFeedback onPress={clearInput_patient}>
+            <Icon {...props} name='close' />
+        </TouchableWithoutFeedback>
+    );
+
+    const renderOption_patient = (item, index) => (
+        <AutocompleteItem
+            key={index}
+            title={item.clinic_number + " " + item.fname + " " + item.lname}
+            accessoryLeft={StarIcon}
+        />
+    );
 
 
     return (
@@ -150,10 +241,21 @@ export default function PatientDetails({ navigation }) {
             <View style={tw`flex w-3/4 h-4/5`}>
                 <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
                     <Text style={tw`font-semibold text-xl`}>Clinic number</Text>
-                    <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
+                    {/* <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                         onChangeText={text => updateQuery(text)}
                         placeholder="กรอกรหัสประจำตัวผู้ป่วย. . .Ex.25640001"
-                    />
+                    /> */}
+                    <View style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}>
+                        <Autocomplete
+                            placeholder='โปรดระบุชื่อผู้ป่วย'
+                            value={query_patient}
+                            onChangeText={onChangeText_patient}
+                            accessoryRight={renderCloseIcon_patient}
+                            onSelect={onSelect_patient}>
+                            {data_patient.map(renderOption_patient)}
+                        </Autocomplete>
+                    </View>
+
                     <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}>
                         <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
                     </TouchableOpacity>
@@ -230,14 +332,14 @@ export default function PatientDetails({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>ส่วนสูง</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setHigh(text)}
-                                    value= {high}
+                                    value={high}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>BP</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setBp(text)}
-                                    value= {bp}
+                                    value={bp}
                                 />
                             </View>
                         </View>
@@ -247,21 +349,21 @@ export default function PatientDetails({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>BT</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setBt(text)}
-                                    value= {bt}
+                                    value={bt}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>PR</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setPr(text)}
-                                    value= {pr}
+                                    value={pr}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={tw`font-semibold text-base`}>RR</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setRr(text)}
-                                    value= {rr}
+                                    value={rr}
 
                                 />
                             </View>
@@ -272,7 +374,7 @@ export default function PatientDetails({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>อาการที่มาพบแพทย์</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setSymptom(text)}
-                                    value= {symptom}
+                                    value={symptom}
                                 />
                             </View>
                         </View>

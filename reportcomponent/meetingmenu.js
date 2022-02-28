@@ -25,7 +25,7 @@ export default function Meetingmenu({ navigation }) {
                     <Text style={tw`text-lg text-black font-bold`}>สรุปนัดหมายหมอ</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={tw`h-12 w-1/3 bg-white rounded-md items-center justify-center border-2 border-gray-500`}
+                {/* <TouchableOpacity style={tw`h-12 w-1/3 bg-white rounded-md items-center justify-center border-2 border-gray-500`}
                  onPress={() => navigation.navigate('สรุปนัดหมายนักจิตวิทยา')}
                  title="สรุปนัดหมายนักจิตวิทยา">
                     <Text style={tw`text-lg text-black font-bold`}>สรุปนัดหมายนักจิตวิทยา</Text>
@@ -47,7 +47,7 @@ export default function Meetingmenu({ navigation }) {
                  onPress={() => navigation.navigate('สรุปนัดหมายครูการศึกษาพิเศษ')}
                  title="สรุปนัดหมายครูการศึกษาพิเศษ">
                     <Text style={tw`text-lg text-black font-bold`}>สรุปนัดหมายครูการศึกษาพิเศษ</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
             </View>
         </View>

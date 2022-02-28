@@ -3,13 +3,24 @@ import { Text, View, TextInput, Button, TouchableOpacity, Alert, } from 'react-n
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import axios from 'axios';
+import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
+
+import { TouchableWithoutFeedback } from 'react-native';
+import AwesomeDebouncePromise from 'awesome-debounce-promise';
+
+const URL_PATIENT = `http://178.128.90.50:3333/patients`
+
+const StarIcon = (props) => (
+    <Icon {...props} name='star' />
+);
+
 
 
 const URL = `http://178.128.90.50:3333/patients`
 export default function PatientProfile({ navigation }) {
 
     const [Patient, setPatient] = useState([])
-    const [Patients, setPatients] = useState([])
+    const [patients, setPatients] = useState([])
     const [clinic_number, setclinic_number] = useState("");
     const [fname, setfname] = useState("");
     const [lname, setlname] = useState("");
@@ -47,14 +58,14 @@ export default function PatientProfile({ navigation }) {
 
 
     useEffect(() => {
-        getPatient()
+        getPatientID()
     }, [id]);
 
 
 
     // let ID = parseInt(query)
 
-    const getPatient = async () => {
+    const getPatientID = async () => {
         await axios.get(`${URL}/${id}`)
             .then(function (response) {
                 // handle success
@@ -87,27 +98,11 @@ export default function PatientProfile({ navigation }) {
                 // alert("Suscess")
             })
             .catch(function (error) {
-                // handle error
-                // alert(error.message);
-                // Alert.alert('ไม่สามารถค้นหาได้', 'กรุณากรอกรหัสประจำตัวผู้ป่วยให้ถูกต้อง', [
-                //     // {
-                //     //     test: 'Ok',
-                //     //  onPress: () => console.warn('Ok Pressed!')
-                //     // 
-                // ]
-                // )
+
             });
 
-        // let tmp = JSON.stringify(PatientData)
-        // setPatient(PatientData)
-        // alert(Patient.fname)
 
         console.log(Patient);
-    //    console.log(_fname);
-        
-        PrintPatient()
-
-
 
     }
 
@@ -132,82 +127,132 @@ export default function PatientProfile({ navigation }) {
             relation
         })
 
-
-
-
     }
 
 
-    const PrintPatient = () => {
+    
 
-        
-     
+    //PATIENT
 
-        if (id == null || id == "") {
-            Alert.alert('ไม่สามารถค้นหาได้', 'กรุณากรอกรหัสประจำตัวผู้ป่วยให้ถูกต้อง', [
-                // {
-                //     test: 'Ok',
-                //  onPress: () => console.warn('Ok Pressed!')
-                // 
-            ]
-            )
-        }
-        else if(id.toString().length ==  7) 
-        {
-            // setage(Patient[0].age)
-            // setbod(Patient[0].bod)
-            // setclinic_number(Patient[0].clinic_number)
-            // setcongenital_disease(Patient[0].congenital_disease)
-            // setDistric(Patient[0].district)
-            // setdrug_allergy(Patient[0].drug_allergy)
-            // setfname(Patient[0].fname)
-            // setfname_parent(Patient[0].fname_parent)
-            // setgender(Patient[0].gender)
-            // sethome_no(Patient[0].home_no)
-            // setlname(Patient[0].lname)
-            // setlname_parent(Patient[0].lname_parent)
-            // setmoo(Patient[0].moo)
-            // setprovince(Patient[0].province)
-            // setrelation(Patient[0].relation)
-            // setsoi(Patient[0].soi)
-            // setsubdistrict(Patient[0].subdistrict)
-            // settelephone(Patient[0].telephone)
-            // console.log(Patient[0]);
-            console.log("Test1");
-        }
-        else {
-            console.log("TestElse");
-        }
-           
-        // Alert.alert('Mesasge','Data test test',[
-        //     {test: 'Ok',
-        // onPress: () => console.warn('Ok Pressed!')}
-        // ])
+
+    const [idPatient, setIdPatient] = useState()
+    const [fname_patient, setFname_patient] = useState("")
+    const [lname_patient, setLname_patient] = useState("")
+    const [age_patient, setAge_patient] = useState("")
+
+
+    //Patient Autocomplete
+
+    const requestData_patient = () => fetch(URL_PATIENT);
+    const requestDataWithDebounce_patient = AwesomeDebouncePromise(requestData_patient, 400);
+
+    const [query_patient, setQuery_patient] = React.useState(null);
+    const [data_patient, setData_patient] = React.useState([]);
+
+
+    useEffect(() => {
+        getPatient()
+    }, [])
+
+
+
+    const getPatient = async () => {
+        await axios.get(`${URL_PATIENT}`)
+            .then(function (response) {
+
+                let obj = JSON.stringify(response.data)
+                let objJson = JSON.parse(obj)
+                setPatients(objJson)
+
+                // alert(patients[0].clinic_number)
+            })
+            .catch(function (error) {
+                // alert(error.message);
+            })
 
     }
 
-    // const findPatient = async () => {
+    const updateData_patient = () => {
+        requestDataWithDebounce_patient()
+            .then(response => response.json())
+            .then(json => json)
+            .then(applyFilter_patient)
+            .then(setData_patient);
+    };
 
+    React.useEffect(updateData_patient, [query_patient]);
 
+    const onSelect_patient = (index) => {
+        setQuery_patient(data_patient[index].fname + " " + data_patient[index].lname);
+        setIdPatient(data_patient[index].clinic_number)
+    
+        setPatient(data_patient[index].fname)
+        setage(data_patient[index].age)
+        setbod(data_patient[index].bod)
+        setclinic_number(data_patient[index].clinic_number)
+        setcongenital_disease(data_patient[index].congenital_disease)
+        setDistric(data_patient[index].district)
+        setdrug_allergy(data_patient[index].drug_allergy)
+        setfname(data_patient[index].fname)
+        setfname_parent(data_patient[index].fname_parent)
+        setgender(data_patient[index].gender)
+        sethome_no(data_patient[index].home_no)
+        setlname(data_patient[index].lname)
+        setlname_parent(data_patient[index].lname_parent)
+        setmoo(data_patient[index].moo)
+        setprovince(data_patient[index].province)
+        setrelation(data_patient[index].relation)
+        setsoi(data_patient[index].soi)
+        setsubdistrict(data_patient[index].subdistrict)
+        settelephone(data_patient[index].telephone)
 
-    //     await axios.get(`${URL}/${id}`)
-    //         .then(function (response) {
-    //             // handle success
-    //             // alert(JSON.stringify(response.data));
-    //             // let patientsData = JSON.stringify(response.data)
-    //             // console.log(patientsData);
-    //             setPatient(response.data)
-    //             setPatients(response.data)
-    //             // alert("Suscess")
-    //         })
-    //         .catch(function (error) {
-    //             // handle error
-    //             // alert(error.message);
-    //         });
-    // }
+    };
 
+    const onChangeText_patient = (nextQuery) => {
+        setQuery_patient(nextQuery);
+    };
 
+    const applyFilter_patient = (options) => {
+        return options.filter(item => item.fname.toLowerCase().includes(query_patient.toLowerCase()));
+    };
 
+    const clearInput_patient = () => {
+        setQuery_patient('');
+        setPatient()
+        setage('')
+        setbod('')
+        setclinic_number('')
+        setcongenital_disease('')
+        setDistric('')
+        setdrug_allergy('')
+        setfname('')
+        setfname_parent('')
+        setgender('')
+        sethome_no('')
+        setlname('')
+        setlname_parent('')
+        setmoo('')
+        setprovince('')
+        setrelation('')
+        setsoi('')
+        setsubdistrict('')
+        settelephone('')
+        setData_patient(patients);
+    };
+
+    const renderCloseIcon_patient = (props) => (
+        <TouchableWithoutFeedback onPress={clearInput_patient}>
+            <Icon {...props} name='close' />
+        </TouchableWithoutFeedback>
+    );
+
+    const renderOption_patient = (item, index) => (
+        <AutocompleteItem
+            key={index}
+            title={item.clinic_number + " " + item.fname + " " + item.lname}
+            accessoryLeft={StarIcon}
+        />
+    );
 
 
 
@@ -224,10 +269,21 @@ export default function PatientProfile({ navigation }) {
                 <View style={tw`flex w-11/12 h-4/5`}>
                     <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
                         <Text style={tw`font-semibold text-xl`}>Clinic number</Text>
-                        <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
+                        {/* <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                             onChangeText={text => updateQuery(text)}
                             placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
-                        />
+                        /> */}
+                        <View style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}>
+                            <Autocomplete
+                                placeholder='โปรดระบุชื่อผู้ป่วย'
+                                value={query_patient}
+                                onChangeText={onChangeText_patient}
+                                accessoryRight={renderCloseIcon_patient}
+                                onSelect={onSelect_patient}>
+                                {data_patient.map(renderOption_patient)}
+                            </Autocomplete>
+                        </View>
+
 
                         {/* <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}
                         // onPress={PrintPatient()}
@@ -236,7 +292,7 @@ export default function PatientProfile({ navigation }) {
                             <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
 
                         </TouchableOpacity> */}
-                        
+
                         {/* <Button title={find ? 'ล้าง' : 'ค้นหา'} onPress={onPressHandler}></Button>
                         {find ?
                             // <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>

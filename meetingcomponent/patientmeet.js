@@ -3,14 +3,19 @@ import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity }
 import tw from "tailwind-react-native-classnames";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from "axios";
+import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
 
-
-
-
-const URL_DOCTOR = `http://178.128.90.50:3333/users`
+import { TouchableWithoutFeedback } from 'react-native';
+import AwesomeDebouncePromise from 'awesome-debounce-promise';
+import { set } from "react-native-reanimated";
 
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
+const URL_DOCTOR = `http://178.128.90.50:3333/users`
+const URL_MEET = `http://178.128.90.50:3333/meets`
 
+const StarIcon = (props) => (
+    <Icon {...props} name='star' />
+);
 
 
 
@@ -26,61 +31,7 @@ export default function PatientMeet({ navigation }) {
     const [lnameDoctor, setLnameDoctor] = useState("")
     //PATIENT
     const [patients, setPatients] = useState([])
-    const [patient, setPatient] = useState([{
-        "clinic_number": 25640007,
-        "fname": "นนทิวัชร",
-        "lname": "บุญวงศ์",
-        "gender": "ชาย",
-        "bod": "2004-01-06",
-        "age": "18",
-        "telephone": "0814000000",
-        "drug_allergy": "ไม่มี",
-        "congenital_disease": "ไม่มี",
-        "home_no": "1350",
-        "moo": "-",
-        "soi": "-",
-        "subdistrict": "หาดใหญ่",
-        "district": "หาดใหญ่",
-        "province": "สงขลา",
-        "fname_parent": "กกก",
-        "lname_parent": "กกก",
-        "relation": "มารดา",
-        "created_at": "2021-11-21T05:56:47.000+00:00",
-        "updated_at": "2021-11-21T05:56:47.000+00:00",
-        "meets": [
-            {
-                "id": 15,
-                "details": "ไม่มี",
-                "topic": "Topic3",
-                "date_meet": "2021-11-21T00:00:00.000Z",
-                "time": "00:00:18",
-                "time_to": "00:00:19",
-                "user_id": 1003,
-                "patient_id": 25640007,
-                "created_at": "2021-11-21T06:05:01.000+00:00",
-                "updated_at": "2021-11-21T06:05:01.000+00:00"
-            }
-        ],
-        "costs": [
-            {
-                "id": 19,
-                "date": "2021-11-21T00:00:00.000Z",
-                "cost_of_doctor": 1000,
-                "cost_of_medicine": 500,
-                "cost_of_psychologist": 0,
-                "cost_of_practitioner": 0,
-                "cost_of_occupational_therapist": 0,
-                "cost_of_teacher": 0,
-                "bank_transfer": 1000,
-                "cash": 500,
-                "total": 1500,
-                "user_id": 1003,
-                "patient_id": 25640007,
-                "created_at": "2021-11-21T06:07:32.000+00:00",
-                "updated_at": "2021-11-21T06:07:32.000+00:00"
-            }
-        ]
-    }])
+    const [patient, setPatient] = useState([])
     const [idPatient, setIdPatient] = useState()
     const [fnamePatient, setFnamePatient] = useState("")
     const [lnamePatient, setLnamePatient] = useState("")
@@ -95,7 +46,8 @@ export default function PatientMeet({ navigation }) {
 
     useEffect(() => {
         getDoctors(),
-            getPatient()
+            getPatient(),
+            getMeets()
     }, [])
 
     const updateIdPatient = (input) => {
@@ -111,11 +63,6 @@ export default function PatientMeet({ navigation }) {
 
 
 
-
-    const findDoctor = () => {
-
-
-    }
 
     const findMeet = async () => {
         await patient.meets.map((item, index) => {
@@ -163,6 +110,28 @@ export default function PatientMeet({ navigation }) {
         setLnameDoctor(tmpLnameDoctor)
     }
 
+    const getMeets = async () => {
+        await axios.get(`${URL_MEET}`)
+            .then(function (response) {
+                // alert(JSON.stringify(response.data));
+
+                let obj = JSON.stringify(response.data)
+                let objJson = JSON.parse(obj)
+
+
+                setMeets(objJson)
+                // alert(doctors[0].doctor_id)
+            })
+            .catch(function (error) {
+                // alert(error.message);
+            });
+
+        // doctors.map((item, index) => {
+        //     console.log(item.doctor_id + 'index: ' + index);
+        // })
+
+    };
+
     const getDoctors = async () => {
         await axios.get(`${URL_DOCTOR}`)
             .then(function (response) {
@@ -202,6 +171,105 @@ export default function PatientMeet({ navigation }) {
     }
 
 
+
+    //Patient Autocomplete
+
+    const requestData_patient = () => fetch(URL_PATIENT);
+    const requestDataWithDebounce_patient = AwesomeDebouncePromise(requestData_patient, 400);
+
+    const [query_patient, setQuery_patient] = React.useState(null);
+    const [data_patient, setData_patient] = React.useState([]);
+
+
+
+
+    const updateData_patient = () => {
+        requestDataWithDebounce_patient()
+            .then(response => response.json())
+            .then(json => json)
+            .then(applyFilter_patient)
+            .then(setData_patient);
+    };
+
+    React.useEffect(updateData_patient, [query_patient]);
+
+    const onSelect_patient = (index) => {
+        setQuery_patient(data_patient[index].fname + " " + data_patient[index].lname);
+        setIdPatient(data_patient[index].clinic_number)
+        setFnamePatient(data_patient[index].fname)
+        setLnamePatient(data_patient[index].lname)
+        setTelephone(data_patient[index].telephone)
+        // setDate_meet(data_patient[index].meets[0].date_meet)
+        // console.log("Test");
+        let flag =0;
+        meets.map((item, index) => {
+            if (item.patient_id == idPatient && flag == 0) {
+                
+                 console.log(item.id);
+                 setDate_meet(item.date_meet)
+                 setTime(item.time)
+                 setTime_to(item.time_to)
+                 setIdDoctor(item.user_id)
+                 setDetails(item.details)
+                 flag = 1
+                 
+            }
+            else {
+                // console.log("Else");
+            }
+        })
+
+        let tmp =0;
+        doctors.map((item,index) => {
+            if(item.user_id == idDoctor && tmp == 0)
+            {
+                setFnameDoctor(item.fname)
+                setLnameDoctor(item.lname)
+                
+                tmp = 1
+            }
+        })
+
+
+    };
+
+    const onChangeText_patient = (nextQuery) => {
+        setQuery_patient(nextQuery);
+    };
+
+    const applyFilter_patient = (options) => {
+        return options.filter(item => item.fname.toLowerCase().includes(query_patient.toLowerCase()));
+    };
+
+    const clearInput_patient = () => {
+        setQuery_patient('');
+        setFnamePatient('')
+        setLnamePatient('')
+        setDate_meet('')
+        setTelephone('')
+        setTime('')
+        setTime_to('')
+        setFnameDoctor('')
+        setLnameDoctor('')
+        setDetails('')
+        setData_patient(patients);
+    };
+
+    const renderCloseIcon_patient = (props) => (
+        <TouchableWithoutFeedback onPress={clearInput_patient}>
+            <Icon {...props} name='close' />
+        </TouchableWithoutFeedback>
+    );
+
+    const renderOption_patient = (item, index) => (
+        <AutocompleteItem
+            key={index}
+            title={item.clinic_number + " " + item.fname + " " + item.lname}
+            accessoryLeft={StarIcon}
+        />
+    );
+
+
     return (
         <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
             <View style={tw`flex w-full justify-start items-start ml-16`}>
@@ -212,18 +280,31 @@ export default function PatientMeet({ navigation }) {
             <View style={tw`flex w-11/12 h-4/5`}>
                 <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
                     <Text style={tw`font-semibold text-xl`}>Clinic number</Text>
-                    <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
+                    {/* <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                         onChangeText={text => updateIdPatient(text)}
                         placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                     />
-                 
-                        <Button 
-                            onPress={handle}
-                            title="ค้นหา"
-                            color="#841584"
-                        
-                        />
-                   
+
+                    <Button
+                        onPress={handle}
+                        title="ค้นหา"
+                        color="#841584"
+
+                    /> */}
+
+                    <View style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}>
+                        <Autocomplete
+                            placeholder='โปรดระบุชื่อผู้ป่วย'
+                            value={query_patient}
+                            onChangeText={onChangeText_patient}
+                            accessoryRight={renderCloseIcon_patient}
+                            onSelect={onSelect_patient}>
+                            {data_patient.map(renderOption_patient)}
+                        </Autocomplete>
+                    </View>
+
+
+
                 </View>
 
                 <KeyboardAwareScrollView style={tw`flex mt-8`}>

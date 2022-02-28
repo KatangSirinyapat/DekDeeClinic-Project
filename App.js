@@ -25,8 +25,8 @@ import PractitionerMeet from './meetingcomponent/practitionermeet'
 import TeacherMeet from './meetingcomponent/teachermeet'
 import Register_users from './component/register_user';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
-
+import { ApplicationProvider,IconRegistry, Layout, Text } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 
 const Drawer = createDrawerNavigator();
 
@@ -43,6 +43,7 @@ export default function App() {
 
 
     <ApplicationProvider {...eva} theme={eva.light}>
+       <IconRegistry icons={EvaIconsPack} />
       {/* <HomeScreen /> */}
       <NavigationContainer>
         <Drawer.Navigator initialRouteName="Home">
