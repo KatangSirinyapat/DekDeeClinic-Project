@@ -268,12 +268,12 @@ export default function PatientProfile({ navigation }) {
                 <Text style={tw`font-semibold text-2xl mt-6`}>ข้อมูลผู้ป่วย</Text>
                 <View style={tw`flex w-11/12 h-4/5`}>
                     <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
-                        <Text style={tw`font-semibold text-xl`}>Clinic number</Text>
+                        <Text style={tw`font-semibold text-xl`}>ค้นหาชื่อผู้ป่วย</Text>
                         {/* <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                             onChangeText={text => updateQuery(text)}
                             placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                         /> */}
-                        <View style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}>
+                        <View style={tw`h-10 w-1/2 ml-2 `}>
                             <Autocomplete
                                 placeholder='โปรดระบุชื่อผู้ป่วย'
                                 value={query_patient}

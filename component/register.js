@@ -14,7 +14,7 @@ const URL = `http://178.128.90.50:3333/patients`
 export default function Register({ navigation }) {
 
 
-    const [date, setDate] = useState(new Date(2020, 12, 1, 0, 0, 0, 0));
+    const [date, setDate] = useState(new Date(2021, 12, 1, 0, 0, 0, 0));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [clinic_number, setClinic_number] = useState("");
@@ -154,11 +154,11 @@ export default function Register({ navigation }) {
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col justify-start w-1/3`}>
+                            <View style={tw`flex flex-col w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>วันเกิด</Text>
                                 {/* <TextInput 
                                     onChangeText={(text) => setbod(text)} /> */}
-                                <View style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}>
+                                <View style={tw`h-10 mt-2 w-2/5 border-2 border-purple-500 bg-purple-100 rounded-md`}>
                                     <DateTimePicker themeVariant="light"
                                         testID="dateTimePicker"
                                         value={date}
@@ -236,7 +236,7 @@ export default function Register({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>ที่อยู่ บ้านเลขที่</Text>
-                                <TextInput style={tw`h-10 mt-2 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <TextInput style={tw`h-10 mt-2 w-2/5 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={(text) => sethome_no(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>

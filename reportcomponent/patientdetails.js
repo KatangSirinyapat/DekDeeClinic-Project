@@ -236,16 +236,16 @@ export default function PatientDetails({ navigation }) {
             <View style={tw`flex w-full justify-start items-start ml-16`}>
                 <Button onPress={() => navigation.navigate('รายงาน')} title="< ย้อนกลับ" />
             </View>
-            <Text style={tw`font-semibold text-2xl mt-6`}>รายละเอียดคนไข้</Text>
+            <Text style={tw`font-semibold text-2xl mt-6`}>รายละเอียดผู้ป่วย</Text>
 
             <View style={tw`flex w-3/4 h-4/5`}>
                 <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
-                    <Text style={tw`font-semibold text-xl`}>Clinic number</Text>
+                    <Text style={tw`font-semibold text-xl`}>ค้นหาชื่อผู้ป่วย</Text>
                     {/* <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                         onChangeText={text => updateQuery(text)}
                         placeholder="กรอกรหัสประจำตัวผู้ป่วย. . .Ex.25640001"
                     /> */}
-                    <View style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}>
+                    <View style={tw`h-10 w-1/2 pl-2`}>
                         <Autocomplete
                             placeholder='โปรดระบุชื่อผู้ป่วย'
                             value={query_patient}
@@ -256,9 +256,9 @@ export default function PatientDetails({ navigation }) {
                         </Autocomplete>
                     </View>
 
-                    <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}>
+                    {/* <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}>
                         <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
 
                 <KeyboardAwareScrollView style={tw`flex mt-8`}>
@@ -298,7 +298,7 @@ export default function PatientDetails({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
                             <View style={tw`flex flex-col justify-start w-full`}>
                                 <Text style={tw`font-semibold text-base`}>โรคประจำตัว</Text>
                                 {/* <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
@@ -309,7 +309,7 @@ export default function PatientDetails({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
                             <View style={tw`flex flex-col justify-start w-full`}>
                                 <Text style={tw`font-semibold text-base`}>แพ้ยา</Text>
                                 {/* <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
@@ -320,7 +320,7 @@ export default function PatientDetails({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>น้ำหนัก</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
@@ -344,7 +344,7 @@ export default function PatientDetails({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={tw`font-semibold text-base`}>BT</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
@@ -369,7 +369,7 @@ export default function PatientDetails({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
                             <View style={tw`flex flex-col justify-start w-full`}>
                                 <Text style={tw`font-semibold text-base`}>อาการที่มาพบแพทย์</Text>
                                 <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
