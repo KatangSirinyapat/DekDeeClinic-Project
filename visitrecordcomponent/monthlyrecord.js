@@ -25,7 +25,7 @@ export default function MonthlyRecord({ navigation }) {
     const [total, setTotal] = useState(0)
 
     //Date time
-    const [date1, setDate1] = useState(new Date(2021, 10, 8, 0, 0, 0, 0));
+    const [date1, setDate1] = useState(new Date(2021, 12, 28, 0, 0, 0, 0));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 

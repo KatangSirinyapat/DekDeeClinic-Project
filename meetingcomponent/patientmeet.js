@@ -252,11 +252,11 @@ export default function PatientMeet({ navigation }) {
             <View style={tw`flex w-full justify-start items-start ml-16`}>
                 <Button onPress={() => navigation.navigate('สรุปนัดหมาย')} title="< ย้อนกลับ" />
             </View>
-            <Text style={tw`font-semibold text-2xl mt-6`}>สรุปนัดหมายคนไข้</Text>
+            <Text style={tw`font-semibold text-2xl mt-6`}>สรุปนัดหมายผู้ป่วย</Text>
 
             <View style={tw`flex w-11/12 h-4/5`}>
                 <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
-                    <Text style={tw`font-semibold text-xl`}>Clinic number</Text>
+                    <Text style={tw`font-semibold text-xl`}>ค้นหาชื่อผู้ป่วย</Text>
                     {/* <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                         onChangeText={text => updateIdPatient(text)}
                         placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
@@ -269,7 +269,7 @@ export default function PatientMeet({ navigation }) {
 
                     /> */}
 
-                    <View style={tw`h-10 w-1/2 ml-2 pl-2  rounded-md`}>
+                    <View style={tw`h-10 w-1/2 pl-2`}>
                         <Autocomplete
                             placeholder='โปรดระบุชื่อผู้ป่วย'
                             value={query_patient}
@@ -301,39 +301,39 @@ export default function PatientMeet({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>วันที่นัดหมาย</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`} /> */}
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-2`}>
+                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md pl-2 pt-3`}>
                                     <Text>{date_meet}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}></View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>เวลา ตั้งแต่</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`} /> */}
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-2`}>
+                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-3`}>
                                     <Text>{time}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>ถึง</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md pl-2`} /> */}
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-2`}>
+                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-3`}>
                                     <Text>{time_to}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์</Text>
 
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-2`}>
+                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-3`}>
                                     <Text>{telephone}</Text>
                                 </View>
                             </View>
@@ -342,26 +342,26 @@ export default function PatientMeet({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อแพทย์</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-2`}>
+                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-3`}>
                                     <Text>{fnameDoctor}</Text>
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>สกุลแพทย์</Text>
-                                <View style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md  pl-2 pt-2`}>
+                                <View style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md  pl-2 pt-3`}>
                                     <Text>{lnameDoctor}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
                             <View style={tw`flex flex-col w-full`}>
                                 <Text style={tw`font-semibold text-base`}>หมายเหตุ</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-2`}>
+                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-3`}>
                                     <Text>{details}</Text>
                                 </View>
                             </View>

@@ -51,8 +51,8 @@ export default function Meet({ navigation }) {
     const [time_to, setTime_to] = useState("")
 
     //Date time
-    const [date, setDate] = useState(new Date(2020, 12, 1, 0, 0, 0, 0));
-    const [date2, setDate2] = useState(new Date(2020, 12, 1, 0, 0, 0, 0));
+    const [date, setDate] = useState(new Date(2021, 12, 1, 0, 0, 0, 0));
+    const [date2, setDate2] = useState(new Date(2021, 12, 1, 0, 0, 0, 0));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
@@ -327,7 +327,7 @@ export default function Meet({ navigation }) {
         setFname_doctor(data[index].fname)
         setLname_doctor(data[index].lname)
 
-        
+
     };
 
     const onChangeText = (nextQuery) => {
@@ -383,7 +383,7 @@ export default function Meet({ navigation }) {
         setFname_patient(data_patient[index].fname)
         setLname_patient(data_patient[index].lname)
         setTelephone_patient(data_patient[index].telephone)
-        
+
 
     };
 
@@ -426,31 +426,31 @@ export default function Meet({ navigation }) {
             <View style={tw`flex w-full justify-start items-start ml-16`}>
                 <Button onPress={() => navigation.navigate('Menu')} title="< ย้อนกลับ" />
             </View>
-            <Text style={tw`font-semibold text-2xl mt-6`}>นัดหมาย</Text>
+            <Text style={tw`font-semibold text-2xl mt-6`}>นัดหมายผู้ป่วย</Text>
 
 
             <View style={tw`flex w-11/12 h-4/5`}>
                 <KeyboardAwareScrollView style={tw`flex mt-8`}>
-                    <View style={tw`flex flex-col justify-around items-start w-full h-full  p-4 rounded-xl border-4 border-black`}>
+                    <View style={tw`flex flex-col justify-around items-start w-full h-full p-4 rounded-xl border-4 border-black`}>
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>บุคลากรที่ต้องการนัด</Text>
+                                <Text style={tw`font-semibold text-base`}>แพทย์ที่นัดหมาย</Text>
 
 
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateQuery(text)}
                                     placeholder="กรอกรหัสประจำตัวแพทย์. . ."
                                 /> */}
-
-                                <Autocomplete
-                                    placeholder='โปรดระบุชื่อแพทย์'
-                                    value={query}
-                                    onChangeText={onChangeText}
-                                    accessoryRight={renderCloseIcon}
-                                    onSelect={onSelect}>
-                                    {data.map(renderOption)}
-                                </Autocomplete>
-
+                                <View style={tw`h-10 mt-2 w-11/12`}>
+                                    <Autocomplete
+                                        placeholder='โปรดระบุชื่อแพทย์'
+                                        value={query}
+                                        onChangeText={onChangeText}
+                                        accessoryRight={renderCloseIcon}
+                                        onSelect={onSelect}>
+                                        {data.map(renderOption)}
+                                    </Autocomplete>
+                                </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={tw`font-semibold text-base`}>หัวข้อในการนัดหมาย</Text>
@@ -462,7 +462,7 @@ export default function Meet({ navigation }) {
 
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateTopic(text)}
-                                    placeholder="กรอกหัวข้อนัดหมาย. . ."
+                                    placeholder="กรอกหัวข้อนัดหมาย"
                                 />
                             </View>
                         </View>
@@ -494,29 +494,29 @@ export default function Meet({ navigation }) {
                                     onChangeText={text => setDate_meet(text)}
                                     placeholder="YYYY-MM-DD"
                                 /> */}
-
-                                <DateTimePicker themeVariant="light" style={tw`h-10 mt-2 w-2/4`}
-                                    testID="dateTimePicker"
-                                    value={date}
-                                    mode={'date'}
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={onChange}
-                                />
-
+                                <View style={tw`h-10 mt-2 w-1/4 border-2 border-purple-500 bg-purple-100 rounded-md`}>
+                                    <DateTimePicker themeVariant="light" 
+                                        testID="dateTimePicker"
+                                        value={date}
+                                        mode={'date'}
+                                        is24Hour={true}
+                                        display="default"
+                                        onChange={onChange}
+                                    />
+                                </View>
                             </View>
-                            <View style={tw`flex flex-col w-1/2`}></View>
+                         
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2 mt-2`}>
+                            <View style={tw`flex flex-col mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เวลา ตั้งแต่</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setTime(text)}
                                     placeholder="กรอกเวลา. . ."
                                 /> */}
-
-                                <DateTimePicker style={tw`h-10 mt-2 w-4/12  rounded-md pl-2`}
+                             <View style={tw`h-10 mt-2 w-20 border-2 border-purple-500 bg-purple-100 rounded-md`}>
+                                <DateTimePicker
                                     testID="dateTimePicker"
                                     value={date}
                                     mode={'time'}
@@ -525,13 +525,15 @@ export default function Meet({ navigation }) {
                                     onChange={onChangeTime}
                                 />
                             </View>
+                            </View>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>ถึง</Text>
                                 {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setTime_to(text)}
                                     placeholder="กรอกเวลา. . ."
                                 /> */}
-                                <DateTimePicker style={tw`h-10 mt-2 w-4/12  rounded-md pl-2`}
+                                 <View style={tw`h-10 mt-2 w-20 border-2 border-purple-500 bg-purple-100 rounded-md`}>
+                                <DateTimePicker 
                                     testID="dateTimePicker"
                                     value={date2}
                                     mode={'time'}
@@ -539,17 +541,18 @@ export default function Meet({ navigation }) {
                                     display="default"
                                     onChange={onChangeTime_to}
                                 />
+                                </View>
                             </View>
                         </View>
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>Clinic number</Text>
+                                <Text style={tw`font-semibold text-base`}>ค้นหาชื่อผู้ป่วย</Text>
 
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateIdPatient(text)}
                                     placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                                 /> */}
-
+                             <View style={tw`h-10 mt-2 w-11/12`}>
                                 <Autocomplete
                                     placeholder='โปรดระบุชื่อผู้ป่วย'
                                     value={query_patient}
@@ -558,6 +561,7 @@ export default function Meet({ navigation }) {
                                     onSelect={onSelect_patient}>
                                     {data_patient.map(renderOption_patient)}
                                 </Autocomplete>
+                            </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>เบอร์ติดต่อ</Text>
@@ -595,7 +599,7 @@ export default function Meet({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>รายละเอียดเพิ่มเติม</Text>
                                 <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setDetails(text)}
-                                    placeholder="กรอกรายละเอียดเพิ่มเติม. . ."
+                                    placeholder="กรอกรายละเอียดเพิ่มเติม"
                                 />
                             </View>
                         </View>

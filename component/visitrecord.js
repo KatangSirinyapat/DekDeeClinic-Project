@@ -66,7 +66,7 @@ export default function VisitRecord({ navigation }) {
     const [cost_of_psychologist3, setCost_of_psychologist3] = useState(0)
 
     //Date time
-    const [date1, setDate1] = useState(new Date(2020, 12, 1, 0, 0, 0, 0));
+    const [date1, setDate1] = useState(new Date(2021, 12, 1, 0, 0, 0, 0));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
@@ -337,7 +337,7 @@ export default function VisitRecord({ navigation }) {
                             <Text style={tw`font-semibold text-base`}>วันที่</Text>
 
 
-                            <DateTimePicker themeVariant="light" style={tw`h-8 w-1/4 ml-2`}
+                            <DateTimePicker themeVariant="light" style={tw`h-10 w-1/4 ml-2`}
                                 testID="dateTimePicker"
                                 value={date1}
                                 mode={'date'}
@@ -352,7 +352,7 @@ export default function VisitRecord({ navigation }) {
                             <View style={tw`flex flex-col w-1/4 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>รายชื่อแพทย์</Text>
 
-                                <Autocomplete
+                                <Autocomplete style={tw`h-10 mt-2`}
                                     placeholder='โปรดระบุชื่อแพทย์'
                                     value={query}
                                     onChangeText={onChangeText}
@@ -364,9 +364,9 @@ export default function VisitRecord({ navigation }) {
                               
                             </View>
                             <View style={tw`flex flex-col w-1/4 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>รายชื่อผู้ป่วย</Text>
+                                <Text style={tw`font-semibold text-base`}>ค้นหาชื่อผู้ป่วย</Text>
 
-                                <Autocomplete
+                                <Autocomplete style={tw`h-10 mt-2`}
                                     placeholder='โปรดระบุชื่อผู้ป่วย'
                                     value={query_patient}
                                     onChangeText={onChangeText_patient}

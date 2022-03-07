@@ -29,9 +29,9 @@ export default function Report({ navigation }) {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={tw`h-12 w-1/3 bg-white rounded-md items-center justify-center border-2 border-gray-500`}
-                onPress={() => navigation.navigate('รายละเอียดคนไข้')}
-                title="รายละเอียดคนไข้">
-                    <Text style={tw`text-lg text-black font-bold`}>รายละเอียดคนไข้</Text>
+                onPress={() => navigation.navigate('รายละเอียดผู้ป่วย')}
+                title="รายละเอียดผู้ป่วย">
+                    <Text style={tw`text-lg text-black font-bold`}>รายละเอียดผู้ป่วย</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={tw`h-12 w-1/3 bg-white rounded-md items-center justify-center border-2 border-gray-500`}

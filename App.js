@@ -47,29 +47,30 @@ export default function App() {
       {/* <HomeScreen /> */}
       <NavigationContainer>
         <Drawer.Navigator initialRouteName="Home">
-
-          <Drawer.Screen name="Menu" component={Menu} />
+         
+          <Drawer.Screen name="Menu" component={Menu} /> 
+          <Drawer.Screen name="ลงทะเบียนแพทย์" component={Register_users} />
           <Drawer.Screen name="ลงทะเบียนผู้ป่วยใหม่" component={Register} />
           <Drawer.Screen name="ข้อมูลผู้ป่วย" component={PatientProfile} />
           <Drawer.Screen name="ระบบนัดหมาย" component={Meet} />
           <Drawer.Screen name="บันทึกการให้บริการ" component={VisitRecord} />
           <Drawer.Screen name="รายงาน" component={Report} />
           <Drawer.Screen name="สรุปนัดหมาย" component={Meetingmenu} />
-          <Drawer.Screen name="สรุปนัดหมายคนไข้" component={PatientMeet} />
-          <Drawer.Screen name="สรุปนัดหมายหมอ" component={DocterMeet} />
-          <Drawer.Screen name="สรุปนัดหมายนักจิตวิทยา" component={PsychologistMeet} />
+          <Drawer.Screen name="สรุปนัดหมายผู้ป่วย" component={PatientMeet} />
+          <Drawer.Screen name="สรุปนัดหมายแพทย์" component={DocterMeet} />
+          {/* <Drawer.Screen name="สรุปนัดหมายนักจิตวิทยา" component={PsychologistMeet} />
           <Drawer.Screen name="สรุปนัดหมายนักฝึกพูด" component={PractitionerMeet} />
           <Drawer.Screen name="สรุปนัดหมายนักกิจกรรมบำบัด" component={OccupationaltherapistMeet} />
-          <Drawer.Screen name="สรุปนัดหมายครูการศึกษาพิเศษ" component={TeacherMeet} />
+          <Drawer.Screen name="สรุปนัดหมายครูการศึกษาพิเศษ" component={TeacherMeet} /> */}
           <Drawer.Screen name="สรุปการให้บริการ" component={Visitrecordmenu} />
           <Drawer.Screen name="การให้บริการรายวัน" component={DailyRecord} />
           <Drawer.Screen name="การให้บริการรายเดือน" component={MonthlyRecord} />
           <Drawer.Screen name="การให้บริการกำหนดเอง" component={ManualRecord} />
-          <Drawer.Screen name="รายละเอียดคนไข้" component={PatientDetails} />
+          <Drawer.Screen name="รายละเอียดผู้ป่วย" component={PatientDetails} />
           <Drawer.Screen name="สรุปรายปี" component={AnnualReport} />
           {/* <Drawer.Screen name="ตั้งค่าระบบ" component={Setting} /> */}
           <Drawer.Screen name="Login" component={Login} />
-          <Drawer.Screen name="ลงทะเบียนแพทย์" component={Register_users} />
+        
 
 
         </Drawer.Navigator>
