@@ -64,52 +64,9 @@ export default function PatientMeet({ navigation }) {
 
 
 
-    const findMeet = async () => {
-        await patient.meets.map((item, index) => {
-            setMeets(item)
-        })
-    }
-
-    const handle = async () => {
-        await findPatient()
-    }
-
-    const findPatient = () => {
-        patients.map((item, index) => {
-            if (item.clinic_number == idPatient) {
-                setPatient(item)
-                console.log("------------");
-                // console.log(patient.meets[0].topic);
-
-                findMeet()
-                console.log(meets.user_id);
-            }
-            else if (item.doctor_id != idDoctor) {
-                // alert('กรุณากรอกรหัสประจำตัวแพทย์ให้ถูกต้อง')
-
-                console.log("ItemIDpatient: " + item.clinic_number);
-            }
-        })
-        doctors.map((item, index) => {
-            if (item.doctor_id === meets.user_id) {
-                tmpFnameDoctor = item.fname
-                tmpLnameDoctor = item.lname
-            }
-
-        })
 
 
-        setFnamePatient(patient.fname)
-        setLnamePatient(patient.lname)
-        setTelephone(patient.telephone)
-        setDate_meet(meets.date_meet)
-        setTime(meets.time)
-        setTime_to(meets.time_to)
-        setDetails(meets.details)
-        setFnameDoctor(tmpFnameDoctor)
-        setLnameDoctor(tmpLnameDoctor)
-    }
-
+  
     const getMeets = async () => {
         await axios.get(`${URL_MEET}`)
             .then(function (response) {
@@ -120,15 +77,13 @@ export default function PatientMeet({ navigation }) {
 
 
                 setMeets(objJson)
-                // alert(doctors[0].doctor_id)
+                
             })
             .catch(function (error) {
                 // alert(error.message);
             });
 
-        // doctors.map((item, index) => {
-        //     console.log(item.doctor_id + 'index: ' + index);
-        // })
+
 
     };
 
@@ -148,9 +103,7 @@ export default function PatientMeet({ navigation }) {
                 // alert(error.message);
             });
 
-        // doctors.map((item, index) => {
-        //     console.log(item.doctor_id + 'index: ' + index);
-        // })
+  
 
     };
 
@@ -193,30 +146,54 @@ export default function PatientMeet({ navigation }) {
 
     React.useEffect(updateData_patient, [query_patient]);
 
+    const findData =  () => {
+      
+        let tmp =0;
+        doctors.map((item,index) => {
+            if(item.user_id == idDoctor && tmp == 0)
+            {
+                setFnameDoctor(item.fname)
+                setLnameDoctor(item.lname)
+                
+                tmp = 1
+            }
+        })
+    }
+
+    const findMeet = () => {
+
+        let flag = 0
+
+        meets.map((item,index) => {
+            if(item.patient_id == idPatient && flag == 0)
+            {
+                setIdDoctor(item.user_id)
+                setDate_meet(item.date_meet)
+                setTime(item.time)
+                setTime_to(item.time_to)
+                setDetails(item.details)
+                console.log("Suscess! Meet");
+                findData()
+            }
+        })
+
+    }
+
     const onSelect_patient = (index) => {
         setQuery_patient(data_patient[index].fname + " " + data_patient[index].lname);
         setIdPatient(data_patient[index].clinic_number)
         setFnamePatient(data_patient[index].fname)
         setLnamePatient(data_patient[index].lname)
         setTelephone(data_patient[index].telephone)
-        // setDate_meet(data_patient[index].meets[0].date_meet)
+        // setDate_meet(data_patient[index].meets[1].date_meet)
         // console.log("Test");
-        let flag =0;
-        meets.map((item, index) => {
-            if (item.patient_id == idPatient && flag == 0) {
-                
-                 console.log(item.id);
-                 setDate_meet(item.date_meet)
-                 setTime(item.time)
-                 setTime_to(item.time_to)
-                 setIdDoctor(item.user_id)
-                 setDetails(item.details)
-                 flag = 1
-                 
-            }
-            else {
-                // console.log("Else");
-            }
+       
+        // findMeet()
+        data_patient[index].meets.map((item,index) => {
+            setDate_meet(item.date_meet)
+            setTime(item.time)
+            setTime_to(item.time_to)
+            setDetails(item.details)
         })
 
         let tmp =0;
@@ -292,7 +269,7 @@ export default function PatientMeet({ navigation }) {
 
                     /> */}
 
-                    <View style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}>
+                    <View style={tw`h-10 w-1/2 ml-2 pl-2  rounded-md`}>
                         <Autocomplete
                             placeholder='โปรดระบุชื่อผู้ป่วย'
                             value={query_patient}
