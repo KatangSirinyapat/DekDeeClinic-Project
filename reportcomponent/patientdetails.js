@@ -115,6 +115,27 @@ export default function PatientDetails({ navigation }) {
 
     }
 
+    const count_treatments = async () => {
+        await axios.get(`${URL_PATIENT}/data/${id}`)
+            .then(function (response) {
+
+            
+
+               console.log("count_Susses:" + response.data.num_of_treatments);
+               
+
+            })
+            .catch(function (error) {
+
+            });
+
+
+        console.log(patient)
+        // PrintPatient()
+    }
+
+    
+
     const postDetail = async () => {
         await axios.post(URL_DETAILS, {
 
@@ -130,6 +151,9 @@ export default function PatientDetails({ navigation }) {
         })
             .then(function (response) {
                 alert("บันทึกข้อมูลเสร็จสิ้น")
+                count_treatments()
+                
+
 
             })
             .catch(function (error) {
