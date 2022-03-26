@@ -107,7 +107,8 @@ export default function Register({ navigation }) {
                 province: province,
                 fname_parent: fname_parent,
                 lname_parent: lname_parent,
-                relation: relation
+                relation: relation,
+                num_of_treatments: 0
             })
             .then(function (response) {
                 // handle success

@@ -62,3 +62,28 @@ export default function Menu({ navigation }) {
     );
   }
   
+
+
+
+
+
+
+
+
+
+
+//New UI
+
+// export default function Menu() {
+//   // const navigation = useNavigation()
+//   return (
+//     <View style={tw`flex h-full justify-center items-center bg-purple-200`}> 
+//       <Text>asdasasd</Text>
+       
+     
+     
+//     </View>
+  
+   
+//   );
+// }

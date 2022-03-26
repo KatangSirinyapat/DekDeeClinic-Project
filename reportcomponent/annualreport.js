@@ -63,7 +63,7 @@ export default function AnnualReport({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>จำนวนการให้บริการทั้งหมด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/4 bg-purple-300 rounded-md pl-2`}>{summary.service}</Text>
+                                <Text style={tw`h-8 w-2/4 bg-purple-300 rounded-md pl-2 pt-2`}>{summary.service}</Text>
 
                             </View>
                         </View>
@@ -73,7 +73,7 @@ export default function AnnualReport({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>จำนวนผู้เข้ารับการรักษา</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/4 bg-purple-300 rounded-md pl-2`}>{summary.count_of_patient}</Text>
+                                <Text style={tw`h-8 w-2/4 bg-purple-300 rounded-md pl-2 pt-2`}>{summary.count_of_patient}</Text>
                             </View>
                         </View>
 
@@ -83,8 +83,8 @@ export default function AnnualReport({ navigation }) {
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
                                 <Text style={tw`font-semibold text-base`}>จำนวนการให้บริการทั้งหมด</Text>
                             </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/4 bg-purple-300 rounded-md pl-2`}>{summary.service}</Text>
+                            <View style={tw`flex flex-row items-center w-3/5`}>
+                                <Text style={tw`h-8 w-2/4 bg-purple-300 rounded-md pl-2 pt-2`}>{summary.service}</Text>
                             </View>
                         </View>
 
@@ -93,7 +93,7 @@ export default function AnnualReport({ navigation }) {
                                 <Text style={tw`font-semibold text-base`}>จำนวนผู้เข้ารับการรักษา</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={tw`h-8 w-2/4 bg-purple-300 rounded-md pl-2`}>{summary.count_of_patient}</Text>
+                                <Text style={tw`h-8 w-2/4 bg-purple-300 rounded-md pl-2 pt-2`}>{summary.count_of_patient}</Text>
                             </View>
                         </View>
 

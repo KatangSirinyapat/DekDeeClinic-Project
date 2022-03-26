@@ -36,6 +36,7 @@ export default function Register_users({ navigation }) {
                 alert("บันทึกข้อมูลเสร็จสิ้น")
 
             })
+            
             .catch(function (error) {
                 alert(error.message)
             })

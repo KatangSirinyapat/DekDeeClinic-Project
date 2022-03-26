@@ -30,6 +30,7 @@ export default function PatientProfile({ navigation }) {
     const [telephone, settelephone] = useState("");
     const [drug_allergy, setdrug_allergy] = useState("");
     const [congenital_disease, setcongenital_disease] = useState("");
+    const [num_of_treatments, setnum_of_treatments] = useState("");
     const [home_no, sethome_no] = useState("");
     const [moo, setmoo] = useState("");
     const [soi, setsoi] = useState("");
@@ -94,7 +95,8 @@ export default function PatientProfile({ navigation }) {
                 setsoi(objJson[0].soi)
                 setsubdistrict(objJson[0].subdistrict)
                 settelephone(objJson[0].telephone)
-
+                setnum_of_treatments(objJson[0].num_of_treatments)
+                
                 // alert("Suscess")
             })
             .catch(function (error) {
@@ -205,6 +207,7 @@ export default function PatientProfile({ navigation }) {
         setsoi(data_patient[index].soi)
         setsubdistrict(data_patient[index].subdistrict)
         settelephone(data_patient[index].telephone)
+        setnum_of_treatments(data_patient[index].num_of_treatments)
 
     };
 
@@ -237,6 +240,7 @@ export default function PatientProfile({ navigation }) {
         setsoi('')
         setsubdistrict('')
         settelephone('')
+        setnum_of_treatments('')
         setData_patient(patients);
     };
 
@@ -369,9 +373,9 @@ export default function PatientProfile({ navigation }) {
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/4`}>
-                                    <Text style={tw`font-semibold text-base`}>จำนวนครั้งในการรักษา</Text>
+                                    <Text style={tw`font-semibold text-base`}>จำนวนครั้งในการรักษา </Text>
                                     <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
-                                        <Text>0</Text>
+                                        <Text>{num_of_treatments}</Text>
                                     </View>
 
                                 </View>
