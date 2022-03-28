@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TextInput, Button, TouchableOpacity, Alert, } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Alert, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import axios from 'axios';
@@ -246,7 +246,7 @@ export default function PatientProfile({ navigation }) {
 
     const renderCloseIcon_patient = (props) => (
         <TouchableWithoutFeedback onPress={clearInput_patient}>
-            <Icon {...props} name='close' />
+            <Icon {...props} name='close'/>
         </TouchableWithoutFeedback>
     );
 
@@ -262,22 +262,22 @@ export default function PatientProfile({ navigation }) {
 
     return (
 
-        <View>
-            <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
-                <View style={tw`flex w-full justify-start items-start ml-16`}>
+        <View style={tw`flex h-full items-center`}>
 
-                    <Button onPress={() => navigation.navigate('Menu')} title="< ย้อนกลับ" />
-                </View>
-
-                <Text style={tw`font-semibold text-2xl mt-6`}>ข้อมูลผู้ป่วย</Text>
-                <View style={tw`flex w-11/12 h-4/5`}>
-                    <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
-                        <Text style={tw`font-semibold text-xl`}>ค้นหาชื่อผู้ป่วย</Text>
+        <View style={[tw`flex w-full justify-center items-center`,styles.containertop]}> 
+          <View style={[tw`w-full`,styles.top]}>
+            <Text style={[tw`font-bold`,styles.title]}>ข้อมูลผู้ป่วย</Text> 
+          </View>
+        </View>
+            
+                <View style={[tw`w-4/5`,styles.menu]}>
+                    <View style={tw`flex flex-row w-full justify-center items-center`}>
+                        <Text style={[tw`font-semibold text-xl`,styles.font]}>ค้นหาชื่อผู้ป่วย</Text>
                         {/* <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                             onChangeText={text => updateQuery(text)}
                             placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                         /> */}
-                        <View style={tw`h-10 w-1/2 ml-2 `}>
+                        <View style={tw`h-10 w-1/2 ml-2`}>
                             <Autocomplete
                                 placeholder='โปรดระบุชื่อผู้ป่วย'
                                 value={query_patient}
@@ -307,144 +307,144 @@ export default function PatientProfile({ navigation }) {
                         } */}
                     </View>
 
-                    <KeyboardAwareScrollView style={tw`flex mt-8`}>
-                        <View style={tw`flex flex-col justify-center items-center w-full h-full p-4 rounded-xl border-4 border-black`}>
+                    <KeyboardAwareScrollView style={tw`mt-2`}>
+                        <View style={[tw`flex flex-col justify-center items-center p-4 rounded-xl`,styles.content]}>
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>ชื่อ </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ชื่อ </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{fname}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>สกุล </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>สกุล </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{lname}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col w-1/4`}>
-                                    <Text style={tw`font-semibold text-base`}>เพศ </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>เพศ </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{gender}</Text>
                                     </View>
 
                                 </View>
                             </View>
 
-                            <View style={tw`flex flex-row justify-between w-full`}>
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>วันเกิด </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>วันเกิด </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-3/4 rounded-md pl-2`,styles.textbox]}>
                                         <Text>{bod}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>อายุ </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>อายุ </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-3/4 rounded-md pl-2`,styles.textbox]}>
                                         <Text>{age}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/4`}>
-                                    <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์ </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>เบอร์โทรศัพท์ </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{telephone}</Text>
                                     </View>
 
                                 </View>
                             </View>
 
-                            <View style={tw`flex flex-row justify-between w-full`}>
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>ประวัติการแพ้ยา </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ประวัติการแพ้ยา </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{drug_allergy}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>ประวัติโรคประจำตัว </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ประวัติโรคประจำตัว </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{congenital_disease}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/4`}>
-                                    <Text style={tw`font-semibold text-base`}>จำนวนครั้งในการรักษา </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>จำนวนครั้งในการรักษา </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{num_of_treatments}</Text>
                                     </View>
 
                                 </View>
                             </View>
 
-                            <View style={tw`flex flex-row justify-between w-full`}>
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>ที่อยู่ บ้านเลขที่ </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`} >
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ที่อยู่ บ้านเลขที่ </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-3/4 rounded-md pl-2`,styles.textbox]} >
                                         <Text>{home_no}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>หมู่ที่ </Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`} >
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>หมู่ที่ </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-3/4 rounded-md pl-2`,styles.textbox]} >
                                         <Text>{moo}</Text>
                                     </View>
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/4`}>
-                                    <Text style={tw`font-semibold text-base`}>ตรอก/ซอก/ซอย</Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ตรอก/ซอก/ซอย</Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{soi}</Text>
                                     </View>
 
                                 </View>
                             </View>
 
-                            <View style={tw`flex flex-row justify-between w-full`}>
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>ตำบล</Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ตำบล</Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-3/4 rounded-md pl-2`,styles.textbox]}>
                                         <Text>{subdistrict}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>อำเภอ</Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-3/4 bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>อำเภอ</Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-3/4 rounded-md pl-2`,styles.textbox]}>
                                         <Text>{district}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col justify-start w-1/4`}>
-                                    <Text style={tw`font-semibold text-base`}>จังหวัด</Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>จังหวัด</Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{province}</Text>
                                     </View>
                                 </View>
                             </View>
 
-                            <View style={tw`flex flex-row justify-between w-full`}>
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
                                 <View style={tw`flex flex-col w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>ชื่อผู้ปกครอง</Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ชื่อผู้ปกครอง</Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{fname_parent}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col w-1/3`}>
-                                    <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>สกุล</Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{lname_parent}</Text>
                                     </View>
 
                                 </View>
                                 <View style={tw`flex flex-col w-1/4`}>
-                                    <Text style={tw`font-semibold text-base`}>ความสัมพันธ์กับผู้ป่วย</Text>
-                                    <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ความสัมพันธ์กับผู้ป่วย</Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{relation}</Text>
                                     </View>
 
@@ -462,9 +462,124 @@ export default function PatientProfile({ navigation }) {
                         </View>
                     </KeyboardAwareScrollView>
                 </View>
-            </View>
+                <View style={[tw`flex flex-row w-full justify-evenly items-center`,styles.footer]} >
+            <TouchableOpacity style={[tw``, styles.navbtm]}
+              onPress={() => navigation.navigate('ข้อมูลผู้ป่วย')}
+              title="ข้อมูลผู้ป่วย">
+              <Image source={require("../Icon/Buttom-Nav/icons8-find-user-male-45-P.png")}/>
+              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontpress]}>ข้อมูลผู้ป่วย</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[tw``, styles.navbtm]}
+              onPress={() => navigation.navigate('ระบบนัดหมาย')}
+              title="ระบบนัดหมาย">
+              <Image source={require("../Icon/Buttom-Nav/icons8-calendar-45-W.png")}/>
+              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>นัดหมาย</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[tw``, styles.navbtm]}
+              onPress={() => navigation.navigate('Menu')}
+              title="Menu">
+              <Image source={require("../Icon/Buttom-Nav/icons8-clinic-45-W.png")}/>
+              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>หน้าหลัก</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[tw``, styles.navbtm]}
+              onPress={() => navigation.navigate('บันทึกการให้บริการ')}
+              title="บันทึกการให้บริการ">
+              <Image source={require("../Icon/Buttom-Nav/icons8-cost-45-W.png")}/>
+              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>บันทึกการให้บริการ</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[tw``, styles.navbtm]}
+              onPress={() => navigation.navigate('รายงาน')}
+              title="รายงาน">
+              <Image source={require("../Icon/Buttom-Nav/icons8-test-results-45-W.png")}/>
+              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>รายงาน</Text>
+            </TouchableOpacity>
         </View>
+
+            </View>
+    
 
     );
 }
+
+const styles = StyleSheet.create({
+
+    containertop: {
+      position: "absolute",
+      top: 0,
+    },
+
+    top: { 
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: 155,
+      backgroundColor: '#D7BDE2',
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 2,
+        height: 2,
+      },
+      shadowOpacity: 0.16,
+      shadowRadius: 5.46,
+    },
+
+    title: {
+      fontSize: 30,
+      color: '#4A235A',
+    },
+
+    content: {
+        // borderColor: 'black',
+        // borderWidth: 2,
+    },
+
+    menu: {
+      position: "absolute",
+    //   borderColor: 'black',
+    //   borderWidth: 2,
+      marginTop: 180,
+    },
+
+    textbox: {
+        backgroundColor: '#EBDEF0',
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 2,
+          height: 2,
+        },
+        shadowOpacity: 0.02,
+        shadowRadius: 5,
+    },
+
+    font:{
+      color : '#633974',
+    },
+
+    footer: {
+      position: "absolute",
+      bottom: 0,
+      height: 109,
+      backgroundColor: '#D7BDE2',
+    },
+
+    navbtm: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start', 
+      alignItems: 'center',
+      width: 130,
+    },
+
+    fontnormal: {
+      color: '#FFFFFF',
+    },
+
+    fontpress: {
+      color: '#4A235A'
+    },
+  });
 

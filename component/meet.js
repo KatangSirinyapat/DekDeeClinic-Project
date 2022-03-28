@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, Picker } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, Picker, Image } from 'react-native';
 import tw from "tailwind-react-native-classnames";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -421,27 +421,27 @@ export default function Meet({ navigation }) {
 
 
     return (
-        <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
+        <View style={tw`flex h-full items-center`}>
 
-            <View style={tw`flex w-full justify-start items-start ml-16`}>
-                <Button onPress={() => navigation.navigate('Menu')} title="< ย้อนกลับ" />
-            </View>
-            <Text style={tw`font-semibold text-2xl mt-6`}>นัดหมายผู้ป่วย</Text>
+        <View style={[tw`flex w-full justify-center items-center`,styles.containertop]}> 
+          <View style={[tw`w-full`,styles.top]}>
+            <Text style={[tw`font-bold`,styles.title]}>นัดหมายผู้ป่วย</Text> 
+          </View>
 
 
-            <View style={tw`flex w-11/12 h-4/5`}>
-                <KeyboardAwareScrollView style={tw`flex mt-8`}>
+            {/* <View style={tw`flex w-11/12 h-4/5`}>
+                <KeyboardAwareScrollView style={tw`flex mt-1`}>
                     <View style={tw`flex flex-col justify-around items-start w-full h-full p-4 rounded-xl border-4 border-black`}>
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>แพทย์ที่นัดหมาย</Text>
+                                <Text style={tw`font-semibold text-base`}>แพทย์ที่นัดหมาย</Text> */}
 
 
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateQuery(text)}
                                     placeholder="กรอกรหัสประจำตัวแพทย์. . ."
                                 /> */}
-                                <View style={tw`h-10 mt-2 w-11/12`}>
+                                {/* <View style={tw`h-10 mt-2 w-11/12`}>
                                     <Autocomplete
                                         placeholder='โปรดระบุชื่อแพทย์'
                                         value={query}
@@ -453,21 +453,21 @@ export default function Meet({ navigation }) {
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>หัวข้อในการนัดหมาย</Text>
+                                <Text style={tw`font-semibold text-base`}>หัวข้อในการนัดหมาย</Text> */}
                                 {/* <TextInput style={tw`h-10 mt-2 w-5/6 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}/> */}
                                 {/* <DropDownPicker style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeItem={item => console.log(item.label, item.value)}
                                     items={[{ label: 'item1', value: 'Item1' },
                                     { label: 'item2', value: 'Item2' },]} /> */}
 
-                                <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateTopic(text)}
                                     placeholder="กรอกหัวข้อนัดหมาย"
                                 />
                             </View>
-                        </View>
+                        </View> */}
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        {/* <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>ชื่อแพทย์</Text>
                                 <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
@@ -489,12 +489,12 @@ export default function Meet({ navigation }) {
 
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>วันที่นัดหมาย</Text>
+                                <Text style={tw`font-semibold text-base`}>วันที่นัดหมาย</Text> */}
                                 {/* <TextInput style={tw`flex justify-center h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setDate_meet(text)}
                                     placeholder="YYYY-MM-DD"
                                 /> */}
-                                <View style={tw`h-10 mt-2 w-1/4 border-2 border-purple-500 bg-purple-100 rounded-md`}>
+                                {/* <View style={tw`h-10 mt-2 w-1/4 border-2 border-purple-500 bg-purple-100 rounded-md`}>
                                     <DateTimePicker themeVariant="light" 
                                         testID="dateTimePicker"
                                         value={date}
@@ -506,16 +506,16 @@ export default function Meet({ navigation }) {
                                 </View>
                             </View>
                          
-                        </View>
+                        </View> */}
 
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        {/* <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>เวลา ตั้งแต่</Text>
+                                <Text style={tw`font-semibold text-base`}>เวลา ตั้งแต่</Text> */}
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setTime(text)}
                                     placeholder="กรอกเวลา. . ."
                                 /> */}
-                             <View style={tw`h-10 mt-2 w-20 border-2 border-purple-500 bg-purple-100 rounded-md`}>
+                             {/* <View style={tw`h-10 mt-2 w-20 border-2 border-purple-500 bg-purple-100 rounded-md`}>
                                 <DateTimePicker
                                     testID="dateTimePicker"
                                     value={date}
@@ -525,14 +525,14 @@ export default function Meet({ navigation }) {
                                     onChange={onChangeTime}
                                 />
                             </View>
-                            </View>
-                            <View style={tw`flex flex-col w-1/2 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>ถึง</Text>
+                            </View> */}
+                            {/* <View style={tw`flex flex-col w-1/2 mt-2`}>
+                                <Text style={tw`font-semibold text-base`}>ถึง</Text> */}
                                 {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => setTime_to(text)}
                                     placeholder="กรอกเวลา. . ."
                                 /> */}
-                                 <View style={tw`h-10 mt-2 w-20 border-2 border-purple-500 bg-purple-100 rounded-md`}>
+                                 {/* <View style={tw`h-10 mt-2 w-20 border-2 border-purple-500 bg-purple-100 rounded-md`}>
                                 <DateTimePicker 
                                     testID="dateTimePicker"
                                     value={date2}
@@ -543,16 +543,16 @@ export default function Meet({ navigation }) {
                                 />
                                 </View>
                             </View>
-                        </View>
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                        </View> */}
+                        {/* <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/2 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>ค้นหาชื่อผู้ป่วย</Text>
+                                <Text style={tw`font-semibold text-base`}>ค้นหาชื่อผู้ป่วย</Text> */}
 
                                 {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
                                     onChangeText={text => updateIdPatient(text)}
                                     placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                                 /> */}
-                             <View style={tw`h-10 mt-2 w-11/12`}>
+                             {/* <View style={tw`h-10 mt-2 w-11/12`}>
                                 <Autocomplete
                                     placeholder='โปรดระบุชื่อผู้ป่วย'
                                     value={query_patient}
@@ -592,8 +592,6 @@ export default function Meet({ navigation }) {
                             </View>
                         </View>
 
-
-
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-full mt-2`}>
                                 <Text style={tw`font-semibold text-base`}>รายละเอียดเพิ่มเติม</Text>
@@ -602,7 +600,7 @@ export default function Meet({ navigation }) {
                                     placeholder="กรอกรายละเอียดเพิ่มเติม"
                                 />
                             </View>
-                        </View>
+                        </View> */}
 
                         {/* <View style={tw`flex flex-row justify-end w-full mt-2`}>
                             <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}
@@ -611,7 +609,7 @@ export default function Meet({ navigation }) {
                                 <Text style={tw`text-lg text-black font-bold`}>บันทึก</Text>
                             </TouchableOpacity>
                         </View> */}
-
+{/* 
                         <View style={tw`flex flex-row justify-end w-full mt-4`}>
                             <View style={styles.button}>
                                 <Button
@@ -622,10 +620,48 @@ export default function Meet({ navigation }) {
                                 />
                             </View>
                         </View>
-
                     </View>
                 </KeyboardAwareScrollView>
+            </View> */}
             </View>
+
+            <View style={[tw`flex flex-row w-full justify-evenly items-center`,styles.footer]} >
+            <TouchableOpacity style={[tw``, styles.navbtm]}
+              onPress={() => navigation.navigate('ข้อมูลผู้ป่วย')}
+              title="ข้อมูลผู้ป่วย">
+              <Image source={require("../Icon/Buttom-Nav/icons8-find-user-male-45-W.png")}/>
+              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>ข้อมูลผู้ป่วย</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[tw``, styles.navbtm]}
+              onPress={() => navigation.navigate('ระบบนัดหมาย')}
+              title="ระบบนัดหมาย">
+              <Image source={require("../Icon/Buttom-Nav/icons8-calendar-45-P.png")}/>
+              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontpress]}>นัดหมาย</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[tw``, styles.navbtm]}
+              onPress={() => navigation.navigate('Menu')}
+              title="Menu">
+              <Image source={require("../Icon/Buttom-Nav/icons8-clinic-45-W.png")}/>
+              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>หน้าหลัก</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[tw``, styles.navbtm]}
+              onPress={() => navigation.navigate('บันทึกการให้บริการ')}
+              title="บันทึกการให้บริการ">
+              <Image source={require("../Icon/Buttom-Nav/icons8-cost-45-W.png")}/>
+              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>บันทึกการให้บริการ</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[tw``, styles.navbtm]}
+              onPress={() => navigation.navigate('รายงาน')}
+              title="รายงาน">
+              <Image source={require("../Icon/Buttom-Nav/icons8-test-results-45-W.png")}/>
+              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>รายงาน</Text>
+            </TouchableOpacity>
+        </View>
+
         </View>
 
 
@@ -639,6 +675,81 @@ export default function Meet({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+
+    containertop: {
+        position: "absolute",
+        top: 0,
+      },
+  
+      top: { 
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 155,
+        backgroundColor: '#D7BDE2',
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 2,
+          height: 2,
+        },
+        shadowOpacity: 0.16,
+        shadowRadius: 5.46,
+      },
+  
+      title: {
+        fontSize: 30,
+        color: '#4A235A',
+      },
+  
+      content: {
+          // borderColor: 'black',
+          // borderWidth: 2,
+      },
+  
+      menu: {
+        position: "absolute",
+      //   borderColor: 'black',
+      //   borderWidth: 2,
+        marginTop: 180,
+      },
+  
+      textbox: {
+          backgroundColor: '#EBDEF0',
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 2,
+            height: 2,
+          },
+          shadowOpacity: 0.02,
+          shadowRadius: 5,
+      },
+  
+      font:{
+        color : '#633974',
+      },
+  
+      footer: {
+        position: "absolute",
+        bottom: 0,
+        height: 109,
+        backgroundColor: '#D7BDE2',
+      },
+  
+      navbtm: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start', 
+        alignItems: 'center',
+        width: 130,
+      },
+  
+      fontnormal: {
+        color: '#FFFFFF',
+      },
+  
+      fontpress: {
+        color: '#4A235A'
+      },
 
     button: {
         alignItems: 'flex-end',

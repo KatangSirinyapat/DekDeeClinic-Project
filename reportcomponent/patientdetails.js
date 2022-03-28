@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, Alert, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import RNPickerSelect from "react-native-picker-select";
 import tw from "tailwind-react-native-classnames";
@@ -10,6 +10,7 @@ import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
 
 import { TouchableWithoutFeedback } from 'react-native';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
+import { borderStyle } from "styled-system";
 
 
 
@@ -50,7 +51,7 @@ export default function PatientDetails({ navigation }) {
     }
 
     useEffect(() => {
-      
+
         getDetail()
 
     }, [id]);
@@ -119,10 +120,10 @@ export default function PatientDetails({ navigation }) {
         await axios.get(`${URL_PATIENT}/data/${id}`)
             .then(function (response) {
 
-            
 
-               console.log("count_Susses:" + response.data.num_of_treatments);
-               
+
+                console.log("count_Susses:" + response.data.num_of_treatments);
+
 
             })
             .catch(function (error) {
@@ -134,7 +135,7 @@ export default function PatientDetails({ navigation }) {
         // PrintPatient()
     }
 
-    
+
 
     const postDetail = async () => {
         await axios.post(URL_DETAILS, {
@@ -152,7 +153,7 @@ export default function PatientDetails({ navigation }) {
             .then(function (response) {
                 alert("บันทึกข้อมูลเสร็จสิ้น")
                 count_treatments()
-                
+
 
 
             })
@@ -256,19 +257,17 @@ export default function PatientDetails({ navigation }) {
 
 
     return (
-        <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
-            <View style={tw`flex w-full justify-start items-start ml-16`}>
-                <Button onPress={() => navigation.navigate('รายงาน')} title="< ย้อนกลับ" />
-            </View>
-            <Text style={tw`font-semibold text-2xl mt-6`}>รายละเอียดผู้ป่วย</Text>
+        <View style={tw`flex h-full items-center`}>
 
-            <View style={tw`flex w-3/4 h-4/5`}>
-                <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
-                    <Text style={tw`font-semibold text-xl`}>ค้นหาชื่อผู้ป่วย</Text>
-                    {/* <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
-                        onChangeText={text => updateQuery(text)}
-                        placeholder="กรอกรหัสประจำตัวผู้ป่วย. . .Ex.25640001"
-                    /> */}
+            <View style={[tw`flex w-full justify-center items-center`, styles.containertop]}>
+                <View style={[tw`w-full`, styles.top]}>
+                    <Text style={[tw`font-bold`, styles.title]}>รายละเอียดผู้ป่วย</Text>
+                </View>
+            </View>
+
+            <View style={[tw`w-4/5`, styles.menu]}>
+                <View style={tw`flex flex-row w-full justify-center items-center`}>
+                    <Text style={[tw`font-semibold text-xl`, styles.font]}>ค้นหาชื่อผู้ป่วย</Text>
                     <View style={tw`h-10 w-1/2 pl-2`}>
                         <Autocomplete
                             placeholder='โปรดระบุชื่อผู้ป่วย'
@@ -279,18 +278,14 @@ export default function PatientDetails({ navigation }) {
                             {data_patient.map(renderOption_patient)}
                         </Autocomplete>
                     </View>
-
-                    {/* <TouchableOpacity style={tw`h-10 w-20 rounded-md items-center justify-center ml-2 border-4 border-purple-500 bg-purple-100`}>
-                        <Text style={tw`text-lg text-black font-bold`}>ค้นหา</Text>
-                    </TouchableOpacity> */}
                 </View>
 
-                <KeyboardAwareScrollView style={tw`flex mt-8`}>
-                    <View style={tw`flex flex-col justify-center items-center w-full h-full p-10 rounded-xl border-4 border-black`}>
+                <KeyboardAwareScrollView style={tw``}>
+                    <View style={[tw`flex flex-col justify-evenly items-center p-4 rounded-xl`, styles.content]}>
                         <View style={tw`flex flex-row w-full`}>
                             {/* <View style={tw`flex flex-col w-1/5`}>
                                 <Text style={tw`font-semibold text-base`}>คำนำหน้า</Text>
-                                <View style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2 pt-1`}>
+                                <View style={[tw`h-8 mt-1 w-full rounded-md pl-2 ,styles.textbox]pt-1`}>
                                     <RNPickerSelect
                                         placeholder={{ label: "คำนำหน้า", value: null }}
                                         onValueChange={(value) => setNametitle(value)}
@@ -305,87 +300,83 @@ export default function PatientDetails({ navigation }) {
                                 </View>
                             </View> */}
                             <View style={tw`flex flex-col w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>ชื่อ</Text>
-                                {/* <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md`}
-                                /> */}
-                                <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>ชื่อ</Text>
+
+                                <View style={[tw`flex justify-center h-8 mt-1 w-full rounded-md pl-2`,styles.textshow]}>
                                     <Text>{fname}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/3 pl-7`}>
-                                <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                {/* <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pr-20`}
-                                /> */}
-                                <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>สกุล</Text>
+
+                                <View style={[tw`flex justify-center h-8 mt-1 w-full rounded-md pl-2`,styles.textshow]}>
                                     <Text>{lname}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-1`}>
                             <View style={tw`flex flex-col justify-start w-full`}>
-                                <Text style={tw`font-semibold text-base`}>โรคประจำตัว</Text>
-                                {/* <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                /> */}
-                                <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>โรคประจำตัว</Text>
+
+                                <View style={[tw`flex justify-center h-8 mt-1 w-full rounded-md pl-2`,styles.textshow]}>
                                     <Text>{congenital_disease}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-1`}>
                             <View style={tw`flex flex-col justify-start w-full`}>
-                                <Text style={tw`font-semibold text-base`}>แพ้ยา</Text>
-                                {/* <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                /> */}
-                                <View style={tw`flex justify-center h-8 mt-2 w-full bg-purple-300 rounded-md pl-2`}>
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>แพ้ยา</Text>
+
+                                <View style={[tw`flex justify-center h-8 mt-1 w-full rounded-md pl-2`,styles.textshow]}>
                                     <Text>{drug_allergy}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-1`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>น้ำหนัก</Text>
-                                <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>น้ำหนัก</Text>
+                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
                                     onChangeText={text => setWeight(text)}
                                     value={weight}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>ส่วนสูง</Text>
-                                <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>ส่วนสูง</Text>
+                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
                                     onChangeText={text => setHigh(text)}
                                     value={high}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
-                                <Text style={tw`font-semibold text-base`}>BP</Text>
-                                <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>BP</Text>
+                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
                                     onChangeText={text => setBp(text)}
                                     value={bp}
                                 />
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-1`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>BT</Text>
-                                <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>BT</Text>
+                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
                                     onChangeText={text => setBt(text)}
                                     value={bt}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>PR</Text>
-                                <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>PR</Text>
+                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
                                     onChangeText={text => setPr(text)}
                                     value={pr}
                                 />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
-                                <Text style={tw`font-semibold text-base`}>RR</Text>
-                                <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>RR</Text>
+                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
                                     onChangeText={text => setRr(text)}
                                     value={rr}
 
@@ -393,10 +384,10 @@ export default function PatientDetails({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                        <View style={tw`flex flex-row justify-between w-full mt-1`}>
                             <View style={tw`flex flex-col justify-start w-full`}>
-                                <Text style={tw`font-semibold text-base`}>อาการที่มาพบแพทย์</Text>
-                                <TextInput style={tw`h-8 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>อาการที่มาพบแพทย์</Text>
+                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
                                     onChangeText={text => setSymptom(text)}
                                     value={symptom}
                                 />
@@ -404,17 +395,13 @@ export default function PatientDetails({ navigation }) {
                         </View>
 
                         <View style={tw`flex flex-row mt-4 justify-end w-full`}>
-                            {/* <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}
-                            >
-                                <Text style={tw`text-lg text-black font-bold`}>แก้ไข</Text>
-                            </TouchableOpacity> */}
+
 
                             <View style={styles.button}>
                                 <Button
                                     onPress={postDetail}
-                                    color="black"
+                                    color="#4A235A"
                                     title="บันทึก"
-                                    accessibilityLabel="Learn more about this purple button"
                                 />
                             </View>
 
@@ -422,6 +409,43 @@ export default function PatientDetails({ navigation }) {
 
                     </View>
                 </KeyboardAwareScrollView>
+            </View>
+
+            <View style={[tw`flex flex-row w-full justify-evenly items-center`, styles.footer]} >
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('ข้อมูลผู้ป่วย')}
+                    title="ข้อมูลผู้ป่วย">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-find-user-male-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>ข้อมูลผู้ป่วย</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('ระบบนัดหมาย')}
+                    title="ระบบนัดหมาย">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-calendar-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>นัดหมาย</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('Menu')}
+                    title="Menu">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-clinic-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>หน้าหลัก</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('บันทึกการให้บริการ')}
+                    title="บันทึกการให้บริการ">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-cost-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>บันทึกการให้บริการ</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('รายงาน')}
+                    title="รายงาน">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-test-results-45-P.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontpress]}>รายงาน</Text>
+                </TouchableOpacity>
             </View>
         </View>
 
@@ -433,16 +457,107 @@ export default function PatientDetails({ navigation }) {
 
 const styles = StyleSheet.create({
 
+    containertop: {
+        position: 'absolute',
+        top: 0,
+    },
+
+    top: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 155,
+        backgroundColor: '#D7BDE2',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.16,
+        shadowRadius: 5.46,
+    },
+
+    title: {
+        fontSize: 30,
+        color: '#4A235A',
+    },
+
+    content: {
+        // borderColor: 'black',
+        // borderWidth: 2,
+        height: 500,
+        marginBottom: 0
+    },
+
+    menu: {
+        position: "absolute",
+        //   borderColor: 'black',
+        //   borderWidth: 2,
+        marginTop: 180,
+        height: 630
+    },
+    textshow: {
+        backgroundColor: '#EBDEF0',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.02,
+        shadowRadius: 5,
+    },
+
+    textbox: {
+        backgroundColor: '#EBDEF0',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.02,
+        shadowRadius: 5,
+        borderColor: '#633974',
+        borderWidth: 1,
+    },
+
+    font: {
+        color: '#633974',
+    },
+
+    footer: {
+        position: "absolute",
+        bottom: 0,
+        height: 109,
+        backgroundColor: '#D7BDE2',
+    },
+
+    navbtm: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: 130,
+    },
+
+    fontnormal: {
+        color: '#FFFFFF',
+    },
+
+    fontpress: {
+        color: '#4A235A'
+    },
+
     button: {
         alignItems: 'flex-end',
         justifyContent: 'center',
         paddingHorizontal: 30,
         borderRadius: 4,
         elevation: 10,
-        backgroundColor: '#FBCFE8',
-        borderWidth: 4,
-        borderColor: "#EF4444",
+        backgroundColor: '#EBDEF0',
+        borderWidth: 2,
+        borderColor: "#4A235A",
         marginLeft: 12,
+        
 
     },
 });
