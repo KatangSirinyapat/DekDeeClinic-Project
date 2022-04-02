@@ -136,31 +136,31 @@ export default function Register({ navigation }) {
 
             <View style={[tw`flex flex-row flex-wrap w-4/5 justify-evenly items-center`, styles.menu]}>
                 <KeyboardAwareScrollView style={tw``}>
-                    <View style={[tw`flex flex-col justify-evenly items-center p-4 rounded-xl mt-2`, styles.content]}>
+                    <View style={[tw`flex flex-col justify-evenly items-center p-4 rounded-xl`, styles.content]}>
                         <View style={tw`flex flex-row justify-between w-full`}>
                             <View style={tw`flex flex-col w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>ชื่อ</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อ</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setfname(text)} />
                             </View>
                             <View style={tw`flex flex-col w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>สกุล</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setlname(text)} />
                             </View>
                             <View style={tw`flex flex-col w-1/4`}>
-                                <Text style={tw`font-semibold text-base`}>เลขประจำตัวผู้ป่วย</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>เลขประจำตัวผู้ป่วย</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setClinic_number(text)} />
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-6`}>
                             <View style={tw`flex flex-col w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>วันเกิด</Text>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>วันเกิด</Text>
                                 {/* <TextInput 
                                     onChangeText={(text) => setbod(text)} /> */}
-                                <View style={[tw`h-8 mt-1 w-2/5 rounded-md`,styles.textbox]}>
+                                <View style={[tw`h-9 mt-1 w-2/5 rounded-md`, styles.textbox]}>
                                     <DateTimePicker themeVariant="light"
                                         testID="dateTimePicker"
                                         value={date}
@@ -173,18 +173,18 @@ export default function Register({ navigation }) {
 
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>อายุ</Text>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>อายุ</Text>
                                 {/* <TextInput 
                                     onChangeText={(text) => setage(text)} /> */}
-                                <View style={[tw`h-8 mt-1 w-3/4 rounded-md pl-2`,styles.textbox]}>
-                                    <Text style={tw`mt-1`}>{age} ปี</Text>
+                                <View style={[tw`h-9 mt-1 w-3/4 rounded-md pl-2`, styles.textbox]}>
+                                    <Text style={tw`mt-2`}>{age} ปี</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
-                                <Text style={tw`font-semibold text-base`}>เพศ</Text>
-                                {/* <TextInput sty[le={tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>เพศ</Text>
+                                {/* <TextInput sty[le={tw`h-9 mt-1 w-full rounded-md pl-2`,styles.textbox]}
                           onChangeText={(text) => setgender(text)}/> */}
-                                <View style={[tw`h-8 mt-1 w-full rounded-md pl-2 pt-2`,styles.textbox]}>
+                                <View style={[tw`h-9 mt-1 w-full rounded-md pl-2 pt-2`, styles.textbox]}>
                                     <RNPickerSelect
                                         placeholder={{ label: "เลือกเพศ", value: null }}
                                         onValueChange={(value) => setgender(value)}
@@ -199,10 +199,10 @@ export default function Register({ navigation }) {
 
                         <View style={tw`flex flex-row justify-between w-full mt-6`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>ประวัติการแพ้ยา</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ประวัติการแพ้ยา</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setdrug_allergy(text)} />
-                                {/* <View style={tw`h-8 mt-1 w-full rounded-md pl-2 py-2`}>
+                                {/* <View style={tw`h-9 mt-1 w-full rounded-md pl-2 py-2`}>
                                     <RNPickerSelect
                                         placeholder={{ label: "ประวัติการแพ้ยา", value: null }}
                                         onValueChange={(value) => setdrug_allergy(value)}
@@ -214,10 +214,10 @@ export default function Register({ navigation }) {
                                 </View> */}
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>ประวัติโรคประจำตัว</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ประวัติโรคประจำตัว</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setcongenital_disease(text)} />
-                                {/* <View style={tw`h-8 mt-1 w-full rounded-md pl-2 py-2`}>
+                                {/* <View style={tw`h-9 mt-1 w-full rounded-md pl-2 py-2`}>
                                     <RNPickerSelect
                                         placeholder={{ label: "โรคประจำตัว", value: null }}
                                         onValueChange={(value) => setcongenital_disease(value)}
@@ -229,62 +229,62 @@ export default function Register({ navigation }) {
                                 </View> */}
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
-                                <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>เบอร์โทรศัพท์</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => settelephone(text)} />
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-6`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>ที่อยู่ บ้านเลขที่</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-2/5 rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ที่อยู่ บ้านเลขที่</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-2/5 rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => sethome_no(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>หมู่ที่</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-3/4 rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>หมู่ที่</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-3/4 rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setmoo(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
-                                <Text style={tw`font-semibold text-base`}>ตรอก/ซอก/ซอย</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ตรอก/ซอก/ซอย</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setsoi(text)} />
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-6`}>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>ตำบล</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-3/4 rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ตำบล</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-3/4 rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setsubdistrict(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>อำเภอ</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-3/4 rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>อำเภอ</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-3/4 rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setDistric(text)} />
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
-                                <Text style={tw`font-semibold text-base`}>จังหวัด</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>จังหวัด</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setprovince(text)} />
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-6`}>
                             <View style={tw`flex flex-col w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>ชื่อผู้ปกครอง</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อผู้ปกครอง</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setfname_parent(text)} />
                             </View>
                             <View style={tw`flex flex-col w-1/3`}>
-                                <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                <TextInput style={[tw`h-8 mt-1 w-full rounded-md pl-2`,styles.textbox]}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>สกุล</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setlname_parent(text)} />
                             </View>
                             <View style={tw`flex flex-col w-1/4`}>
-                                <Text style={tw`font-semibold text-base`}>ความสัมพันธ์กับผู้ป่วย</Text>
-                                <View style={[tw`h-8 mt-1 w-full rounded-md pl-2 pt-2`,styles.textbox]}>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ความสัมพันธ์กับผู้ป่วย</Text>
+                                <View style={[tw`h-9 mt-1 w-full rounded-md pl-2 pt-2`, styles.textbox]}>
                                     <RNPickerSelect
                                         placeholder={{ label: "ความสัมพันธ์กับผู้ป่วย", value: null }}
                                         onValueChange={(value) => setrelation(value)}
@@ -297,14 +297,24 @@ export default function Register({ navigation }) {
                                 </View>
                             </View>
                         </View>
-
                         <View style={tw`flex flex-row mt-8 justify-end w-full`}>
-                            <TouchableOpacity style={[tw`h-12 rounded-md items-center justify-center`,styles.button]}
+                            <View style={styles.button}>
+                                <Button
+                                    onPress={postPatient}
+                                    color="#4A235A"
+                                    title="บันทึก"
+                                />
+                            </View>
+                        </View>
+
+
+                        {/* <View style={tw`flex flex-row mt-8 justify-end w-full`}>
+                            <TouchableOpacity style={[tw`h-12 rounded-md items-center justify-center`, styles.button]}
                                 onPress={postPatient}>
                                 <Text style={tw`text-lg text-black font-bold`}>บันทึก</Text>
                             </TouchableOpacity>
-                            {/* <Button title="บันทึก" onPress={postPatient}></Button> */}
-                        </View>
+                            <Button title="บันทึก" onPress={postPatient}></Button>
+                        </View> */}
 
                     </View>
                 </KeyboardAwareScrollView>
@@ -389,10 +399,10 @@ const styles = StyleSheet.create({
 
     menu: {
         position: "absolute",
-        //   borderColor: 'black',
-        //   borderWidth: 2,
-        marginTop: 180,
-        height: 630
+        // borderColor: 'black',
+        // borderWidth: 2,
+        marginTop: 185,
+        // height: 630
     },
     textshow: {
         backgroundColor: '#EBDEF0',

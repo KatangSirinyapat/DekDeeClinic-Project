@@ -37,7 +37,7 @@ export default function AnnualReport({ navigation }) {
 
         <View style={[tw`flex w-full justify-center items-center`,styles.containertop]}> 
           <View style={[tw`w-full`,styles.top]}>
-            <Text style={[tw`font-bold`,styles.title]}>สรุปนัดหมาย</Text> 
+            <Text style={[tw`font-bold`,styles.title]}>สรุปรายปี</Text> 
           </View>
         </View>
 

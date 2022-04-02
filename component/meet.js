@@ -423,255 +423,207 @@ export default function Meet({ navigation }) {
     return (
         <View style={tw`flex h-full items-center`}>
 
-        <View style={[tw`flex w-full justify-center items-center`,styles.containertop]}> 
-          <View style={[tw`w-full`,styles.top]}>
-            <Text style={[tw`font-bold`,styles.title]}>นัดหมายผู้ป่วย</Text> 
-          </View>
+            <View style={[tw`flex w-full justify-center items-center`, styles.containertop]}>
+                <View style={[tw`w-full`, styles.top]}>
+                    <Text style={[tw`font-bold`, styles.title]}>นัดหมายผู้ป่วย</Text>
+                </View>
 
 
-            {/* <View style={tw`flex w-11/12 h-4/5`}>
-                <KeyboardAwareScrollView style={tw`flex mt-1`}>
-                    <View style={tw`flex flex-col justify-around items-start w-full h-full p-4 rounded-xl border-4 border-black`}>
-                        <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>แพทย์ที่นัดหมาย</Text> */}
-
-
-                                {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={text => updateQuery(text)}
-                                    placeholder="กรอกรหัสประจำตัวแพทย์. . ."
-                                /> */}
-                                {/* <View style={tw`h-10 mt-2 w-11/12`}>
-                                    <Autocomplete
-                                        placeholder='โปรดระบุชื่อแพทย์'
-                                        value={query}
-                                        onChangeText={onChangeText}
-                                        accessoryRight={renderCloseIcon}
-                                        onSelect={onSelect}>
-                                        {data.map(renderOption)}
-                                    </Autocomplete>
+                <View style={[tw`flex flex-row flex-wrap w-4/5 justify-evenly items-center`, styles.menu]}>
+                    <KeyboardAwareScrollView style={tw``}>
+                        <View style={[tw`flex flex-col justify-evenly items-center p-4 rounded-xl`, styles.content]}>
+                            <View style={tw`flex flex-row justify-between w-full mt-1`}>
+                                <View style={tw`flex flex-col w-1/2`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>แพทย์ที่นัดหมาย</Text>
+                                    <View style={tw`h-9 mt-1 w-11/12`}>
+                                        <Autocomplete
+                                            style={styles.textbox}
+                                            placeholder='โปรดระบุชื่อแพทย์'
+                                            value={query}
+                                            onChangeText={onChangeText}
+                                            accessoryRight={renderCloseIcon}
+                                            onSelect={onSelect}>
+                                            {data.map(renderOption)}
+                                        </Autocomplete>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>หัวข้อในการนัดหมาย</Text> */}
-                                {/* <TextInput style={tw`h-10 mt-2 w-5/6 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}/> */}
-                                {/* <DropDownPicker style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeItem={item => console.log(item.label, item.value)}
-                                    items={[{ label: 'item1', value: 'Item1' },
-                                    { label: 'item2', value: 'Item2' },]} /> */}
-
-                                {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={text => updateTopic(text)}
-                                    placeholder="กรอกหัวข้อนัดหมาย"
-                                />
-                            </View>
-                        </View> */}
-
-                        {/* <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>ชื่อแพทย์</Text>
-                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
-                                    <Text style={tw`text-base`}>
-                                        {fname_doctor}
-                                    </Text>
-
-                                </View>
-                            </View>
-                            <View style={tw`flex flex-col w-1/2 mt-2 `}>
-                                <Text style={tw`font-semibold text-base`}>สกุลแพทย์</Text>
-                                <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-100 rounded-md pl-2`}>
-                                    <Text style={tw`text-base`}>
-                                        {lname_doctor}
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-
-                        <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>วันที่นัดหมาย</Text> */}
-                                {/* <TextInput style={tw`flex justify-center h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={text => setDate_meet(text)}
-                                    placeholder="YYYY-MM-DD"
-                                /> */}
-                                {/* <View style={tw`h-10 mt-2 w-1/4 border-2 border-purple-500 bg-purple-100 rounded-md`}>
-                                    <DateTimePicker themeVariant="light" 
-                                        testID="dateTimePicker"
-                                        value={date}
-                                        mode={'date'}
-                                        is24Hour={true}
-                                        display="default"
-                                        onChange={onChange}
+                                <View style={tw`flex flex-col w-1/2`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>หัวข้อในการนัดหมาย</Text>
+                                    <TextInput style={[tw`h-10 mt-1 w-full pl-2`, styles.textbox]}
+                                        onChangeText={text => updateTopic(text)}
+                                        placeholder="กรอกหัวข้อนัดหมาย"
                                     />
                                 </View>
                             </View>
-                         
-                        </View> */}
 
-                        {/* <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>เวลา ตั้งแต่</Text> */}
-                                {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={text => setTime(text)}
-                                    placeholder="กรอกเวลา. . ."
-                                /> */}
-                             {/* <View style={tw`h-10 mt-2 w-20 border-2 border-purple-500 bg-purple-100 rounded-md`}>
-                                <DateTimePicker
-                                    testID="dateTimePicker"
-                                    value={date}
-                                    mode={'time'}
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={onChangeTime}
-                                />
-                            </View>
-                            </View> */}
-                            {/* <View style={tw`flex flex-col w-1/2 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>ถึง</Text> */}
-                                {/* <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={text => setTime_to(text)}
-                                    placeholder="กรอกเวลา. . ."
-                                /> */}
-                                 {/* <View style={tw`h-10 mt-2 w-20 border-2 border-purple-500 bg-purple-100 rounded-md`}>
-                                <DateTimePicker 
-                                    testID="dateTimePicker"
-                                    value={date2}
-                                    mode={'time'}
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={onChangeTime_to}
-                                />
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อแพทย์</Text>
+                                    <View style={[tw`flex justify-center h-10 mt-1 w-11/12 pl-2`, styles.textshow]}>
+                                        <Text style={tw`text-base`}>
+                                            {fname_doctor}
+                                        </Text>
+
+                                    </View>
+                                </View>
+                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>สกุลแพทย์</Text>
+                                    <View style={[tw`flex justify-center h-10 mt-1 w-full pl-2`, styles.textshow]}>
+                                        <Text style={tw`text-base`}>
+                                            {lname_doctor}
+                                        </Text>
+                                    </View>
                                 </View>
                             </View>
-                        </View> */}
-                        {/* <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>ค้นหาชื่อผู้ป่วย</Text> */}
 
-                                {/* <TextInput style={tw`h-10 mt-2 w-11/12 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={text => updateIdPatient(text)}
-                                    placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
-                                /> */}
-                             {/* <View style={tw`h-10 mt-2 w-11/12`}>
-                                <Autocomplete
-                                    placeholder='โปรดระบุชื่อผู้ป่วย'
-                                    value={query_patient}
-                                    onChangeText={onChangeText_patient}
-                                    accessoryRight={renderCloseIcon_patient}
-                                    onSelect={onSelect_patient}>
-                                    {data_patient.map(renderOption_patient)}
-                                </Autocomplete>
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่นัดหมาย</Text>
+                                    <View style={[tw`h-10 mt-1 w-1/4`, styles.textbox]}>
+                                        <DateTimePicker themeVariant="light"
+                                            testID="dateTimePicker"
+                                            value={date}
+                                            mode={'date'}
+                                            is24Hour={true}
+                                            display="default"
+                                            onChange={onChange}
+                                        />
+                                    </View>
+                                </View>
+                                <View style={tw`flex flex-col mt-1`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>เวลา ตั้งแต่</Text>
+                                    <View style={[tw`h-10 mt-1 w-20`, styles.textbox]}>
+                                        <DateTimePicker
+                                            testID="dateTimePicker"
+                                            value={date}
+                                            mode={'time'}
+                                            is24Hour={true}
+                                            display="default"
+                                            onChange={onChangeTime}
+                                        />
+                                    </View>
+                                </View>
+                                <View style={tw`flex flex-col w-1/2 mt-1 ml-8`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ถึง</Text>
+                                    <View style={[tw`h-10 mt-1 w-20`, styles.textbox]}>
+                                        <DateTimePicker
+                                            testID="dateTimePicker"
+                                            value={date2}
+                                            mode={'time'}
+                                            is24Hour={true}
+                                            display="default"
+                                            onChange={onChangeTime_to}
+                                        />
+                                    </View>
+                                </View>
                             </View>
+
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค้นหาชื่อผู้ป่วย</Text>
+                                    <View style={tw`h-10 mt-1 w-11/12`}>
+                                        <Autocomplete
+                                            style={styles.textbox}
+                                            placeholder='โปรดระบุชื่อผู้ป่วย'
+                                            value={query_patient}
+                                            onChangeText={onChangeText_patient}
+                                            accessoryRight={renderCloseIcon_patient}
+                                            onSelect={onSelect_patient}>
+                                            {data_patient.map(renderOption_patient)}
+                                        </Autocomplete>
+                                    </View>
+                                </View>
+                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>เบอร์ติดต่อ</Text>
+                                    <View style={[tw`flex justify-center h-10 mt-1 w-full pl-2`, styles.textshow]} >
+                                        <Text style={tw`text-base`}>
+                                            {telephone_patient}
+                                        </Text>
+                                    </View>
+                                </View>
                             </View>
-                            <View style={tw`flex flex-col w-1/2 mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>เบอร์ติดต่อ</Text>
-                                <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-100 rounded-md pl-2`} >
-                                    <Text style={tw`text-base`}>
-                                        {telephone_patient}
-                                    </Text>
+
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อผู้ป่วย</Text>
+                                    <View style={[tw`flex justify-center h-10 mt-1 w-11/12 pl-2`, styles.textshow]} >
+                                        <Text style={tw`text-base`}>
+                                            {fname_patient}
+                                        </Text>
+                                    </View>
+                                </View>
+                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>สกุลผู้ป่วย</Text>
+                                    <View style={[tw`flex justify-center h-10 mt-1 w-full pl-2`, styles.textshow]} >
+                                        <Text style={tw`text-base`}>
+                                            {lname_patient}
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+
+                            <View style={tw`flex flex-row justify-between w-full my-2`}>
+                                <View style={tw`flex flex-col w-full mt-1`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>รายละเอียดเพิ่มเติม</Text>
+                                    <TextInput style={[tw`h-10 mt-1 w-full pl-2`, styles.textbox]}
+                                        onChangeText={text => setDetails(text)}
+                                        placeholder="กรอกรายละเอียดเพิ่มเติม"
+                                    />
+                                </View>
+                            </View>
+                            <View style={tw`flex flex-row justify-end w-full mt-2`}>
+                                <View style={styles.button}>
+                                    <Button
+                                        onPress={postmeet}
+                                        color="#4A235A"
+                                        title="บันทึก"
+                                    />
                                 </View>
                             </View>
                         </View>
-
-                        <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`mt-2 font-semibold text-base`}>ชื่อผู้ป่วย</Text>
-                                <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`} >
-                                    <Text style={tw`text-base`}>
-                                        {fname_patient}
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base mt-2`}>สกุลผู้ป่วย</Text>
-                                <View style={tw`flex justify-center h-10 mt-2 w-full bg-purple-100 rounded-md pl-2`} >
-                                    <Text style={tw`text-base`}>
-                                        {lname_patient}
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-
-                        <View style={tw`flex flex-row justify-between w-full`}>
-                            <View style={tw`flex flex-col w-full mt-2`}>
-                                <Text style={tw`font-semibold text-base`}>รายละเอียดเพิ่มเติม</Text>
-                                <TextInput style={tw`h-10 mt-2 w-full border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
-                                    onChangeText={text => setDetails(text)}
-                                    placeholder="กรอกรายละเอียดเพิ่มเติม"
-                                />
-                            </View>
-                        </View> */}
-
-                        {/* <View style={tw`flex flex-row justify-end w-full mt-2`}>
-                            <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}
-                                onPress={postmeet}
-                            >
-                                <Text style={tw`text-lg text-black font-bold`}>บันทึก</Text>
-                            </TouchableOpacity>
-                        </View> */}
-{/* 
-                        <View style={tw`flex flex-row justify-end w-full mt-4`}>
-                            <View style={styles.button}>
-                                <Button
-                                    onPress={postmeet}
-                                    color="black"
-                                    title="บันทึก"
-
-                                />
-                            </View>
-                        </View>
-                    </View>
-                </KeyboardAwareScrollView>
-            </View> */}
+                    </KeyboardAwareScrollView>
+                </View>
             </View>
 
-            <View style={[tw`flex flex-row w-full justify-evenly items-center`,styles.footer]} >
-            <TouchableOpacity style={[tw``, styles.navbtm]}
-              onPress={() => navigation.navigate('ข้อมูลผู้ป่วย')}
-              title="ข้อมูลผู้ป่วย">
-              <Image source={require("../Icon/Buttom-Nav/icons8-find-user-male-45-W.png")}/>
-              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>ข้อมูลผู้ป่วย</Text>
-            </TouchableOpacity>
+            <View style={[tw`flex flex-row w-full justify-evenly items-center`, styles.footer]} >
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('ข้อมูลผู้ป่วย')}
+                    title="ข้อมูลผู้ป่วย">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-find-user-male-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>ข้อมูลผู้ป่วย</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={[tw``, styles.navbtm]}
-              onPress={() => navigation.navigate('ระบบนัดหมาย')}
-              title="ระบบนัดหมาย">
-              <Image source={require("../Icon/Buttom-Nav/icons8-calendar-45-P.png")}/>
-              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontpress]}>นัดหมาย</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('ระบบนัดหมาย')}
+                    title="ระบบนัดหมาย">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-calendar-45-P.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontpress]}>นัดหมาย</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={[tw``, styles.navbtm]}
-              onPress={() => navigation.navigate('Menu')}
-              title="Menu">
-              <Image source={require("../Icon/Buttom-Nav/icons8-clinic-45-W.png")}/>
-              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>หน้าหลัก</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('Menu')}
+                    title="Menu">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-clinic-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>หน้าหลัก</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={[tw``, styles.navbtm]}
-              onPress={() => navigation.navigate('บันทึกการให้บริการ')}
-              title="บันทึกการให้บริการ">
-              <Image source={require("../Icon/Buttom-Nav/icons8-cost-45-W.png")}/>
-              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>บันทึกการให้บริการ</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('บันทึกการให้บริการ')}
+                    title="บันทึกการให้บริการ">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-cost-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>บันทึกการให้บริการ</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={[tw``, styles.navbtm]}
-              onPress={() => navigation.navigate('รายงาน')}
-              title="รายงาน">
-              <Image source={require("../Icon/Buttom-Nav/icons8-test-results-45-W.png")}/>
-              <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`,styles.fontnormal]}>รายงาน</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('รายงาน')}
+                    title="รายงาน">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-test-results-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>รายงาน</Text>
+                </TouchableOpacity>
+            </View>
+
         </View>
-
-        </View>
-
-
-
-
     );
-
-
-
-
 }
 
 const styles = StyleSheet.create({
@@ -679,9 +631,9 @@ const styles = StyleSheet.create({
     containertop: {
         position: "absolute",
         top: 0,
-      },
-  
-      top: { 
+    },
+
+    top: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -689,67 +641,81 @@ const styles = StyleSheet.create({
         backgroundColor: '#D7BDE2',
         shadowColor: "#000",
         shadowOffset: {
-          width: 2,
-          height: 2,
+            width: 2,
+            height: 2,
         },
         shadowOpacity: 0.16,
         shadowRadius: 5.46,
-      },
-  
-      title: {
+    },
+
+    title: {
         fontSize: 30,
         color: '#4A235A',
-      },
-  
-      content: {
-          // borderColor: 'black',
-          // borderWidth: 2,
-      },
-  
-      menu: {
-        position: "absolute",
-      //   borderColor: 'black',
-      //   borderWidth: 2,
-        marginTop: 180,
-      },
-  
-      textbox: {
-          backgroundColor: '#EBDEF0',
-          shadowColor: "#000",
-          shadowOffset: {
+    },
+
+    content: {
+        // borderColor: 'black',
+        // borderWidth: 2,
+    },
+
+    menu: {
+        // borderColor: 'black',
+        // borderWidth: 2,
+
+    },
+
+    textshow: {
+        backgroundColor: '#EBDEF0',
+        shadowColor: "#000",
+        shadowOffset: {
             width: 2,
             height: 2,
-          },
-          shadowOpacity: 0.02,
-          shadowRadius: 5,
-      },
-  
-      font:{
-        color : '#633974',
-      },
-  
-      footer: {
+        },
+        shadowOpacity: 0.02,
+        shadowRadius: 5,
+        borderRadius: 6,
+    },
+
+    textbox: {
+        backgroundColor: '#EBDEF0',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.02,
+        shadowRadius: 5,
+        borderColor: '#633974',
+        borderWidth: 1,
+        borderRadius: 6,
+    },
+
+    font: {
+        color: '#633974',
+    },
+
+    footer: {
         position: "absolute",
         bottom: 0,
         height: 109,
         backgroundColor: '#D7BDE2',
-      },
-  
-      navbtm: {
+    },
+
+    navbtm: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-start', 
+        justifyContent: 'flex-start',
         alignItems: 'center',
         width: 130,
-      },
-  
-      fontnormal: {
+    },
+
+    fontnormal: {
         color: '#FFFFFF',
-      },
-  
-      fontpress: {
+    },
+
+    fontpress: {
         color: '#4A235A'
-      },
+    },
 
     button: {
         alignItems: 'flex-end',
@@ -757,10 +723,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         borderRadius: 4,
         elevation: 10,
-        backgroundColor: '#FBCFE8',
-        borderWidth: 4,
-        borderColor: "#EF4444",
+        backgroundColor: '#EBDEF0',
+        borderWidth: 2,
+        borderColor: "#4A235A",
         marginLeft: 12,
-
-    },
+    }
 });
