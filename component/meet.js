@@ -429,13 +429,13 @@ export default function Meet({ navigation }) {
                 </View>
 
 
-                <View style={[tw`flex flex-row flex-wrap w-4/5 justify-evenly items-center`, styles.menu]}>
+                <View style={[tw`flex flex-row flex-wrap w-4/5`, styles.menu]}>
                     <KeyboardAwareScrollView style={tw``}>
                         <View style={[tw`flex flex-col justify-evenly items-center p-4 rounded-xl`, styles.content]}>
-                            <View style={tw`flex flex-row justify-between w-full mt-1`}>
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
                                 <View style={tw`flex flex-col w-1/2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>แพทย์ที่นัดหมาย</Text>
-                                    <View style={tw`h-9 mt-1 w-11/12`}>
+                                    <View style={tw`h-10 mt-1 w-11/12`}>
                                         <Autocomplete
                                             style={styles.textbox}
                                             placeholder='โปรดระบุชื่อแพทย์'
@@ -457,7 +457,7 @@ export default function Meet({ navigation }) {
                             </View>
 
                             <View style={tw`flex flex-row justify-between w-full mt-2`}>
-                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                <View style={tw`flex flex-col w-1/2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อแพทย์</Text>
                                     <View style={[tw`flex justify-center h-10 mt-1 w-11/12 pl-2`, styles.textshow]}>
                                         <Text style={tw`text-base`}>
@@ -466,7 +466,7 @@ export default function Meet({ navigation }) {
 
                                     </View>
                                 </View>
-                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                <View style={tw`flex flex-col w-1/2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>สกุลแพทย์</Text>
                                     <View style={[tw`flex justify-center h-10 mt-1 w-full pl-2`, styles.textshow]}>
                                         <Text style={tw`text-base`}>
@@ -477,7 +477,7 @@ export default function Meet({ navigation }) {
                             </View>
 
                             <View style={tw`flex flex-row justify-between w-full mt-2`}>
-                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                <View style={tw`flex flex-col w-1/2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่นัดหมาย</Text>
                                     <View style={[tw`h-10 mt-1 w-1/4`, styles.textbox]}>
                                         <DateTimePicker themeVariant="light"
@@ -490,7 +490,7 @@ export default function Meet({ navigation }) {
                                         />
                                     </View>
                                 </View>
-                                <View style={tw`flex flex-col mt-1`}>
+                                <View style={tw`flex flex-col`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>เวลา ตั้งแต่</Text>
                                     <View style={[tw`h-10 mt-1 w-20`, styles.textbox]}>
                                         <DateTimePicker
@@ -503,7 +503,7 @@ export default function Meet({ navigation }) {
                                         />
                                     </View>
                                 </View>
-                                <View style={tw`flex flex-col w-1/2 mt-1 ml-8`}>
+                                <View style={tw`flex flex-col w-1/2 ml-8`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>ถึง</Text>
                                     <View style={[tw`h-10 mt-1 w-20`, styles.textbox]}>
                                         <DateTimePicker
@@ -519,7 +519,7 @@ export default function Meet({ navigation }) {
                             </View>
 
                             <View style={tw`flex flex-row justify-between w-full mt-2`}>
-                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                <View style={tw`flex flex-col w-1/2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>ค้นหาชื่อผู้ป่วย</Text>
                                     <View style={tw`h-10 mt-1 w-11/12`}>
                                         <Autocomplete
@@ -533,7 +533,7 @@ export default function Meet({ navigation }) {
                                         </Autocomplete>
                                     </View>
                                 </View>
-                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                <View style={tw`flex flex-col w-1/2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>เบอร์ติดต่อ</Text>
                                     <View style={[tw`flex justify-center h-10 mt-1 w-full pl-2`, styles.textshow]} >
                                         <Text style={tw`text-base`}>
@@ -544,7 +544,7 @@ export default function Meet({ navigation }) {
                             </View>
 
                             <View style={tw`flex flex-row justify-between w-full mt-2`}>
-                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                <View style={tw`flex flex-col w-1/2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อผู้ป่วย</Text>
                                     <View style={[tw`flex justify-center h-10 mt-1 w-11/12 pl-2`, styles.textshow]} >
                                         <Text style={tw`text-base`}>
@@ -552,7 +552,7 @@ export default function Meet({ navigation }) {
                                         </Text>
                                     </View>
                                 </View>
-                                <View style={tw`flex flex-col w-1/2 mt-1`}>
+                                <View style={tw`flex flex-col w-1/2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>สกุลผู้ป่วย</Text>
                                     <View style={[tw`flex justify-center h-10 mt-1 w-full pl-2`, styles.textshow]} >
                                         <Text style={tw`text-base`}>
@@ -563,7 +563,7 @@ export default function Meet({ navigation }) {
                             </View>
 
                             <View style={tw`flex flex-row justify-between w-full my-2`}>
-                                <View style={tw`flex flex-col w-full mt-1`}>
+                                <View style={tw`flex flex-col w-full`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>รายละเอียดเพิ่มเติม</Text>
                                     <TextInput style={[tw`h-10 mt-1 w-full pl-2`, styles.textbox]}
                                         onChangeText={text => setDetails(text)}

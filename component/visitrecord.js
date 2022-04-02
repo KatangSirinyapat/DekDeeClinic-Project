@@ -333,13 +333,11 @@ export default function VisitRecord({ navigation }) {
                     <Text style={[tw`font-bold`, styles.title]}>บันทึกการให้บริการ</Text>
                 </View>
 
-                {/* <View style={tw`flex w-11/12 h-4/5`}>
-                    <KeyboardAwareScrollView style={tw`flex mt-1`}>
-                        <View style={tw`flex flex-col justify-between items-start w-full h-full p-4 rounded-xl border-4 border-black`}>
-                            <View style={tw`flex flex-row w-full justify-end items-center pl-36`}>
-                                <Text style={tw`font-semibold text-base`}>วันที่</Text>
-
-
+                <View style={[tw`flex flex-row flex-wrap w-4/5`, styles.menu]}>
+                    <KeyboardAwareScrollView style={tw``}>
+                        <View style={[tw`flex flex-col justify-evenly items-center p-4 rounded-xl mt-1`, styles.content]}>
+                            {/* <View style={tw`flex flex-row w-full justify-end items-center pl-36`}>
+                                <Text style={[tw`font-semibold text-base`,styles.font]}>วันที่</Text>
                                 <DateTimePicker themeVariant="light" style={tw`h-10 w-1/4 ml-2`}
                                     testID="dateTimePicker"
                                     value={date1}
@@ -348,12 +346,12 @@ export default function VisitRecord({ navigation }) {
                                     display="default"
                                     onChange={onChange}
                                 />
-
                             </View>
+
 
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col w-1/4 mt-2`}>
-                                    <Text style={tw`font-semibold text-base`}>รายชื่อแพทย์</Text>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>รายชื่อแพทย์</Text>
 
                                     <Autocomplete style={tw`h-10 mt-2`}
                                         placeholder='โปรดระบุชื่อแพทย์'
@@ -367,7 +365,7 @@ export default function VisitRecord({ navigation }) {
 
                                 </View>
                                 <View style={tw`flex flex-col w-1/4 mt-2`}>
-                                    <Text style={tw`font-semibold text-base`}>ค้นหาชื่อผู้ป่วย</Text>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ค้นหาชื่อผู้ป่วย</Text>
 
                                     <Autocomplete style={tw`h-10 mt-2`}
                                         placeholder='โปรดระบุชื่อผู้ป่วย'
@@ -381,12 +379,53 @@ export default function VisitRecord({ navigation }) {
 
                                 </View>
 
+                            </View> */}
+
+                            <View style={tw`flex flex-row justify-between w-full`}>
+                                <View style={tw`flex flex-col w-1/3 mt-2`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่</Text>
+                                    <View style={[tw`flex h-10 mt-1 w-11/12`, styles.textbox]}>
+                                        <DateTimePicker themeVariant="light"
+                                            testID="dateTimePicker"
+                                            value={date1}
+                                            mode={'date'}
+                                            is24Hour={true}
+                                            display="default"
+                                            onChange={onChange}
+                                        />
+                                    </View>
+                                </View>
+                                <View style={tw`flex flex-col w-1/3 mt-2`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>รายชื่อแพทย์</Text>
+                                    <Autocomplete style={[tw`h-10 mt-1 w-11/12`, styles.textbox]}
+                                        placeholder='โปรดระบุชื่อแพทย์'
+                                        value={query}
+                                        onChangeText={onChangeText}
+                                        accessoryRight={renderCloseIcon}
+                                        onSelect={onSelect}>
+                                        {data.map(renderOption)}
+                                    </Autocomplete>
+                                </View>
+
+                                <View style={tw`flex flex-col w-1/3 mt-2`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>รายชื่อผุ้ป่วย</Text>
+                                    <Autocomplete style={[tw`h-10 mt-1 w-11/12`, styles.textbox]}
+                                        placeholder='โปรดระบุชื่อผู้ป่วย'
+                                        value={query_patient}
+                                        onChangeText={onChangeText_patient}
+                                        accessoryRight={renderCloseIcon_patient}
+                                        onSelect={onSelect_patient}>
+                                        {data_patient.map(renderOption_patient)}
+                                    </Autocomplete>
+                                </View>
+
+                                <View style={tw`flex flex-col w-1/3`}></View>
                             </View>
 
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col w-1/3 mt-2`}>
-                                    <Text style={tw`font-semibold text-base`}>ชื่อ</Text>
-                                    <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อ</Text>
+                                    <View style={[tw`flex justify-center h-10 mt-2 w-11/12 pl-2`, styles.textshow]}>
                                         <Text style={tw`text-base`}>
                                             {fname_patient}
                                         </Text>
@@ -394,8 +433,8 @@ export default function VisitRecord({ navigation }) {
                                     </View>
                                 </View>
                                 <View style={tw`flex flex-col w-1/3 mt-2`}>
-                                    <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                    <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>สกุล</Text>
+                                    <View style={[tw`flex justify-center h-10 mt-2 w-11/12 pl-2`, styles.textshow]}>
                                         <Text style={tw`text-base`}>
                                             {lname_patient}
                                         </Text>
@@ -404,8 +443,8 @@ export default function VisitRecord({ navigation }) {
                                 </View>
 
                                 <View style={tw`flex flex-col w-1/3 mt-2`}>
-                                    <Text style={tw`font-semibold text-base`}>อายุ</Text>
-                                    <View style={tw`flex justify-center h-10 mt-2 w-11/12 bg-purple-100 rounded-md pl-2`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>อายุ</Text>
+                                    <View style={[tw`flex justify-center h-10 mt-2 w-11/12 pl-2`, styles.textshow]}>
                                         <Text style={tw`text-base`}>
                                             {age_patient}
                                         </Text>
@@ -418,49 +457,55 @@ export default function VisitRecord({ navigation }) {
                             </View>
 
                             <View style={tw`flex flex-row justify-between w-full mt-4`}>
-                                <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base`}>ค่าบริการของแพทย์</Text>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของแพทย์</Text>
                                 </View>
-                                <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <TextInput style={[tw`h-8 w-5/12 pl-2`, styles.textbox]}
                                         onChangeText={text => setCost_of_doctor(parseInt(text))}
                                         placeholder="จำนวนเงิน"
                                     />
                                 </View>
-                            </View>
-
-                            <View style={tw`flex flex-row justify-between w-full mt-4`}>
-                                <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base`}>ค่ายา</Text>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่ายา</Text>
                                 </View>
-                                <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <TextInput style={[tw`h-8 w-5/12 pl-2`, styles.textbox]}
                                         onChangeText={text => setCost_of_medicine(parseInt(text))}
                                         placeholder="จำนวนเงิน"
                                     />
                                 </View>
                             </View>
 
-                            <Text style={tw`font-semibold text-lg mt-4`}>ค่าบริการของนักจิตวิทยา</Text>
+                            {/* <Text style={tw`font-semibold text-lg mt-4`}>ค่าบริการของนักจิตวิทยา</Text> */}
 
                             <View style={tw`flex flex-row justify-between w-full mt-4`}>
-                                <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base`}>ชื่อนักจิตวิทยา 1</Text>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของนักจิตวิทยา</Text>
                                 </View>
-                                <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <TextInput style={[tw`h-8 w-5/12 pl-2`, styles.textbox]}
                                         onChangeText={text => setCost_of_psychologist1(parseInt(text))}
+                                        placeholder="จำนวนเงิน"
+                                    />
+                                </View>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของนักฝึกพูด</Text>
+                                </View>
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <TextInput style={[tw`h-8 w-5/12 pl-2`, styles.textbox]}
+                                        onChangeText={text => setCost_of_practitioner(parseInt(text))}
                                         placeholder="จำนวนเงิน"
                                     />
                                 </View>
                             </View>
 
-                            <View style={tw`flex flex-row justify-between w-full mt-4`}>
+                            {/* <View style={tw`flex flex-row justify-between w-full mt-4`}>
                                 <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base`}>ชื่อนักจิตวิทยา 2</Text>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ชื่อนักจิตวิทยา 2</Text>
                                 </View>
                                 <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                    <TextInput style={[tw`h-8 w-1/3 pl-2`,styles.textbox]}
                                         onChangeText={text => setCost_of_psychologist2(parseInt(text))}
                                         placeholder="จำนวนเงิน"
                                     />
@@ -469,58 +514,67 @@ export default function VisitRecord({ navigation }) {
 
                             <View style={tw`flex flex-row justify-between w-full mt-4`}>
                                 <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base`}>ชื่อนักจิตวิทยา 3</Text>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>ชื่อนักจิตวิทยา 3</Text>
                                 </View>
                                 <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                    <TextInput style={[tw`h-8 w-1/3 pl-2`,styles.textbox]}
                                         onChangeText={text => setCost_of_psychologist3(parseInt(text))}
                                         placeholder="จำนวนเงิน"
                                     />
                                 </View>
-                            </View>
+                            </View> */}
 
-                            <View style={tw`flex flex-row justify-between w-full mt-4`}>
+                            {/* <View style={tw`flex flex-row justify-between w-full mt-4`}>
                                 <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base`}>ค่าบริการของนักฝึกพูด</Text>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของนักฝึกพูด</Text>
                                 </View>
                                 <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                    <TextInput style={[tw`h-8 w-1/3 pl-2`, styles.textbox]}
                                         onChangeText={text => setCost_of_practitioner(parseInt(text))}
                                         placeholder="จำนวนเงิน"
                                     />
                                 </View>
-                            </View>
+                            </View> */}
 
                             <View style={tw`flex flex-row justify-between w-full mt-4`}>
-                                <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base`}>ค่าบริการของนักกิจกรรมบำบัด</Text>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของนักกิจกรรมบำบัด</Text>
                                 </View>
-                                <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <TextInput style={[tw`h-8 w-5/12 pl-2`, styles.textbox]}
                                         onChangeText={text => setCost_of_occupational_therapist(parseInt(text))}
                                         placeholder="จำนวนเงิน"
                                     />
                                 </View>
-                            </View>
-
-                            <View style={tw`flex flex-row justify-between w-full mt-4`}>
-                                <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base`}>ค่าบริการของครูการศึกษาพิเศษ</Text>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของครูการศึกษาพิเศษ</Text>
                                 </View>
-                                <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <TextInput style={[tw`h-8 w-5/12 pl-2`, styles.textbox]}
                                         onChangeText={text => setCost_of_teacher(parseInt(text))}
                                         placeholder="จำนวนเงิน"
                                     />
                                 </View>
                             </View>
-                            <View style={tw`flex flex-row justify-between w-full mt-4`}>
+
+                            {/* <View style={tw`flex flex-row justify-between w-full mt-4`}>
                                 <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base text-red-600`}>รวมทั้งหมด</Text>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของครูการศึกษาพิเศษ</Text>
                                 </View>
                                 <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <View style={tw`flex justify-center h-8 w-1/3 bg-purple-100 rounded-md pl-2`}>
-                                        <Text style={tw`font-semibold text-base`}>
+                                    <TextInput style={[tw`h-8 w-1/3 pl-2`, styles.textbox]}
+                                        onChangeText={text => setCost_of_teacher(parseInt(text))}
+                                        placeholder="จำนวนเงิน"
+                                    />
+                                </View>
+                            </View> */}
+                            <View style={tw`flex flex-row justify-center w-full mt-6 mr-10`}>
+                                <View style={tw`flex flex-row items-center`}>
+                                    <Text style={tw`font-semibold text-base text-red-600`}>รวมทั้งหมด</Text>
+                                </View>
+                                <View style={tw`flex flex-row items-center w-32 ml-2`}>
+                                    <View style={[tw`flex justify-center items-center h-8 w-full`, styles.textshow]}>
+                                        <Text style={[tw`font-semibold text-base`, styles.font]}>
                                             {calculate_total_cost()}
                                         </Text>
                                     </View>
@@ -528,54 +582,42 @@ export default function VisitRecord({ navigation }) {
                                 </View>
                             </View>
 
-                            <View style={tw`flex flex-row justify-between w-full mt-4`}>
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
                                 <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-lg`}>ช่องทางชำระเงิน</Text>
+                                    <Text style={[tw`font-semibold text-lg`, styles.font]}>ช่องทางชำระเงิน</Text>
                                 </View>
                                 <View style={tw`flex flex-row  items-center w-3/5`}>
 
                                 </View>
                             </View>
 
-                            <View style={tw`flex flex-row justify-between w-full mt-4`}>
-                                <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base`}>เงินโอน</Text>
+                            <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>เงินโอน</Text>
                                 </View>
-                                <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <TextInput style={[tw`h-8 w-5/12 pl-2`, styles.textbox]}
                                         onChangeText={text => setBank_transfer(parseInt(text))}
                                         placeholder="จำนวนเงิน"
                                     />
                                 </View>
-                            </View>
-
-                            <View style={tw`flex flex-row justify-between w-full mt-4`}>
-                                <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                    <Text style={tw`font-semibold text-base`}>เงินสด</Text>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>เงินสด</Text>
                                 </View>
-                                <View style={tw`flex flex-row  items-center w-3/5`}>
-                                    <TextInput style={tw`h-8 w-1/3 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`}
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <TextInput style={[tw`h-8 w-5/12 pl-2`, styles.textbox]}
                                         onChangeText={text => setCash(parseInt(text))}
                                         placeholder="จำนวนเงิน"
                                     />
                                 </View>
-                            </View> */}
+                            </View>
 
-                            {/* <View style={tw`flex flex-row mt-4 justify-end w-full mt-4`}>
-                            <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}
-                                onPress={postCost()}
-                            >
-                                <Text style={tw`text-lg text-black font-bold`}>บันทึก</Text>
-                            </TouchableOpacity>
-                        </View> */}
-
-                            {/* <View style={tw`flex flex-row justify-end w-full mt-4`}>
+                            <View style={tw`flex flex-row justify-end w-full mt-8 mr-12`}>
                                 <View style={styles.button}>
                                     <Button
                                         onPress={postCost}
-                                        color="black"
+                                        color="#4A235A"
                                         title="บันทึก"
-                                        accessibilityLabel="Learn more about this purple button"
                                     />
                                 </View>
                             </View>
@@ -583,7 +625,7 @@ export default function VisitRecord({ navigation }) {
                     </KeyboardAwareScrollView>
 
 
-                </View> */}
+                </View>
             </View>
             <View style={[tw`flex flex-row w-full justify-evenly items-center`, styles.footer]} >
                 <TouchableOpacity style={[tw``, styles.navbtm]}
@@ -630,7 +672,7 @@ export default function VisitRecord({ navigation }) {
 const styles = StyleSheet.create({
 
     containertop: {
-        position: 'absolute',
+        position: "absolute",
         top: 0,
     },
 
@@ -660,10 +702,21 @@ const styles = StyleSheet.create({
     },
 
     menu: {
-        position: "absolute",
-        //   borderColor: 'black',
-        //   borderWidth: 2,
-        marginTop: 180,
+        // borderColor: 'black',
+        // borderWidth: 2,
+
+    },
+
+    textshow: {
+        backgroundColor: '#EBDEF0',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.02,
+        shadowRadius: 5,
+        borderRadius: 6,
     },
 
     textbox: {
@@ -675,6 +728,9 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.02,
         shadowRadius: 5,
+        borderColor: '#633974',
+        borderWidth: 1,
+        borderRadius: 6,
     },
 
     font: {
@@ -710,10 +766,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         borderRadius: 4,
         elevation: 10,
-        backgroundColor: '#FBCFE8',
-        borderWidth: 4,
-        borderColor: "#EF4444",
+        backgroundColor: '#EBDEF0',
+        borderWidth: 2,
+        borderColor: "#4A235A",
         marginLeft: 12,
-
-    },
+    }
 });
