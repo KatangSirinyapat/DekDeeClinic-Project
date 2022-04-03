@@ -3,15 +3,26 @@ import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import axios from 'axios';
+import { Layout, RangeDatepicker, Datepicker } from '@ui-kitten/components';
+import moment from "moment";
+
 
 
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 const URL_COSTS = `http://178.128.90.50:3333/costs`
 
+
 export default function AnnualReport({ navigation }) {
 
 
     const [summary, setSummary] = useState({})
+    const [range, setRange] = React.useState({});
+    const [costs, setCosts ] = useState()
+    const [service, setService] = useState()
+    const [count_of_patient, setcount_of_patient] = useState()
+
+    let dateStart;
+    let dateEnd;
 
 
     useEffect(() => {
@@ -29,6 +40,48 @@ export default function AnnualReport({ navigation }) {
             .catch(function (error) {
                 // alert(error.message);
             })
+    }
+
+    const onRange = (nextRange) => {
+
+        // console.log();
+        let tmp = nextRange.startDate
+
+        dateStart = moment(tmp.toLocaleDateString('en-US')).format()
+
+
+        // console.log(tmp.toLocaleDateString('en-US'));
+
+        let tmp2 = nextRange.endDate
+        if (tmp2 != null) {
+            // console.log();
+            dateEnd = moment(tmp2.toLocaleDateString('en-US')).format()
+            //   console.log(moment(test).format());
+            console.log("dateStart: " + dateStart);
+            console.log("dateEnd: " + dateEnd);
+            getCost()
+        }
+        setRange(nextRange)
+        // setRange2(nextRange)
+    }
+
+    const getCost = async () => {
+        await axios.get(`${URL_COSTS}/range_sun_of_year/${dateStart}/${dateEnd}`)
+            .then(function (response) {
+
+                // let obj = JSON.stringify(response.data)
+                // let objJson = JSON.parse(obj)
+
+                console.log(response.data);
+                // setCosts(response.data)
+                setService(response.data.service)
+                setcount_of_patient(response.data.count_of_patient)
+
+            })
+            .catch(function (error) {
+                // alert(error.message);
+            })
+
     }
 
     // const navigation = useNavigation()
@@ -50,15 +103,14 @@ export default function AnnualReport({ navigation }) {
                         </View>
 
                         <View style={tw`flex flex-row justify-start w-full ml-10`}>
-                            <View style={tw`flex flex-col w-1/3 pt-2`}>
-                                <Text style={[tw`font-semibold text-base`,styles.font]}>วันที่</Text>
-                                <TextInput style={[tw`h-8 w-full rounded-md pl-2 mt-1`,styles.textbox]}/>
+                            <View style={tw`flex flex-row justify-start items-center w-1/3`}>
+                                <Text style={[tw`font-semibold text-base mr-4`,styles.font]}>วันที่</Text>
+                                <RangeDatepicker
+                                        style={styles.textbox}
+                                        range={range}
+                                        onSelect={nextRange => onRange(nextRange)}
+                                    />
                             </View>
-                            <View style={tw`flex flex-col w-1/3 ml-9 pt-2`}>
-                                <Text style={[tw`font-semibold text-base`,styles.font]}>ถึง</Text>
-                                <TextInput style={[tw`h-8 w-full rounded-md pl-2 mt-1`,styles.textbox]}/>
-                            </View>
-
                         </View>
 
 
@@ -67,7 +119,7 @@ export default function AnnualReport({ navigation }) {
                                 <Text style={[tw`font-semibold text-base`,styles.font]}>จำนวนการให้บริการทั้งหมด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`,styles.textshow]}>{summary.service}</Text>
+                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`,styles.textshow]}>{service}</Text>
 
                             </View>
                         </View>
@@ -77,7 +129,7 @@ export default function AnnualReport({ navigation }) {
                                 <Text style={[tw`font-semibold text-base`,styles.font]}>จำนวนผู้เข้ารับการรักษา</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`,styles.textshow]}>{summary.count_of_patient}</Text>
+                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`,styles.textshow]}>{count_of_patient}</Text>
                             </View>
                         </View>
                         
@@ -190,7 +242,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         //   borderColor: 'black',
         //   borderWidth: 2,
-        marginTop: 180,
+        marginTop: 178,
         height: 630
     },
     textshow: {
@@ -205,16 +257,7 @@ const styles = StyleSheet.create({
     },
 
     textbox: {
-        backgroundColor: '#EBDEF0',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 2,
-            height: 2,
-        },
-        shadowOpacity: 0.02,
-        shadowRadius: 5,
-        borderColor: '#633974',
-        borderWidth: 1,
+       width: 218,
     },
 
     font: {

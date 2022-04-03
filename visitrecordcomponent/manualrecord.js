@@ -3,54 +3,71 @@ import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Layout, RangeDatepicker, Datepicker } from '@ui-kitten/components';
+import moment from "moment";
+import axios from "axios";
+import { flex } from "styled-system";
+
+const URL_COST = `http://178.128.90.50:3333/costs`
 
 export default function ManualRecord({ navigation }) {
+
+    const [range, setRange] = React.useState({});
+    // const [date, setDate] = React.useState(new Date());
     // const navigation = useNavigation()
     //Date time
-    const [date1, setDate1] = useState(new Date(2021, 12, 1, 0, 0, 0, 0));
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
+    // const [date1, setDate1] = useState(new Date(2021, 12, 1, 0, 0, 0, 0));
+  
+    const [costs, setCosts] = useState([])
+    let dateStart;
+    let dateEnd;
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate1(currentDate);
 
-        let curDate = new Date().toString()
-        let tmpDate = currentDate.toString()
+    // useEffect(() => {
+    //     getCost()
+    // }, [])
 
-        let data = currentDate.toJSON()
-        let dataBoD = JSON.stringify(data);
-        let tmp = dataBoD.substring(1, 11)
-        let tmp0 = tmp.substring(0, 8)
-        let tmp1 = tmp.substring(8, 11)
 
-        let int_tmp1 = parseInt(tmp1) + 1
-        // console.log(int_tmp1);
-        if (int_tmp1 >= 0 && int_tmp1 <= 9) {
-            tmp = tmp0 + 0 + int_tmp1
 
+    const getCost = async () => {
+        await axios.get(`${URL_COST}/find_range/${dateStart}/${dateEnd}`)
+            .then(function (response) {
+
+                // let obj = JSON.stringify(response.data)
+                // let objJson = JSON.parse(obj)
+
+                console.log(response.data);
+                setCosts(response.data)
+
+            })
+            .catch(function (error) {
+                // alert(error.message);
+            })
+
+    }
+
+    const onRange = (nextRange) => {
+
+        // console.log();
+        let tmp = nextRange.startDate
+
+        dateStart = moment(tmp.toLocaleDateString('en-US')).format()
+
+
+        // console.log(tmp.toLocaleDateString('en-US'));
+
+        let tmp2 = nextRange.endDate
+        if (tmp2 != null) {
+            // console.log();
+            dateEnd = moment(tmp2.toLocaleDateString('en-US')).format()
+            //   console.log(moment(test).format());
+            console.log("dateStart: " + dateStart);
+            console.log("dateEnd: " + dateEnd);
+            getCost()
         }
-        else {
-            tmp = tmp0 + int_tmp1
-        }
-
-        console.log(tmp);
-        setDate(tmp.toString())
-        // tmpDate = tmp.toString()
-
-        // costs.map((item, index) => {
-        //     if (item.date === date.concat("T00:00:00.000Z")) {
-        //         setCost(item)
-        //         costOBJ.push(item)
-        //         // tmp = item.date
-        //         // console.log(tmp.substring(0,7));
-
-        //     }
-        // })
-
-        // console.log(dataBoD.substring(1,11)); 
-    };
+        setRange(nextRange)
+        // setRange2(nextRange)
+    }
 
     return (
         <View style={tw`flex h-full items-center`}>
@@ -65,48 +82,25 @@ export default function ManualRecord({ navigation }) {
                     <View style={[tw`flex flex-col p-4 rounded-xl`, styles.content]}>
                         <View style={tw`flex flex-row w-full justify-start items-center`}>
                             <View style={tw`flex flex-row w-2/5 justify-start items-center ml-16`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่</Text>
-                                <DateTimePicker themeVariant="light" style={tw`h-10 w-1/2 rounded-md`}
-                                    testID="dateTimePicker"
-                                    value={date1}
-                                    mode={'date'}
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={onChange}
-                                />
+                                <Text style={[tw`font-semibold text-base ml-8`, styles.font]}>วันที่</Text>
+                                <View style={tw`flex flex-row w-3/5 justify-start items-center ml-4`}>
+                                    <RangeDatepicker style={styles.textbox}
+                                        range={range}
+                                        onSelect={nextRange => onRange(nextRange)}
+                                    />
+                                </View>
+                            </View>
 
-                                {/* <TextInput style={tw`h-8 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`} /> */}
-                            </View>
-                            <View style={tw`flex flex-row w-2/5 justify-start items-center`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>ถึง</Text>
-                                <DateTimePicker themeVariant="light" style={tw`h-10 w-1/2 rounded-md`}
-                                    testID="dateTimePicker"
-                                    value={date1}
-                                    mode={'date'}
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={onChange}
-                                />
-                                {/* <TextInput style={tw`h-8 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`} /> */}
-                            </View>
-                            <View style={styles.button}>
+                            {/* <View style={styles.button}>
                                 <Button
                                     color="#4A235A"
                                     title="ค้นหา"
-                                // onPress={findCost}
+                                    onPress={getCost}
                                 />
-                            </View>
+                            </View> */}
                         </View>
 
-                        {/* <View style={tw`flex flex-row justify-between w-full mt-4 ml-36`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`,styles.font]}>จำนวนคนไข้</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <TextInput style={tw`h-8 w-2/5 border-2 border-purple-500 bg-purple-100 rounded-md pl-2`} />
-                                <Text style={tw`font-semibold text-base pl-2`}>คน</Text>
-                            </View>
-                        </View> */}
+
 
                         <View style={tw`flex flex-row justify-between w-full mt-4 ml-36`}>
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
@@ -114,7 +108,7 @@ export default function ManualRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={[tw`flex justify-center h-8 w-2/5 pl-2`, styles.textshow]}>
-                                    {/* <Text>{cost_of_medicine}</Text> */}
+                                    <Text>{costs.cost_of_doctor}</Text>
                                 </View>
                             </View>
                         </View>
@@ -125,7 +119,7 @@ export default function ManualRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={[tw`flex justify-center h-8 w-2/5 pl-2`, styles.textshow]}>
-                                    {/* <Text>{cost_of_medicine}</Text> */}
+                                    <Text>{costs.cost_of_medicine}</Text>
                                 </View>
                             </View>
                         </View>
@@ -138,7 +132,7 @@ export default function ManualRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={[tw`flex justify-center h-8 w-2/5 pl-2`, styles.textshow]}>
-                                    {/* <Text>{cost_of_medicine}</Text> */}
+                                    <Text>{costs.cost_of_psychologist}</Text>
                                 </View>
                             </View>
                         </View>
@@ -167,7 +161,7 @@ export default function ManualRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={[tw`flex justify-center h-8 w-2/5 pl-2`, styles.textshow]}>
-                                    {/* <Text>{cost_of_medicine}</Text> */}
+                                    <Text>{costs.cost_of_practitioner}</Text>
                                 </View>
                             </View>
                         </View>
@@ -178,7 +172,7 @@ export default function ManualRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={[tw`flex justify-center h-8 w-2/5 pl-2`, styles.textshow]}>
-                                    {/* <Text>{cost_of_medicine}</Text> */}
+                                    <Text>{costs.cost_of_occupational_therapist}</Text>
                                 </View>
                             </View>
                         </View>
@@ -189,7 +183,7 @@ export default function ManualRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={[tw`flex justify-center h-8 w-2/5 pl-2`, styles.textshow]}>
-                                    {/* <Text>{cost_of_medicine}</Text> */}
+                                    <Text>{costs.cost_of_teacher}</Text>
                                 </View>
                             </View>
                         </View>
@@ -200,7 +194,7 @@ export default function ManualRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={[tw`flex justify-center h-8 w-2/5 pl-2`, styles.textshow]}>
-                                    {/* <Text>{cost_of_medicine}</Text> */}
+                                    <Text>{costs.bank_transfer}</Text>
                                 </View>
                             </View>
                         </View>
@@ -211,7 +205,7 @@ export default function ManualRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={[tw`flex justify-center h-8 w-2/5 pl-2`, styles.textshow]}>
-                                    {/* <Text>{cost_of_medicine}</Text> */}
+                                    <Text>{costs.cash}</Text>
                                 </View>
                             </View>
                         </View>
@@ -222,7 +216,7 @@ export default function ManualRecord({ navigation }) {
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
                                 <View style={[tw`flex justify-center h-8 w-2/5 pl-2`, styles.textshow]}>
-                                    {/* <Text>{cost_of_medicine}</Text> */}
+                                    <Text>{costs.total}</Text>
                                 </View><Text style={tw`font-semibold text-base pl-2 text-red-600`}>บาท</Text>
                             </View>
                         </View>
@@ -330,17 +324,7 @@ const styles = StyleSheet.create({
     },
 
     textbox: {
-        backgroundColor: '#EBDEF0',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 2,
-            height: 2,
-        },
-        shadowOpacity: 0.02,
-        shadowRadius: 5,
-        borderColor: '#633974',
-        borderWidth: 1,
-        borderRadius: 6,
+        width: 218,
     },
 
     font: {
