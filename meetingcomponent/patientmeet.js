@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, Image } from 'react-native';
 import tw from "tailwind-react-native-classnames";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from "axios";
@@ -66,7 +66,7 @@ export default function PatientMeet({ navigation }) {
 
 
 
-  
+
     const getMeets = async () => {
         await axios.get(`${URL_MEET}`)
             .then(function (response) {
@@ -77,7 +77,7 @@ export default function PatientMeet({ navigation }) {
 
 
                 setMeets(objJson)
-                
+
             })
             .catch(function (error) {
                 // alert(error.message);
@@ -103,7 +103,7 @@ export default function PatientMeet({ navigation }) {
                 // alert(error.message);
             });
 
-  
+
 
     };
 
@@ -146,15 +146,14 @@ export default function PatientMeet({ navigation }) {
 
     React.useEffect(updateData_patient, [query_patient]);
 
-    const findData =  () => {
-      
-        let tmp =0;
-        doctors.map((item,index) => {
-            if(item.user_id == idDoctor && tmp == 0)
-            {
+    const findData = () => {
+
+        let tmp = 0;
+        doctors.map((item, index) => {
+            if (item.user_id == idDoctor && tmp == 0) {
                 setFnameDoctor(item.fname)
                 setLnameDoctor(item.lname)
-                
+
                 tmp = 1
             }
         })
@@ -164,9 +163,8 @@ export default function PatientMeet({ navigation }) {
 
         let flag = 0
 
-        meets.map((item,index) => {
-            if(item.patient_id == idPatient && flag == 0)
-            {
+        meets.map((item, index) => {
+            if (item.patient_id == idPatient && flag == 0) {
                 setIdDoctor(item.user_id)
                 setDate_meet(item.date_meet)
                 setTime(item.time)
@@ -187,22 +185,21 @@ export default function PatientMeet({ navigation }) {
         setTelephone(data_patient[index].telephone)
         // setDate_meet(data_patient[index].meets[1].date_meet)
         // console.log("Test");
-       
+
         // findMeet()
-        data_patient[index].meets.map((item,index) => {
+        data_patient[index].meets.map((item, index) => {
             setDate_meet(item.date_meet)
             setTime(item.time)
             setTime_to(item.time_to)
             setDetails(item.details)
         })
 
-        let tmp =0;
-        doctors.map((item,index) => {
-            if(item.user_id == idDoctor && tmp == 0)
-            {
+        let tmp = 0;
+        doctors.map((item, index) => {
+            if (item.user_id == idDoctor && tmp == 0) {
                 setFnameDoctor(item.fname)
                 setLnameDoctor(item.lname)
-                
+
                 tmp = 1
             }
         })
@@ -248,16 +245,18 @@ export default function PatientMeet({ navigation }) {
 
 
     return (
-        <View style={tw`flex h-full justify-start items-center bg-purple-200`}>
-            <View style={tw`flex w-full justify-start items-start ml-16`}>
-                <Button onPress={() => navigation.navigate('สรุปนัดหมาย')} title="< ย้อนกลับ" />
-            </View>
-            <Text style={tw`font-semibold text-2xl mt-6`}>สรุปนัดหมายผู้ป่วย</Text>
+        <View style={tw`flex h-full items-center`}>
 
-            <View style={tw`flex w-11/12 h-4/5`}>
-                <View style={tw`flex flex-row w-full justify-center items-center mt-8`}>
-                    <Text style={tw`font-semibold text-xl`}>ค้นหาชื่อผู้ป่วย</Text>
-                    {/* <TextInput style={tw`h-10 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
+            <View style={[tw`flex w-full justify-center items-center`, styles.containertop]}>
+                <View style={[tw`w-full`, styles.top]}>
+                    <Text style={[tw`font-bold`, styles.title]}>สรุปนัดหมายผู้ป่วย</Text>
+                </View>
+            </View>
+
+            <View style={[tw`flex flex-col`, styles.menu]}>
+                <View style={tw`flex flex-row w-full justify-center items-center`}>
+                    <Text style={[tw`font-semibold text-xl`, styles.font]}>ค้นหาชื่อผู้ป่วย</Text>
+                    {/* <TextInput style={tw`h-8 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                         onChangeText={text => updateIdPatient(text)}
                         placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                     />
@@ -269,7 +268,7 @@ export default function PatientMeet({ navigation }) {
 
                     /> */}
 
-                    <View style={tw`h-10 w-1/2 pl-2`}>
+                    <View style={tw`h-8 w-1/2 pl-2`}>
                         <Autocomplete
                             placeholder='โปรดระบุชื่อผู้ป่วย'
                             value={query_patient}
@@ -284,56 +283,56 @@ export default function PatientMeet({ navigation }) {
 
                 </View>
 
-                <KeyboardAwareScrollView style={tw`flex mt-8`}>
-                    <View style={tw`flex flex-col justify-around items-start w-full h-full  p-4 rounded-xl border-4 border-black`}>
-                        <View style={tw`flex flex-row justify-between w-full`}>
+                <KeyboardAwareScrollView style={tw`mt-2`}>
+                    <View style={[tw`flex flex-col justify-center items-center p-4 rounded-xl`, styles.content]}>
+                        <View style={tw`flex flex-row justify-between w-4/5`}>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>ชื่อ</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md pl-2 pt-2`}>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อ</Text>
+                                <View style={[tw`h-8 mt-1 w-11/12 pl-2 pt-2`, styles.textshow]}>
                                     <Text>{fnamePatient}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>สกุล</Text>
-                                <View style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md pl-2 pt-2`}>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>สกุล</Text>
+                                <View style={[tw`h-8 mt-1 w-full pl-2 pt-2`, styles.textshow]}>
                                     <Text>{lnamePatient}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                        <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>วันที่นัดหมาย</Text>
-                                {/* <TextInput style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`} /> */}
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md pl-2 pt-3`}>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่นัดหมาย</Text>
+                                {/* <TextInput style={tw`h-8 mt-2 w-11/12  pl-2`} /> */}
+                                <View style={[tw`h-8 mt-2 w-11/12 pl-2 pt-3`,styles.textshow]}>
                                     <Text>{date_meet}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}></View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                        <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>เวลา ตั้งแต่</Text>
-                                {/* <TextInput style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2`} /> */}
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-3`}>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>เวลา ตั้งแต่</Text>
+                                {/* <TextInput style={tw`h-8 mt-2 w-11/12  pl-2`} /> */}
+                                <View style={[tw`h-8 mt-2 w-11/12  pl-2 pt-3`,styles.textshow]}>
                                     <Text>{time}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>ถึง</Text>
-                                {/* <TextInput style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md pl-2`} /> */}
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-3`}>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ถึง</Text>
+                                {/* <TextInput style={tw`h-8 mt-2 w-full pl-2`} /> */}
+                                <View style={[tw`h-8 mt-2 w-full  pl-2 pt-3`,styles.textshow]}>
                                     <Text>{time_to}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                        <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>เบอร์โทรศัพท์</Text>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>เบอร์โทรศัพท์</Text>
 
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-3`}>
+                                <View style={[tw`h-8 mt-2 w-11/12  pl-2 pt-3`,styles.textshow]}>
                                     <Text>{telephone}</Text>
                                 </View>
                             </View>
@@ -342,38 +341,78 @@ export default function PatientMeet({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                        <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>ชื่อแพทย์</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-3`}>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อแพทย์</Text>
+                                <View style={[tw`h-8 mt-2 w-11/12  pl-2 pt-3`,styles.textshow]}>
                                     <Text>{fnameDoctor}</Text>
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
-                                <Text style={tw`font-semibold text-base`}>สกุลแพทย์</Text>
-                                <View style={tw`h-10 mt-2 w-full bg-purple-300 rounded-md  pl-2 pt-3`}>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>สกุลแพทย์</Text>
+                                <View style={[tw`h-8 mt-2 w-full  pl-2 pt-3`,styles.textshow]}>
                                     <Text>{lnameDoctor}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                        <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
                             <View style={tw`flex flex-col w-full`}>
-                                <Text style={tw`font-semibold text-base`}>หมายเหตุ</Text>
-                                <View style={tw`h-10 mt-2 w-11/12 bg-purple-300 rounded-md  pl-2 pt-3`}>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>หมายเหตุ</Text>
+                                <View style={[tw`h-8 mt-2 w-full  pl-2 pt-3`,styles.textshow]}>
                                     <Text>{details}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-end w-full mt-2`}>
-                            <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}>
-                                <Text style={tw`text-lg text-black font-bold`}>Print</Text>
-                            </TouchableOpacity>
+                        <View style={tw`flex flex-row justify-end w-11/12 mt-4`}>
+                            <View style={[tw`mr-14`,styles.button]}>
+                                <Button
+                                    // onPress={}
+                                    color="#4A235A"
+                                    title="Print"
+                                />
+                            </View>
                         </View>
                     </View>
                 </KeyboardAwareScrollView>
+            </View>
+            <View style={[tw`flex flex-row w-full justify-evenly items-center`, styles.footer]} >
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('ข้อมูลผู้ป่วย')}
+                    title="ข้อมูลผู้ป่วย">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-find-user-male-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>ข้อมูลผู้ป่วย</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('ระบบนัดหมาย')}
+                    title="ระบบนัดหมาย">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-calendar-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>นัดหมาย</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('Menu')}
+                    title="Menu">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-clinic-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>หน้าหลัก</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('บันทึกการให้บริการ')}
+                    title="บันทึกการให้บริการ">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-cost-45-W.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontnormal]}>บันทึกการให้บริการ</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[tw``, styles.navbtm]}
+                    onPress={() => navigation.navigate('รายงาน')}
+                    title="รายงาน">
+                    <Image source={require("../Icon/Buttom-Nav/icons8-test-results-45-P.png")} />
+                    <Text style={[tw`flex items-center text-sm text-black font-bold mt-1`, styles.fontpress]}>รายงาน</Text>
+                </TouchableOpacity>
             </View>
         </View>
 
@@ -383,3 +422,106 @@ export default function PatientMeet({ navigation }) {
     );
 }
 
+const styles = StyleSheet.create({
+
+    containertop: {
+        position: "absolute",
+        top: 0,
+    },
+
+    top: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 155,
+        backgroundColor: '#D7BDE2',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.16,
+        shadowRadius: 5.46,
+    },
+
+    title: {
+        fontSize: 30,
+        color: '#4A235A',
+    },
+
+    menu: {
+        // borderColor: 'black',
+        // borderWidth: 2,
+        marginTop: 180,
+    },
+
+    textshow: {
+        backgroundColor: '#EBDEF0',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.02,
+        shadowRadius: 5,
+        borderRadius: 6,
+    },
+
+    textbox: {
+        backgroundColor: '#EBDEF0',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.02,
+        shadowRadius: 5,
+        borderColor: '#633974',
+        borderWidth: 1,
+        borderRadius: 6,
+    },
+
+    font: {
+        color: '#633974',
+    },
+
+    fonttable: {
+        color: '#633974',
+        fontSize: 16,
+    },
+
+    footer: {
+        position: "absolute",
+        bottom: 0,
+        height: 109,
+        backgroundColor: '#D7BDE2',
+    },
+
+    navbtm: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: 130,
+    },
+
+    fontnormal: {
+        color: '#FFFFFF',
+    },
+
+    fontpress: {
+        color: '#4A235A'
+    },
+
+    button: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingHorizontal: 30,
+        borderRadius: 4,
+        elevation: 10,
+        backgroundColor: '#EBDEF0',
+        borderWidth: 2,
+        borderColor: "#4A235A",
+        marginLeft: 12,
+    }
+});

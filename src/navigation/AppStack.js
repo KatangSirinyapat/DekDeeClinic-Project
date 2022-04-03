@@ -10,7 +10,7 @@ import VisitRecord from '../../component/visitrecord';
 import Report from '../../component/reportmenu';
 import Meetingmenu from '../../reportcomponent/meetingmenu';
 import PatientMeet from '../../meetingcomponent/patientmeet';
-import DocterMeet from '../../meetingcomponent/psychologistmeet';
+import DocterMeet from '../../meetingcomponent/doctermeet';
 import Visitrecordmenu from '../../reportcomponent/visitrecordmenu';
 import DailyRecord from '../../visitrecordcomponent/dailyrecord';
 import MonthlyRecord from '../../visitrecordcomponent/monthlyrecord';

@@ -321,9 +321,6 @@ export default function VisitRecord({ navigation }) {
     );
 
 
-
-
-
     return (
 
         <View style={tw`flex h-full items-center`}>
@@ -335,7 +332,7 @@ export default function VisitRecord({ navigation }) {
 
                 <View style={[tw`flex flex-row flex-wrap w-4/5`, styles.menu]}>
                     <KeyboardAwareScrollView style={tw``}>
-                        <View style={[tw`flex flex-col justify-evenly items-center p-4 rounded-xl mt-1`, styles.content]}>
+                        <View style={[tw`flex flex-col justify-evenly items-center p-4 rounded-xl mt-3`, styles.content]}>
                             {/* <View style={tw`flex flex-row w-full justify-end items-center pl-36`}>
                                 <Text style={[tw`font-semibold text-base`,styles.font]}>วันที่</Text>
                                 <DateTimePicker themeVariant="light" style={tw`h-10 w-1/4 ml-2`}
@@ -384,8 +381,9 @@ export default function VisitRecord({ navigation }) {
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col w-1/3 mt-2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่</Text>
-                                    <View style={[tw`flex h-10 mt-1 w-11/12`, styles.textbox]}>
+                                    <View style={[tw`flex h-10 mt-1 w-11/12 justify-center`, styles.textbox]}>
                                         <DateTimePicker themeVariant="light"
+                                            style={tw`mr-40`}
                                             testID="dateTimePicker"
                                             value={date1}
                                             mode={'date'}
@@ -568,7 +566,7 @@ export default function VisitRecord({ navigation }) {
                                     />
                                 </View>
                             </View> */}
-                            <View style={tw`flex flex-row justify-center w-full mt-6 mr-10`}>
+                            <View style={tw`flex flex-row justify-center w-full mt-6 mr-14`}>
                                 <View style={tw`flex flex-row items-center`}>
                                     <Text style={tw`font-semibold text-base text-red-600`}>รวมทั้งหมด</Text>
                                 </View>
@@ -612,7 +610,7 @@ export default function VisitRecord({ navigation }) {
                                 </View>
                             </View>
 
-                            <View style={tw`flex flex-row justify-end w-full mt-8 mr-12`}>
+                            <View style={tw`flex flex-row justify-end w-full mt-6 mr-14`}>
                                 <View style={styles.button}>
                                     <Button
                                         onPress={postCost}
@@ -769,6 +767,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#EBDEF0',
         borderWidth: 2,
         borderColor: "#4A235A",
-        marginLeft: 12,
     }
 });

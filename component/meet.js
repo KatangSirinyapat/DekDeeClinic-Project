@@ -479,8 +479,9 @@ export default function Meet({ navigation }) {
                             <View style={tw`flex flex-row justify-between w-full mt-2`}>
                                 <View style={tw`flex flex-col w-1/2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่นัดหมาย</Text>
-                                    <View style={[tw`h-10 mt-1 w-1/4`, styles.textbox]}>
+                                    <View style={[tw`h-10 mt-1 w-1/4 justify-center`, styles.textbox]}>
                                         <DateTimePicker themeVariant="light"
+                                            style={tw``}
                                             testID="dateTimePicker"
                                             value={date}
                                             mode={'date'}
@@ -492,8 +493,9 @@ export default function Meet({ navigation }) {
                                 </View>
                                 <View style={tw`flex flex-col`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>เวลา ตั้งแต่</Text>
-                                    <View style={[tw`h-10 mt-1 w-20`, styles.textbox]}>
+                                    <View style={[tw`h-10 mt-1 w-20 justify-center`, styles.textbox]}>
                                         <DateTimePicker
+                                            style={tw`mr-1`}
                                             testID="dateTimePicker"
                                             value={date}
                                             mode={'time'}
@@ -505,8 +507,9 @@ export default function Meet({ navigation }) {
                                 </View>
                                 <View style={tw`flex flex-col w-1/2 ml-8`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>ถึง</Text>
-                                    <View style={[tw`h-10 mt-1 w-20`, styles.textbox]}>
+                                    <View style={[tw`h-10 mt-1 w-20 justify-center`, styles.textbox]}>
                                         <DateTimePicker
+                                            style={tw`mr-1`}
                                             testID="dateTimePicker"
                                             value={date2}
                                             mode={'time'}
@@ -690,7 +693,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
     },
 
-    font: {
+    font: {  
         color: '#633974',
     },
 
