@@ -10,7 +10,7 @@ import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
 
 import { TouchableWithoutFeedback } from 'react-native';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
-import { borderStyle } from "styled-system";
+import { borderStyle, paddingTop } from "styled-system";
 
 
 

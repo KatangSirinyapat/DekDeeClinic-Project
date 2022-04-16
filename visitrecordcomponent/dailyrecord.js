@@ -178,17 +178,13 @@ export default function DailyRecord({ navigation }) {
                 </View>
             </View>
 
-            <View style={[tw`flex flex-row w-4/5`, styles.menu]}>
+            <View style={[tw`flex flex-row flex-wrap w-4/5`, styles.menu]}>
                 <KeyboardAwareScrollView style={tw``}>
-                    <View style={[tw`flex flex-col p-4 rounded-xl`, styles.content]}>
-                        <View style={tw`flex flex-row w-full items-center`}>
-                            <View style={tw`flex flex-row w-2/5 justify-start items-center ml-44`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>รายวัน</Text>
-                                {/* <TextInput style={tw`h-8 w-3/4 border-2 border-purple-500 bg-purple-100 rounded-md pl-2 ml-2`}
-                                    onChangeText={text => inputDate(text)}
-                                    placeholder="YYY-MM-DD"
-                                /> */}
-                                <DateTimePicker themeVariant="light" style={tw`h-10 w-1/2 rounded-md`}
+                    <View style={[tw`flex flex-col items-center p-4`, styles.content]}> 
+                        <View style={tw`flex flex-row w-4/5 items-center justify-center mt-10 pr-10`}>
+                            <View style={tw`flex flex-row items-center w-3/5 pr-20`}>
+                                <Text style={[tw`font-semibold text-lg`, styles.font]}>วันที่ที่ต้องการทราบค่าบริการ</Text>
+                                <DateTimePicker themeVariant="light" style={tw`h-10 w-1/2`}
                                     testID="dateTimePicker"
                                     value={date1}
                                     mode={'date'}
@@ -196,18 +192,7 @@ export default function DailyRecord({ navigation }) {
                                     display="default"
                                     onChange={onChange}
                                 />
-
                             </View>
-                            {/* <View style={tw`flex flex-row w-1/2 justify-start items-center`}>
-                                <Text style={[tw`font-semibold text-base`,styles.font]}>จำนวนคนไข้</Text>
-                                <View style={tw`flex flex-row w-2/5`}>
-                                    <View style={tw`flex justify-center items-center h-8 w-full ml-2`}>
-                                        <Text></Text>
-                                    </View>
-                                    <Text style={tw`font-semibold text-base pl-2`}>คน</Text>
-                                </View>
-                            </View> */}
-
                             <View style={styles.button}>
                                 <Button
                                     color="#4A235A"
@@ -216,150 +201,128 @@ export default function DailyRecord({ navigation }) {
                                 />
                             </View>
                         </View>
-
-                        <View style={tw`flex flex-row w-full items-center mt-4 ml-44`}>
-                            <View style={tw`flex flex-row w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของแพทย์</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text>{cost_of_doctor}</Text>
+                        <View style={[tw`flex justify-center w-full mt-8 p-4 mr-6`, styles.bordercost]}>
+                            <View style={tw`flex flex-row`}>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของแพทย์</Text>
+                                </View>
+                                <View style={tw`flex flex-row items-center w-1/3`}>
+                                    <View style={[tw`flex items-center w-1/3`, styles.textshow]}>
+                                        <Text style={tw`h-8 pt-2`}>{cost_of_doctor}</Text>
+                                    </View>
+                                    <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
+                                </View>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่ายา</Text>
+                                </View>
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <View style={[tw`flex items-center w-1/3`, styles.textshow]}>
+                                        <Text style={tw`h-8 pt-2`}>{cost_of_medicine}</Text>
+                                    </View>
+                                    <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
                                 </View>
                             </View>
 
-                        </View>
+                            {/* <Text style={tw`font-semibold text-lg mt-4`}>ค่าบริการของนักจิตวิทยา</Text> */}
 
-                        <View style={tw`flex flex-row justify-between w-full mt-4 ml-44`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>ค่ายา</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text>{cost_of_medicine}</Text>
+                            <View style={tw`flex flex-row justify-between w-full mt-4`}>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของนักจิตวิทยา</Text>
+                                </View>
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <View style={[tw`flex items-center w-1/3`, styles.textshow]}>
+                                        <Text style={tw`h-8 pt-2`}>{cost_of_psychologist}</Text>
+                                    </View>
+                                    <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
+                                </View>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของนักฝึกพูด</Text>
+                                </View>
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <View style={[tw`flex items-center w-1/3`, styles.textshow]}>
+                                        <Text style={tw`h-8 pt-2`}>{cost_of_practitioner}</Text>
+                                    </View>
+                                    <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
                                 </View>
                             </View>
-                        </View>
 
-                        {/* <Text style={tw`font-semibold text-lg mt-4`}>ค่าบริการของนักจิตวิทยา</Text> */}
 
-                        <View style={tw`flex flex-row justify-between w-full mt-4 ml-44`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของนักจิตวิทยา</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text>{cost_of_psychologist}</Text>
+                            <View style={tw`flex flex-row justify-between w-full mt-4`}>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของนักกิจกรรมบำบัด</Text>
+                                </View>
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <View style={[tw`flex items-center w-1/3`, styles.textshow]}>
+                                        <Text style={tw`h-8 pt-2`}>{cost_of_occupational_therapist}</Text>
+                                    </View>
+                                    <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
+                                </View>
+                                <View style={tw`flex flex-row justify-start items-center w-1/4`}>
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของครูการศึกษาพิเศษ</Text>
+                                </View>
+                                <View style={tw`flex flex-row  items-center w-1/3`}>
+                                    <View style={[tw`flex items-center w-1/3`, styles.textshow]}>
+                                        <Text style={tw`h-8 pt-2`}>{cost_of_teacher}</Text>
+                                    </View>
+                                    <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
                                 </View>
                             </View>
-                        </View>
 
-                        {/* <View style={tw`flex flex-row justify-between w-full mt-4 ml-44`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`,styles.font]}>ชื่อนักจิตวิทยา 2</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text></Text>
+
+                            <View style={tw`flex flex-row justify-center w-full mt-6 pr-16`}>
+                                <View style={tw`flex flex-row items-center`}>
+                                    <Text style={[tw`font-semibold text-lg`, styles.font]}>คิดเป็นเงินทั้งสิ้น</Text>
+                                </View>
+                                <View style={tw`flex flex-row items-center w-32 ml-2`}>
+                                    <View style={[tw`flex justify-center items-center h-9 w-full`, styles.textshowsum]}>
+                                        <Text style={[tw`font-semibold text-lg`, styles.font]}>
+                                            {total}
+                                        </Text>
+                                    </View>
+                                    <Text style={[tw`font-semibold text-lg pl-2`, styles.font]}>บาท</Text>
                                 </View>
                             </View>
-                        </View>
+                       
 
-                        <View style={tw`flex flex-row justify-between w-full mt-4 ml-44`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`,styles.font]}>ชื่อนักจิตวิทยา 3</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text></Text>
-                                </View>
-                            </View>
-                        </View> */}
 
-                        <View style={tw`flex flex-row justify-between w-full mt-4 ml-44`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของนักฝึกพูด</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text>{cost_of_practitioner}</Text>
-                                </View>
-                            </View>
-                        </View>
-
-                        <View style={tw`flex flex-row justify-between w-full mt-4 ml-44`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของนักกิจกรรมบำบัด</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text>{cost_of_occupational_therapist}</Text>
-                                </View>
-                            </View>
-                        </View>
-
-                        <View style={tw`flex flex-row justify-between w-full mt-4 ml-44`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>ค่าบริการของครูการศึกษาพิเศษ</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text>{cost_of_teacher}</Text>
-                                </View>
-                            </View>
-                        </View>
-
-                        <View style={tw`flex flex-row justify-between w-full mt-4 ml-44`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
+                        <View style={tw`flex flex-row justify-evenly w-full mt-8 mr-6`}>
+                            <View style={[tw`flex flex-row justify-center items-center w-2/5 pr-10`, styles.bordercost]}>
+                                <Image source={require("../Icon/Record/icons8-mobile-payment-30.png")} />
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>เงินโอน</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text>{bank_transfer}</Text>
+                                <View style={tw`flex flex-row items-center w-1/3 ml-4`}>
+                                    <View style={[tw`flex items-center w-full`, styles.textshow]}>
+                                        <Text style={tw`h-8 pt-2`}>{bank_transfer}</Text>
+                                    </View>
+                                    <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
                                 </View>
+                            </View>
+
+                            <View style={[tw`flex flex-row justify-center items-center w-2/5 pr-10`, styles.bordercost]}>
+                                <Image source={require("../Icon/Record/icons8-money-30.png")} />
+                                <Text style={[tw`font-semibold text-base pl-1`, styles.font]}>เงินสด</Text>
+                                <View style={tw`flex flex-row items-center w-1/3 ml-4`}>
+                                    <View style={[tw`flex items-center w-full`, styles.textshow]}>
+                                        <Text style={tw`h-8 pt-2`}>{cash}</Text>
+                                    </View>
+                                    <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
+                                </View>
+                            </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-full mt-4 ml-44`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>เงินสด</Text>
-                            </View>
-
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text>{cash}</Text>
-                                </View>
-                            </View>
-                        </View>
-
-                        <View style={tw`flex flex-row justify-between w-full mt-4 ml-44`}>
-                            <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={tw`font-semibold text-base text-red-600`}>คิดเป็นเงินทั้งสิ้น</Text>
-                            </View>
-                            <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <View style={[tw`flex justify-center h-8 w-2/5 pl-2`,styles.textshow]}>
-                                    <Text style={[tw`font-semibold text-base`, styles.font]}>{total}</Text>
-                                </View>
-                                <Text style={tw`font-semibold text-base ml-2 text-red-600`}>บาท</Text>
-                            </View>
-                        </View>
-
-                        {/* <View style={tw`flex flex-row mt-4 justify-end w-full mt-4`}>
-                            <TouchableOpacity style={tw`h-12 w-1/5 rounded-md items-center justify-center border-4 border-red-500 bg-pink-200`}>
-                                <Text style={tw`text-lg text-black font-bold`}>Print</Text>
-                            </TouchableOpacity>
-                        </View> */}
-                        <View style={tw`flex flex-row justify-end w-full mt-2`}>
-                            <View style={styles.printButton}>
+                        <View style={tw`flex flex-row justify-end w-full mt-4 mr-8`}>
+                            <View style={styles.button}>
                                 <Button
                                     color="#4A235A"
                                     title="Print"
-                                    accessibilityLabel="Learn more about this purple button"
                                 />
                             </View>
                         </View>
                     </View>
                 </KeyboardAwareScrollView>
+
             </View>
+
             <View style={[tw`flex flex-row w-full justify-evenly items-center`, styles.footer]} >
                 <TouchableOpacity style={[tw``, styles.navbtm]}
                     onPress={() => navigation.navigate('ข้อมูลผู้ป่วย')}
@@ -450,6 +413,18 @@ const styles = StyleSheet.create({
         borderRadius: 6,
     },
 
+    textshowsum: {
+        backgroundColor: '#EBDEF0',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        borderRadius: 6,
+    },
+
     textbox: {
         backgroundColor: '#EBDEF0',
         shadowColor: "#000",
@@ -498,6 +473,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#EBDEF0',
         borderWidth: 2,
         borderColor: "#4A235A",
+    },
+
+    bordercost: {
+        backgroundColor: '#FFFAFA',
+        borderColor: '#633974',
+        borderWidth: 2,
+        borderRadius: 18,
+        padding: 8
     },
 
     printButton: {

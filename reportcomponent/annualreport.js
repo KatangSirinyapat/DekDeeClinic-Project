@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
 
     pic1:{
         position: "absolute",
-        bottom: 50,
+        bottom: 45,
         right: 0,
     },
 

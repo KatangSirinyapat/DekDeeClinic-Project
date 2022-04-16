@@ -62,11 +62,6 @@ export default function PatientMeet({ navigation }) {
     let tmpLnameDoctor = " "
 
 
-
-
-
-
-
     const getMeets = async () => {
         await axios.get(`${URL_MEET}`)
             .then(function (response) {
@@ -288,13 +283,13 @@ export default function PatientMeet({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-4/5`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อ</Text>
-                                <View style={[tw`h-8 mt-1 w-11/12 pl-2 pt-2`, styles.textshow]}>
+                                <View style={[tw`h-8 mt-1 w-11/12 pl-2`, styles.textshow]}>
                                     <Text>{fnamePatient}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>สกุล</Text>
-                                <View style={[tw`h-8 mt-1 w-full pl-2 pt-2`, styles.textshow]}>
+                                <View style={[tw`h-8 mt-1 w-full pl-2`, styles.textshow]}>
                                     <Text>{lnamePatient}</Text>
                                 </View>
                             </View>
@@ -304,7 +299,7 @@ export default function PatientMeet({ navigation }) {
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่นัดหมาย</Text>
                                 {/* <TextInput style={tw`h-8 mt-2 w-11/12  pl-2`} /> */}
-                                <View style={[tw`h-8 mt-2 w-11/12 pl-2 pt-3`,styles.textshow]}>
+                                <View style={[tw`h-8 mt-2 w-11/12 pl-2`,styles.textshow]}>
                                     <Text>{date_meet}</Text>
                                 </View>
                             </View>
@@ -315,14 +310,14 @@ export default function PatientMeet({ navigation }) {
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>เวลา ตั้งแต่</Text>
                                 {/* <TextInput style={tw`h-8 mt-2 w-11/12  pl-2`} /> */}
-                                <View style={[tw`h-8 mt-2 w-11/12  pl-2 pt-3`,styles.textshow]}>
+                                <View style={[tw`h-8 mt-2 w-11/12  pl-2`,styles.textshow]}>
                                     <Text>{time}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>ถึง</Text>
                                 {/* <TextInput style={tw`h-8 mt-2 w-full pl-2`} /> */}
-                                <View style={[tw`h-8 mt-2 w-full  pl-2 pt-3`,styles.textshow]}>
+                                <View style={[tw`h-8 mt-2 w-full  pl-2`,styles.textshow]}>
                                     <Text>{time_to}</Text>
                                 </View>
                             </View>
@@ -332,7 +327,7 @@ export default function PatientMeet({ navigation }) {
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>เบอร์โทรศัพท์</Text>
 
-                                <View style={[tw`h-8 mt-2 w-11/12  pl-2 pt-3`,styles.textshow]}>
+                                <View style={[tw`h-8 mt-2 w-11/12  pl-2`,styles.textshow]}>
                                     <Text>{telephone}</Text>
                                 </View>
                             </View>
@@ -344,14 +339,14 @@ export default function PatientMeet({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อแพทย์</Text>
-                                <View style={[tw`h-8 mt-2 w-11/12  pl-2 pt-3`,styles.textshow]}>
+                                <View style={[tw`h-8 mt-2 w-11/12  pl-2`,styles.textshow]}>
                                     <Text>{fnameDoctor}</Text>
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>สกุลแพทย์</Text>
-                                <View style={[tw`h-8 mt-2 w-full  pl-2 pt-3`,styles.textshow]}>
+                                <View style={[tw`h-8 mt-2 w-full  pl-2`,styles.textshow]}>
                                     <Text>{lnameDoctor}</Text>
                                 </View>
                             </View>
@@ -360,7 +355,7 @@ export default function PatientMeet({ navigation }) {
                         <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
                             <View style={tw`flex flex-col w-full`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>หมายเหตุ</Text>
-                                <View style={[tw`h-8 mt-2 w-full  pl-2 pt-3`,styles.textshow]}>
+                                <View style={[tw`h-8 mt-2 w-full  pl-2`,styles.textshow]}>
                                     <Text>{details}</Text>
                                 </View>
                             </View>
@@ -465,6 +460,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.02,
         shadowRadius: 5,
         borderRadius: 6,
+        display: 'flex',
+        justifyContent: 'center'
     },
 
     textbox: {
