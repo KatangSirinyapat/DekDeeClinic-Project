@@ -145,7 +145,7 @@ export default function DocterMeet({ navigation }) {
     const requestData = () => fetch(URL_DOCTOR);
     const requestDataWithDebounce = AwesomeDebouncePromise(requestData, 400);
 
-    const [query, setQuery] = React.useState(null);
+    const [query, setQuery] = React.useState("");
     const [data, setData] = React.useState([]);
 
     const getDoctors = async () => {

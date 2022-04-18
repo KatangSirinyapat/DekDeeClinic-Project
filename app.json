@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "project-app",
-    "slug": "project-app",
+    "name": "DekDeeClinic App",
+    "slug": "DekDeeClinicApp",
+    "owner": "dekdeeclinic",
+    "privacy": "public",
+    "description": "This is DekDeeClinic Application for Clinic (BETA Test)",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]
   },
-  "name": "project-app"
+  "name": "DekDeeClinic App"
 }

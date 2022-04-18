@@ -125,7 +125,7 @@ export default function PatientMeet({ navigation }) {
     const requestData_patient = () => fetch(URL_PATIENT);
     const requestDataWithDebounce_patient = AwesomeDebouncePromise(requestData_patient, 400);
 
-    const [query_patient, setQuery_patient] = React.useState(null);
+    const [query_patient, setQuery_patient] = React.useState("");
     const [data_patient, setData_patient] = React.useState([]);
 
 

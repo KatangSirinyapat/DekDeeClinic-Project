@@ -87,6 +87,7 @@ export default function ManualRecord({ navigation }) {
                                     <RangeDatepicker style={styles.textbox}
                                         range={range}
                                         onSelect={nextRange => onRange(nextRange)}
+                                        
                                     />
                                 </View>
                             </View>

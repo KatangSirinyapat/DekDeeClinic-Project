@@ -221,7 +221,7 @@ export default function VisitRecord({ navigation }) {
     const requestData = () => fetch(URL_DOCTOR);
     const requestDataWithDebounce = AwesomeDebouncePromise(requestData, 400);
 
-    const [query, setQuery] = React.useState(null);
+    const [query, setQuery] = React.useState("");
     const [data, setData] = React.useState([]);
 
     const updateData = () => {
@@ -271,7 +271,7 @@ export default function VisitRecord({ navigation }) {
     const requestData_patient = () => fetch(URL_PATIENT);
     const requestDataWithDebounce_patient = AwesomeDebouncePromise(requestData_patient, 400);
 
-    const [query_patient, setQuery_patient] = React.useState(null);
+    const [query_patient, setQuery_patient] = React.useState("");
     const [data_patient, setData_patient] = React.useState([]);
 
     const updateData_patient = () => {
