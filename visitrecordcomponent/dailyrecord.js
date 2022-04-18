@@ -30,7 +30,7 @@ export default function DailyRecord({ navigation }) {
     const [total, setTotal] = useState(0)
 
     //Date time
-    const [date1, setDate1] = useState(new Date(2021, 12, 1, 0, 0, 0, 0));
+    const [date1, setDate1] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
@@ -48,7 +48,7 @@ export default function DailyRecord({ navigation }) {
         let tmp0 = tmp.substring(0, 8)
         let tmp1 = tmp.substring(8, 11)
 
-        let int_tmp1 = parseInt(tmp1) + 1
+        let int_tmp1 = parseInt(tmp1) 
         // console.log(int_tmp1);
         if (int_tmp1 >= 0 && int_tmp1 <= 9) {
             tmp = tmp0 + 0 + int_tmp1
@@ -60,19 +60,7 @@ export default function DailyRecord({ navigation }) {
 
         console.log(tmp);
         setDate(tmp.toString())
-        // tmpDate = tmp.toString()
-
-        // costs.map((item, index) => {
-        //     if (item.date === date.concat("T00:00:00.000Z")) {
-        //         setCost(item)
-        //         costOBJ.push(item)
-        //         // tmp = item.date
-        //         // console.log(tmp.substring(0,7));
-
-        //     }
-        // })
-
-        // console.log(dataBoD.substring(1,11)); 
+   
     };
 
 

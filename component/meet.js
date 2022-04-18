@@ -51,8 +51,8 @@ export default function Meet({ navigation }) {
     const [time_to, setTime_to] = useState("")
 
     //Date time
-    const [date, setDate] = useState(new Date(2021, 12, 1, 0, 0, 0, 0));
-    const [date2, setDate2] = useState(new Date(2021, 12, 1, 0, 0, 0, 0));
+    const [date, setDate] = useState(new Date());
+    const [date2, setDate2] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
@@ -84,7 +84,7 @@ export default function Meet({ navigation }) {
     };
 
     const onChangeTime = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
+        const currentDate = selectedDate || date.toLocaleDateString();
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
 

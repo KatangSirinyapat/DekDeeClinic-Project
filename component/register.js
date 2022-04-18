@@ -26,12 +26,12 @@ export default function Register({ navigation }) {
     const [telephone, settelephone] = useState("");
     const [drug_allergy, setdrug_allergy] = useState("");
     const [congenital_disease, setcongenital_disease] = useState("");
-    const [home_no, sethome_no] = useState("");
-    const [moo, setmoo] = useState("");
-    const [soi, setsoi] = useState("");
+    const [home_no, sethome_no] = useState("-");
+    const [moo, setmoo] = useState("-");
+    const [soi, setsoi] = useState("-");
     const [subdistrict, setsubdistrict] = useState("");
     const [district, setDistric] = useState("");
-    const [province, setprovince] = useState("");
+    const [province, setprovince] = useState("สงขลา");
     const [fname_parent, setfname_parent] = useState("");
     const [lname_parent, setlname_parent] = useState("");
     const [relation, setrelation] = useState("");
@@ -267,7 +267,10 @@ export default function Register({ navigation }) {
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>จังหวัด</Text>
                                 <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
-                                    onChangeText={(text) => setprovince(text)} />
+                                    onChangeText={(text) => setprovince(text)} 
+                                    value={province}
+                                    />
+                                    
                             </View>
                         </View>
 
