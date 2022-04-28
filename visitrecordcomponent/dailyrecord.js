@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import tw from "tailwind-react-native-classnames";
 import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import moment from "moment";
 
 const URL_COST = `http://178.128.90.50:3333/costs`
 
@@ -40,6 +40,7 @@ export default function DailyRecord({ navigation }) {
         setDate1(currentDate);
 
         let curDate = new Date().toString()
+        let test = new Date().toLocaleDateString()
         let tmpDate = currentDate.toString()
 
         let data = currentDate.toJSON()
@@ -48,7 +49,7 @@ export default function DailyRecord({ navigation }) {
         let tmp0 = tmp.substring(0, 8)
         let tmp1 = tmp.substring(8, 11)
 
-        let int_tmp1 = parseInt(tmp1) 
+        let int_tmp1 = parseInt(tmp1)
         // console.log(int_tmp1);
         if (int_tmp1 >= 0 && int_tmp1 <= 9) {
             tmp = tmp0 + 0 + int_tmp1
@@ -58,9 +59,13 @@ export default function DailyRecord({ navigation }) {
             tmp = tmp0 + int_tmp1
         }
 
-        console.log(tmp);
-        setDate(tmp.toString())
-   
+        let TrueDay_From_Calendar = new Date();
+        TrueDay_From_Calendar = moment(tmp).add(1, 'day').format('YYYY-MM-DD');
+
+        console.log(TrueDay_From_Calendar);
+
+        setDate(TrueDay_From_Calendar)
+
     };
 
 
@@ -80,10 +85,12 @@ export default function DailyRecord({ navigation }) {
 
         costs.map((item, index) => {
 
+            console.log("Test:" + date);
             if (item.date === date.concat("T00:00:00.000Z")) {
                 setCost(item)
                 console.log("T" + index);
                 costOBJ.push(item)
+
                 // tmp = item.date
                 // console.log(tmp.substring(0,7));
 
@@ -168,7 +175,7 @@ export default function DailyRecord({ navigation }) {
 
             <View style={[tw`flex flex-row flex-wrap w-4/5`, styles.menu]}>
                 <KeyboardAwareScrollView style={tw``}>
-                    <View style={[tw`flex flex-col items-center p-4`, styles.content]}> 
+                    <View style={[tw`flex flex-col items-center p-4`, styles.content]}>
                         <View style={tw`flex flex-row w-4/5 items-center justify-center mt-10 pr-10`}>
                             <View style={tw`flex flex-row items-center w-3/5 pr-20`}>
                                 <Text style={[tw`font-semibold text-lg`, styles.font]}>วันที่ที่ต้องการทราบค่าบริการ</Text>
@@ -270,31 +277,31 @@ export default function DailyRecord({ navigation }) {
                                     <Text style={[tw`font-semibold text-lg pl-2`, styles.font]}>บาท</Text>
                                 </View>
                             </View>
-                       
 
 
-                        <View style={tw`flex flex-row justify-evenly w-full mt-8 mr-6`}>
-                            <View style={[tw`flex flex-row justify-center items-center w-2/5 pr-10`, styles.bordercost]}>
-                                <Image source={require("../Icon/Record/icons8-mobile-payment-30.png")} />
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>เงินโอน</Text>
-                                <View style={tw`flex flex-row items-center w-1/3 ml-4`}>
-                                    <View style={[tw`flex items-center w-full`, styles.textshow]}>
-                                        <Text style={tw`h-8 pt-2`}>{bank_transfer}</Text>
+
+                            <View style={tw`flex flex-row justify-evenly w-full mt-8 mr-6`}>
+                                <View style={[tw`flex flex-row justify-center items-center w-2/5 pr-10`, styles.bordercost]}>
+                                    <Image source={require("../Icon/Record/icons8-mobile-payment-30.png")} />
+                                    <Text style={[tw`font-semibold text-base`, styles.font]}>เงินโอน</Text>
+                                    <View style={tw`flex flex-row items-center w-1/3 ml-4`}>
+                                        <View style={[tw`flex items-center w-full`, styles.textshow]}>
+                                            <Text style={tw`h-8 pt-2`}>{bank_transfer}</Text>
+                                        </View>
+                                        <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
                                     </View>
-                                    <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
                                 </View>
-                            </View>
 
-                            <View style={[tw`flex flex-row justify-center items-center w-2/5 pr-10`, styles.bordercost]}>
-                                <Image source={require("../Icon/Record/icons8-money-30.png")} />
-                                <Text style={[tw`font-semibold text-base pl-1`, styles.font]}>เงินสด</Text>
-                                <View style={tw`flex flex-row items-center w-1/3 ml-4`}>
-                                    <View style={[tw`flex items-center w-full`, styles.textshow]}>
-                                        <Text style={tw`h-8 pt-2`}>{cash}</Text>
+                                <View style={[tw`flex flex-row justify-center items-center w-2/5 pr-10`, styles.bordercost]}>
+                                    <Image source={require("../Icon/Record/icons8-money-30.png")} />
+                                    <Text style={[tw`font-semibold text-base pl-1`, styles.font]}>เงินสด</Text>
+                                    <View style={tw`flex flex-row items-center w-1/3 ml-4`}>
+                                        <View style={[tw`flex items-center w-full`, styles.textshow]}>
+                                            <Text style={tw`h-8 pt-2`}>{cash}</Text>
+                                        </View>
+                                        <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
                                     </View>
-                                    <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
                                 </View>
-                            </View>
                             </View>
                         </View>
 

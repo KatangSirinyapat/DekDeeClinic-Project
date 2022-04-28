@@ -8,6 +8,7 @@ import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
+import moment from "moment";
 
 import { TouchableWithoutFeedback } from 'react-native';
 
@@ -73,9 +74,10 @@ export default function Meet({ navigation }) {
         // let int_tmp1 = parseInt(tmp1)+1 
         // tmp = tmp0+int_tmp1
 
+        let TrueDay_From_Calendar = new Date();
+        TrueDay_From_Calendar = moment(tmp).add(1, 'day').format('YYYY-MM-DD');
 
-
-        setDate_meet(tmp.toString())
+        setDate_meet(TrueDay_From_Calendar)
         // console.log(date_meet);
         // console.log(dataBoD.substring(1,11)); 
 

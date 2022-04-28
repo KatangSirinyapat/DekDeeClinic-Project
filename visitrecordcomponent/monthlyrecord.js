@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import MonthPicker from 'react-native-month-year-picker';
 
 
 const URL_COST = `http://178.128.90.50:3333/costs`
@@ -45,8 +46,6 @@ export default function MonthlyRecord({ navigation }) {
         setDate(tmp1.toString())
 
     };
-
-
 
 
 
@@ -93,6 +92,9 @@ export default function MonthlyRecord({ navigation }) {
                 tmp_total += item.total
 
 
+            }
+            else {
+                // alert("ไม่พบข้อมูลของเดือนที่ท่านเลือก")
             }
             // console.log("-----------------------");
         })
@@ -148,6 +150,9 @@ export default function MonthlyRecord({ navigation }) {
                                     display="default"
                                     onChange={onChange}
                                 />
+
+                   
+
                             </View>
                             <View style={styles.button}>
                                 <Button
