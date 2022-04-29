@@ -12,7 +12,7 @@ const URL_DOCTOR = `http://178.128.90.50:3333/users`
 
 export default function Register_users({ navigation }) {
 
-    const [doctor_id, setDoctor_id] = useState('');
+    const [doctor_id, setDoctor_id] = useState(0);
     const [fname, setFname] = useState('');
     const [lname, setLname] = useState('');
     const [email, setEmail] = useState('');
@@ -26,7 +26,7 @@ export default function Register_users({ navigation }) {
 
     const postDoctor = async () => {
         await axios.post(URL_DOCTOR, {
-            doctor_id: parseInt(doctor_id),
+            doctor_id: 0, //BackEnd Init this id init 1001 from Back End
             fname: fname,
             lname: lname,
             email: email,
@@ -43,32 +43,7 @@ export default function Register_users({ navigation }) {
             })
     }
 
-    useEffect(() => {
-        getUsers()
-    }, [])
 
-    const getUsers = async () => {
-
-        let user = await axios.get(URL_DOCTOR)
-            .then(function (response) {
-
-                let obj = JSON.stringify(response.data)
-                let objJson = JSON.parse(obj)
-
-                
-                
-                setDoctors(objJson)
-                alert(doctors)
-                // alert(patients[0].clinic_number)
-            })
-            .catch(function (error) {
-                // alert(error.message);
-            })
-
-        
-        setDoctors(user.data)
-
-    }
 
 
 

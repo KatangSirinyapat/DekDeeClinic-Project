@@ -5,7 +5,7 @@ import tw from "tailwind-react-native-classnames";
 import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import MonthPicker from 'react-native-month-year-picker';
-
+import moment from "moment";
 
 const URL_COST = `http://178.128.90.50:3333/costs`
 
@@ -79,6 +79,8 @@ export default function MonthlyRecord({ navigation }) {
             // console.log("------------");
             console.log(tmp);
             console.log(date);
+            let input_date =  moment(date).format('YYYY/MM/DD');
+            let database_date = moment(item.date).format('YYYY/MM/DD');
             if (tmp == date) {
 
                 tmp_cost_of_doctor += item.cost_of_doctor

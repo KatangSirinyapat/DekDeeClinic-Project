@@ -98,7 +98,7 @@ export default function VisitRecord({ navigation }) {
         // console.log(tmp);
 
         let TrueDay_From_Calendar = new Date();
-        TrueDay_From_Calendar = moment(tmp).format('YYYY-MM-DD');
+        TrueDay_From_Calendar = moment(tmp).format('YYYY/MM/DD');
 
 
         console.log(TrueDay_From_Calendar);
@@ -252,7 +252,7 @@ export default function VisitRecord({ navigation }) {
         if( parseInt(cash) + parseInt(bank_transfer)  === tmp_total)
         {
             await axios.post(URL_COST, {
-                date: date,
+                date: moment(date).format('YYYY-MM-DD'), 
                 cost_of_doctor: cost_of_doctor,
                 cost_of_medicine: cost_of_medicine,
                 cost_of_psychologist: calculate_cost_of_psychologist(),

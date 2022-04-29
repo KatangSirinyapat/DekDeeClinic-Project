@@ -75,8 +75,8 @@ export default function Meet({ navigation }) {
         // tmp = tmp0+int_tmp1
 
         let TrueDay_From_Calendar = new Date();
-        TrueDay_From_Calendar = moment(tmp).add(1, 'day').format('YYYY-MM-DD');
-
+        TrueDay_From_Calendar = moment(tmp).format('YYYY/MM/DD');
+        console.log(TrueDay_From_Calendar);
         setDate_meet(TrueDay_From_Calendar)
         // console.log(date_meet);
         // console.log(dataBoD.substring(1,11)); 

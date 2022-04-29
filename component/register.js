@@ -17,7 +17,7 @@ export default function Register({ navigation }) {
     const [date, setDate] = useState(new Date(2021, 12, 1, 0, 0, 0, 0));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [clinic_number, setClinic_number] = useState("");
+    const [clinic_number, setClinic_number] = useState(0);
     const [fname, setfname] = useState("");
     const [lname, setlname] = useState("");
     const [gender, setgender] = useState("");
@@ -90,7 +90,7 @@ export default function Register({ navigation }) {
     const postPatient = () => {
         axios
             .post(URL, {
-                clinic_number: parseInt(clinic_number),
+                clinic_number: 0, //init ID from Back End Start at 2001
                 fname: fname,
                 lname: lname,
                 gender: gender,

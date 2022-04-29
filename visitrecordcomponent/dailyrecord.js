@@ -60,7 +60,7 @@ export default function DailyRecord({ navigation }) {
         }
 
         let TrueDay_From_Calendar = new Date();
-        TrueDay_From_Calendar = moment(tmp).add(1, 'day').format('YYYY-MM-DD');
+        TrueDay_From_Calendar = moment(tmp).format('YYYY-MM-DD');
 
         console.log(TrueDay_From_Calendar);
 
@@ -86,7 +86,10 @@ export default function DailyRecord({ navigation }) {
         costs.map((item, index) => {
 
             console.log("Test:" + date);
-            if (item.date === date.concat("T00:00:00.000Z")) {
+         let input_date =  moment(date).format('YYYY/MM/DD');
+         let database_date = moment(item.date).format('YYYY/MM/DD');
+            if (database_date === input_date) {
+                
                 setCost(item)
                 console.log("T" + index);
                 costOBJ.push(item)
@@ -96,7 +99,10 @@ export default function DailyRecord({ navigation }) {
 
             }
             else {
+                
                 console.log("F" + index);
+                console.log("F: " + item.date);
+                console.log(date.concat("T00:00:00.007Z"));
             }
 
         })
