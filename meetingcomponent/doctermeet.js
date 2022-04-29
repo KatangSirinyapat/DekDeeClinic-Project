@@ -276,7 +276,7 @@ export default function DocterMeet({ navigation }) {
                         </KeyboardAwareScrollView>
                     </DataTable>
                 </View>
-                <View style={tw`flex flex-row justify-end mt-2 mr-4`}>
+                {/* <View style={tw`flex flex-row justify-end mt-2 mr-4`}>
                     <View style={styles.button}>
                         <Button
                             // onPress={}
@@ -284,7 +284,7 @@ export default function DocterMeet({ navigation }) {
                             title="Print"
                         />
                     </View>
-                </View>
+                </View> */}
             </View>
 
 

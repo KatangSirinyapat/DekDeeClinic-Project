@@ -79,11 +79,11 @@ export default function DailyRecord({ navigation }) {
         // findCost()
     }
 
-    const findCost = () => {
+    const findCost = async () => {
 
         let tmp = 0
 
-        costs.map((item, index) => {
+        await costs.map((item, index) => {
 
             console.log("Test:" + date);
          let input_date =  moment(date).format('YYYY/MM/DD');
@@ -311,14 +311,14 @@ export default function DailyRecord({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-end w-full mt-4 mr-8`}>
+                        {/* <View style={tw`flex flex-row justify-end w-full mt-4 mr-8`}>
                             <View style={styles.button}>
                                 <Button
                                     color="#4A235A"
                                     title="Print"
                                 />
                             </View>
-                        </View>
+                        </View> */}
                     </View>
                 </KeyboardAwareScrollView>
 
@@ -480,6 +480,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFAFA',
         borderColor: '#633974',
         borderWidth: 2,
+        borderRadius: 18,
+        padding: 8
+    },
+
+    Container_bordercost: {
         borderRadius: 18,
         padding: 8
     },

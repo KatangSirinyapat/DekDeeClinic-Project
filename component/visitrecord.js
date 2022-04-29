@@ -404,7 +404,7 @@ export default function VisitRecord({ navigation }) {
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่</Text>
                                     <View style={[tw`flex h-10 mt-1 w-11/12 justify-center`, styles.textbox]}>
                                         <DateTimePicker themeVariant="light"
-                                            style={tw`mr-40`}
+                                            style={tw`mr-32`}
                                             testID="dateTimePicker"
                                             value={date1}
                                             mode={'date'}

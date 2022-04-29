@@ -325,15 +325,22 @@ export default function PatientProfile({ navigation }) {
 
                                 </View>
                                 <View style={tw`flex flex-col w-1/4`}>
-                                    <Text style={[tw`font-semibold text-base`,styles.font]}>เพศ </Text>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>เลขประจำตัวผู้ป่วย</Text>
                                     <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
-                                        <Text>{gender}</Text>
+                                        <Text>{clinic_number}</Text>
                                     </View>
 
                                 </View>
                             </View>
 
                             <View style={tw`flex flex-row justify-between w-full mt-2`}>
+                                <View style={tw`flex flex-col justify-start w-1/3`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>เพศ </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-3/4 rounded-md pl-2`,styles.textbox]}>
+                                        <Text>{gender}</Text>
+                                    </View>
+
+                                </View>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={[tw`font-semibold text-base`,styles.font]}>วันเกิด </Text>
                                     <View style={[tw`flex justify-center h-8 mt-2 w-3/4 rounded-md pl-2`,styles.textbox]}>
@@ -341,17 +348,10 @@ export default function PatientProfile({ navigation }) {
                                     </View>
 
                                 </View>
-                                <View style={tw`flex flex-col justify-start w-1/3`}>
-                                    <Text style={[tw`font-semibold text-base`,styles.font]}>อายุ </Text>
-                                    <View style={[tw`flex justify-center h-8 mt-2 w-3/4 rounded-md pl-2`,styles.textbox]}>
-                                        <Text>{age}</Text>
-                                    </View>
-
-                                </View>
                                 <View style={tw`flex flex-col justify-start w-1/4`}>
-                                    <Text style={[tw`font-semibold text-base`,styles.font]}>เบอร์โทรศัพท์ </Text>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>อายุ </Text>
                                     <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
-                                        <Text>{telephone}</Text>
+                                        <Text>{age}</Text>
                                     </View>
 
                                 </View>
@@ -359,25 +359,24 @@ export default function PatientProfile({ navigation }) {
 
                             <View style={tw`flex flex-row justify-between w-full mt-2`}>
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
+                                    <Text style={[tw`font-semibold text-base`,styles.font]}>เบอร์โทรศัพท์ </Text>
+                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
+                                        <Text>{telephone}</Text>
+                                    </View>
+
+                                </View>
+                                <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={[tw`font-semibold text-base`,styles.font]}>ประวัติการแพ้ยา </Text>
                                     <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{drug_allergy}</Text>
                                     </View>
 
                                 </View>
-                                <View style={tw`flex flex-col justify-start w-1/3`}>
+                                <View style={tw`flex flex-col justify-start w-1/4`}>
                                     <Text style={[tw`font-semibold text-base`,styles.font]}>ประวัติโรคประจำตัว </Text>
                                     <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
                                         <Text>{congenital_disease}</Text>
                                     </View>
-
-                                </View>
-                                <View style={tw`flex flex-col justify-start w-1/4`}>
-                                    <Text style={[tw`font-semibold text-base`,styles.font]}>จำนวนครั้งในการรักษา </Text>
-                                    <View style={[tw`flex justify-center h-8 mt-2 w-full rounded-md pl-2`,styles.textbox]}>
-                                        <Text>{num_of_treatments}</Text>
-                                    </View>
-
                                 </View>
                             </View>
 

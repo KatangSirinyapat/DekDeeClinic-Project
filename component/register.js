@@ -149,10 +149,14 @@ export default function Register({ navigation }) {
                                     onChangeText={(text) => setlname(text)} />
                             </View>
                             <View style={tw`flex flex-col w-1/4`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>เลขประจำตัวผู้ป่วย</Text>
+                                {/* <Text style={[tw`font-semibold text-base`, styles.font]}>เลขประจำตัวผู้ป่วย</Text>
                                 <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
-                                    onChangeText={(text) => setClinic_number(text)} />
+                                    onChangeText={(text) => setClinic_number(text)} /> */}
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>เบอร์โทรศัพท์</Text>
+                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
+                                    onChangeText={(text) => settelephone(text)} />
                             </View>
+
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-6`}>
@@ -160,7 +164,7 @@ export default function Register({ navigation }) {
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>วันเกิด</Text>
                                 {/* <TextInput 
                                     onChangeText={(text) => setbod(text)} /> */}
-                                <View style={[tw`h-9 mt-1 w-2/5 rounded-md`, styles.textbox]}>
+                                <View style={[tw`h-9 mt-1 w-2/4 rounded-md`, styles.textbox]}>
                                     <DateTimePicker themeVariant="light"
                                         testID="dateTimePicker"
                                         value={date}
@@ -198,7 +202,7 @@ export default function Register({ navigation }) {
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-6`}>
-                            <View style={tw`flex flex-col justify-start w-1/3`}>
+                            <View style={tw`flex flex-col justify-start w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>ประวัติการแพ้ยา</Text>
                                 <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setdrug_allergy(text)} />
@@ -213,7 +217,7 @@ export default function Register({ navigation }) {
                                     />
                                 </View> */}
                             </View>
-                            <View style={tw`flex flex-col justify-start w-1/3`}>
+                            <View style={tw`flex flex-col justify-start w-1/2 pl-10`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>ประวัติโรคประจำตัว</Text>
                                 <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setcongenital_disease(text)} />
@@ -228,11 +232,11 @@ export default function Register({ navigation }) {
                                     />
                                 </View> */}
                             </View>
-                            <View style={tw`flex flex-col justify-start w-1/4`}>
+                            {/* <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>เบอร์โทรศัพท์</Text>
                                 <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => settelephone(text)} />
-                            </View>
+                            </View> */}
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-6`}>
@@ -267,10 +271,10 @@ export default function Register({ navigation }) {
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>จังหวัด</Text>
                                 <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
-                                    onChangeText={(text) => setprovince(text)} 
+                                    onChangeText={(text) => setprovince(text)}
                                     value={province}
-                                    />
-                                    
+                                />
+
                             </View>
                         </View>
 
@@ -322,6 +326,10 @@ export default function Register({ navigation }) {
                     </View>
                 </KeyboardAwareScrollView>
             </View>
+
+            {/* <View style={styles.pic1}>
+                <Image source={require("../Icon/Home/Docter-Regis.png")} />
+            </View> */}
 
             <View style={[tw`flex flex-row w-full justify-evenly items-center`, styles.footer]} >
                 <TouchableOpacity style={[tw``, styles.navbtm]}
@@ -434,6 +442,13 @@ const styles = StyleSheet.create({
     font: {
         color: '#633974',
     },
+
+    pic1: {
+        position: "absolute",
+        bottom: 505,
+        right: 95,
+    },
+
 
     footer: {
         position: "absolute",

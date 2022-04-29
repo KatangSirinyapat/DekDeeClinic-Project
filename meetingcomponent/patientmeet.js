@@ -172,7 +172,7 @@ export default function PatientMeet({ navigation }) {
 
     }
 
-    const onSelect_patient = (index) => {
+    const onSelect_patient = async (index) => {
         setQuery_patient(data_patient[index].fname + " " + data_patient[index].lname);
         setIdPatient(data_patient[index].clinic_number)
         setFnamePatient(data_patient[index].fname)
@@ -182,22 +182,27 @@ export default function PatientMeet({ navigation }) {
         // console.log("Test");
 
         // findMeet()
-        data_patient[index].meets.map((item, index) => {
+        await data_patient[index].meets.map((item, index) => {
             setDate_meet(item.date_meet)
             setTime(item.time)
             setTime_to(item.time_to)
             setDetails(item.details)
+            setIdDoctor(item.user_id)
+
+            let tmp_user_id = item.user_id
+            let tmp = 0;
+            doctors.map((item, index) => {
+                // console.log("FF");
+                if (item.doctor_id == tmp_user_id && tmp == 0) {
+                    setFnameDoctor(item.fname)
+                    setLnameDoctor(item.lname)
+    
+                    tmp = 1
+                }
+            })
         })
 
-        let tmp = 0;
-        doctors.map((item, index) => {
-            if (item.user_id == idDoctor && tmp == 0) {
-                setFnameDoctor(item.fname)
-                setLnameDoctor(item.lname)
-
-                tmp = 1
-            }
-        })
+  
 
 
     };
@@ -248,10 +253,10 @@ export default function PatientMeet({ navigation }) {
                 </View>
             </View>
 
-            <View style={[tw`flex flex-col`, styles.menu]}>
-                <View style={tw`flex flex-row w-full justify-center items-center`}>
+            <View style={[tw`flex flex-col justify-center`, styles.menu]}>
+                <View style={tw`flex flex-row items-center justify-center`}>
                     <Text style={[tw`font-semibold text-xl`, styles.font]}>ค้นหาชื่อผู้ป่วย</Text>
-                    {/* <TextInput style={tw`h-8 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
+                    {/* <TextInput style={tw`h-9 w-1/2 ml-2 pl-2 bg-purple-100 rounded-md`}
                         onChangeText={text => updateIdPatient(text)}
                         placeholder="กรอกรหัสประจำตัวผู้ป่วย. . ."
                     />
@@ -263,7 +268,7 @@ export default function PatientMeet({ navigation }) {
 
                     /> */}
 
-                    <View style={tw`h-8 w-1/2 pl-2`}>
+                    <View style={tw`h-9 w-1/2 pl-2`}>
                         <Autocomplete
                             placeholder='โปรดระบุชื่อผู้ป่วย'
                             value={query_patient}
@@ -280,54 +285,54 @@ export default function PatientMeet({ navigation }) {
 
                 <KeyboardAwareScrollView style={tw`mt-2`}>
                     <View style={[tw`flex flex-col justify-center items-center p-4 rounded-xl`, styles.content]}>
-                        <View style={tw`flex flex-row justify-between w-4/5`}>
+                        <View style={tw`flex flex-row justify-between w-10/12`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อ</Text>
-                                <View style={[tw`h-8 mt-1 w-11/12 pl-2`, styles.textshow]}>
+                                <View style={[tw`h-9 mt-1 w-11/12 pl-2`, styles.textshow]}>
                                     <Text>{fnamePatient}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>สกุล</Text>
-                                <View style={[tw`h-8 mt-1 w-full pl-2`, styles.textshow]}>
+                                <View style={[tw`h-9 mt-1 w-full pl-2`, styles.textshow]}>
                                     <Text>{lnamePatient}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
+                        <View style={tw`flex flex-row justify-between w-10/12 mt-1`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่นัดหมาย</Text>
-                                {/* <TextInput style={tw`h-8 mt-2 w-11/12  pl-2`} /> */}
-                                <View style={[tw`h-8 mt-2 w-11/12 pl-2`,styles.textshow]}>
+                                {/* <TextInput style={tw`h-9 mt-2 w-11/12  pl-2`} /> */}
+                                <View style={[tw`h-9 mt-2 w-11/12 pl-2`, styles.textshow]}>
                                     <Text>{date_meet}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}></View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
+                        <View style={tw`flex flex-row justify-between w-10/12 mt-1`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>เวลา ตั้งแต่</Text>
-                                {/* <TextInput style={tw`h-8 mt-2 w-11/12  pl-2`} /> */}
-                                <View style={[tw`h-8 mt-2 w-11/12  pl-2`,styles.textshow]}>
+                                {/* <TextInput style={tw`h-9 mt-2 w-11/12  pl-2`} /> */}
+                                <View style={[tw`h-9 mt-2 w-11/12  pl-2`, styles.textshow]}>
                                     <Text>{time}</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>ถึง</Text>
-                                {/* <TextInput style={tw`h-8 mt-2 w-full pl-2`} /> */}
-                                <View style={[tw`h-8 mt-2 w-full  pl-2`,styles.textshow]}>
+                                {/* <TextInput style={tw`h-9 mt-2 w-full pl-2`} /> */}
+                                <View style={[tw`h-9 mt-2 w-full  pl-2`, styles.textshow]}>
                                     <Text>{time_to}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
+                        <View style={tw`flex flex-row justify-between w-10/12 mt-1`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>เบอร์โทรศัพท์</Text>
 
-                                <View style={[tw`h-8 mt-2 w-11/12  pl-2`,styles.textshow]}>
+                                <View style={[tw`h-9 mt-2 w-11/12  pl-2`, styles.textshow]}>
                                     <Text>{telephone}</Text>
                                 </View>
                             </View>
@@ -336,32 +341,32 @@ export default function PatientMeet({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
+                        <View style={tw`flex flex-row justify-between w-10/12 mt-1`}>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>ชื่อแพทย์</Text>
-                                <View style={[tw`h-8 mt-2 w-11/12  pl-2`,styles.textshow]}>
+                                <View style={[tw`h-9 mt-2 w-11/12  pl-2`, styles.textshow]}>
                                     <Text>{fnameDoctor}</Text>
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col w-1/2`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>สกุลแพทย์</Text>
-                                <View style={[tw`h-8 mt-2 w-full  pl-2`,styles.textshow]}>
+                                <View style={[tw`h-9 mt-2 w-full  pl-2`, styles.textshow]}>
                                     <Text>{lnameDoctor}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-between w-4/5 mt-1`}>
+                        <View style={tw`flex flex-row justify-between w-10/12 mt-1`}>
                             <View style={tw`flex flex-col w-full`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>หมายเหตุ</Text>
-                                <View style={[tw`h-8 mt-2 w-full  pl-2`,styles.textshow]}>
+                                <View style={[tw`h-9 mt-2 w-full  pl-2`, styles.textshow]}>
                                     <Text>{details}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-end w-11/12 mt-4`}>
+                        {/* <View style={tw`flex flex-row justify-end w-11/12 mt-4`}>
                             <View style={[tw`mr-14`,styles.button]}>
                                 <Button
                                     // onPress={}
@@ -369,7 +374,7 @@ export default function PatientMeet({ navigation }) {
                                     title="Print"
                                 />
                             </View>
-                        </View>
+                        </View> */}
                     </View>
                 </KeyboardAwareScrollView>
             </View>

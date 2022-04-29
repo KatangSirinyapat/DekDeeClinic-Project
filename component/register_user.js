@@ -58,15 +58,15 @@ export default function Register_users({ navigation }) {
                 </View>
             </View>
 
-            <View style={[tw`flex flex-row w-full`, styles.menu]}>
+            <View style={[tw`flex flex-row w-full h-3/5`, styles.menu]}>
                 <KeyboardAwareScrollView style={tw`flex w-1/2`}>
                     <View style={tw`flex flex-col justify-start items-start`}>
                         <View style={[tw`flex flex-col justify-center items-start w-1/3 ml-48`, styles.content]}>
-                            <Text style={[tw`font-semibold`, styles.font]}>Doctor ID *</Text>
+                            {/* <Text style={[tw`font-semibold`, styles.font]}>Doctor ID *</Text>
                             <TextInput style={[tw`h-9 mt-2 w-full rounded-md pl-2`, styles.textbox]} placeholder="โปรดระบุเลขประจำตัวแพทย์"
                                 value={doctor_id}
                                 onChangeText={nextValue => setDoctor_id(nextValue)}
-                            />
+                            /> */}
                             <Text style={[tw`mt-3 font-semibold`, styles.font]}>ชื่อ *</Text>
                             <TextInput style={[tw`h-9 mt-2 w-full rounded-md pl-2`, styles.textbox]} placeholder="โปรดระบุชื่อ"
                                 value={fname}
@@ -102,7 +102,7 @@ export default function Register_users({ navigation }) {
                                 />
                             </View>
                         </View>
-                        <View style={tw`flex flex-row mt-4 justify-end w-1/3 ml-48`}>
+                        <View style={tw`flex flex-row mt-8 justify-end w-1/3 ml-48`}>
                             <View style={styles.button}>
                                 <Button
                                     onPress={postDoctor}
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         // borderColor: 'black',
         // borderWidth: 2,
-        marginTop: 188,
+        marginTop: 200,
         // height: 630
     },
     textshow: {

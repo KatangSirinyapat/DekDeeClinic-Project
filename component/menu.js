@@ -66,11 +66,11 @@ export default function Menu({ navigation }) {
               <Text style={tw`text-lg text-black font-bold`}>ตั้งค่าระบบ</Text>
             </TouchableOpacity> */}
           
-            <TouchableOpacity style={[tw``, styles.btn]}
+            {/* <TouchableOpacity style={[tw``, styles.btn]}
               onPress={() => navigation.navigate('Login')}>
               <Image source={require("../Icon/Home/icons8-logout-80.png")} style={tw`ml-16`}/>
               <Text style={[tw`text-lg font-bold ml-4`,styles.fontmenu]}>ออกจากระบบ</Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>  */}
       
           </View>
 
@@ -159,7 +159,7 @@ export default function Menu({ navigation }) {
       position: "absolute",
       // borderColor: 'black',
       // borderWidth: 2,
-      marginTop: 244,
+      marginTop: 290,
     },
 
     btn:{

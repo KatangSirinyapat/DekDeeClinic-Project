@@ -41,7 +41,7 @@ const AppStack = () => {
             <Drawer.Screen name="การให้บริการกำหนดเอง" component={ManualRecord} />
             <Drawer.Screen name="รายละเอียดผู้ป่วย" component={PatientDetails} />
             <Drawer.Screen name="สรุปรายปี" component={AnnualReport} />
-            <Drawer.Screen name="Login" component={Login} />
+            {/* <Drawer.Screen name="Login" component={Login} /> */}
         </Drawer.Navigator>
     );
 }

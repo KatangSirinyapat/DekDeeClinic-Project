@@ -212,14 +212,14 @@ export default function ManualRecord({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={tw`flex flex-row justify-end w-full mt-4 mr-8`}>
+                        {/* <View style={tw`flex flex-row justify-end w-full mt-4 mr-8`}>
                             <View style={styles.button}>
                                 <Button
                                     color="#4A235A"
                                     title="Print"
                                 />
                             </View>
-                        </View>
+                        </View> */}
                     </View>
                 </KeyboardAwareScrollView>
             </View>
