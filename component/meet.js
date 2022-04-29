@@ -123,7 +123,7 @@ export default function Meet({ navigation }) {
         let tmpString = tmp1Int.toString() + tmp2
 
         setTime(tmpString)
-        // console.log(tmp1Int);
+        // console.log(tmpString);
 
     };
 

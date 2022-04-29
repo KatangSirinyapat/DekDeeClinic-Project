@@ -11,7 +11,7 @@ import { TouchableWithoutFeedback } from 'react-native';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import Autocomplete_doctor from "./Autocomplete/autocomplete_doctor";
 import Autocomplete_patient from "./Autocomplete/autocomplete_patient";
-
+import moment from "moment";
 
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 
@@ -86,16 +86,25 @@ export default function VisitRecord({ navigation }) {
         let tmp0 = tmp.substring(0, 8)
         let tmp1 = tmp.substring(8, 11)
 
-        let int_tmp1 = parseInt(tmp1) + 1
+        let int_tmp1 = parseInt(tmp1) 
         tmp = tmp0 + int_tmp1
-        console.log(tmp);
+        if (int_tmp1 >= 0 && int_tmp1 <= 9) {
+            tmp = tmp0 + 0 + int_tmp1
+
+        }
+        else {
+            tmp = tmp0 + int_tmp1
+        }
+        // console.log(tmp);
+
+        let TrueDay_From_Calendar = new Date();
+        TrueDay_From_Calendar = moment(tmp).format('YYYY-MM-DD');
 
 
-        setDate(tmp.toString())
+        console.log(TrueDay_From_Calendar);
+        setDate(TrueDay_From_Calendar)
 
         // console.log(dataBoD.substring(1,11)); 
-
-
 
     };
 

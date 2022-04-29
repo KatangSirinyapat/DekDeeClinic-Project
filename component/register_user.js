@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TextInput, CheckBox, TouchableOpacity, Text, Image, Button } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import RNPickerSelect from "react-native-picker-select";
@@ -9,6 +9,7 @@ import axios from "axios";
 
 const URL_DOCTOR = `http://178.128.90.50:3333/users`
 
+
 export default function Register_users({ navigation }) {
 
     const [doctor_id, setDoctor_id] = useState('');
@@ -17,6 +18,8 @@ export default function Register_users({ navigation }) {
     const [email, setEmail] = useState('');
     const [telephone, setTelephone] = useState('');
     const [position, setPosition] = useState('');
+
+    const [doctors, setDoctors] = useState([])
 
     const [value, setValue] = React.useState('');
 
@@ -29,8 +32,6 @@ export default function Register_users({ navigation }) {
             email: email,
             telephone: telephone,
             position: position
-
-
         })
             .then(function (response) {
                 alert("บันทึกข้อมูลเสร็จสิ้น")
@@ -41,6 +42,35 @@ export default function Register_users({ navigation }) {
                 alert(error.message)
             })
     }
+
+    useEffect(() => {
+        getUsers()
+    }, [])
+
+    const getUsers = async () => {
+
+        let user = await axios.get(URL_DOCTOR)
+            .then(function (response) {
+
+                let obj = JSON.stringify(response.data)
+                let objJson = JSON.parse(obj)
+
+                
+                
+                setDoctors(objJson)
+                alert(doctors)
+                // alert(patients[0].clinic_number)
+            })
+            .catch(function (error) {
+                // alert(error.message);
+            })
+
+        
+        setDoctors(user.data)
+
+    }
+
+
 
 
 
@@ -57,32 +87,32 @@ export default function Register_users({ navigation }) {
                 <KeyboardAwareScrollView style={tw`flex w-1/2`}>
                     <View style={tw`flex flex-col justify-start items-start`}>
                         <View style={[tw`flex flex-col justify-center items-start w-1/3 ml-48`, styles.content]}>
-                            <Text style={[tw`font-semibold`,styles.font]}>Doctor ID *</Text>
+                            <Text style={[tw`font-semibold`, styles.font]}>Doctor ID *</Text>
                             <TextInput style={[tw`h-9 mt-2 w-full rounded-md pl-2`, styles.textbox]} placeholder="โปรดระบุเลขประจำตัวแพทย์"
                                 value={doctor_id}
                                 onChangeText={nextValue => setDoctor_id(nextValue)}
                             />
-                            <Text style={[tw`mt-3 font-semibold`,styles.font]}>ชื่อ *</Text>
+                            <Text style={[tw`mt-3 font-semibold`, styles.font]}>ชื่อ *</Text>
                             <TextInput style={[tw`h-9 mt-2 w-full rounded-md pl-2`, styles.textbox]} placeholder="โปรดระบุชื่อ"
                                 value={fname}
                                 onChangeText={nextValue => setFname(nextValue)}
                             />
-                            <Text style={[tw`mt-3 font-semibold`,styles.font]}>สกุล *</Text>
+                            <Text style={[tw`mt-3 font-semibold`, styles.font]}>สกุล *</Text>
                             <TextInput style={[tw`h-9 mt-2 w-full rounded-md pl-2`, styles.textbox]} placeholder="โปรดระบุนามสกุล"
                                 value={lname}
                                 onChangeText={nextValue => setLname(nextValue)}
                             />
-                            <Text style={[tw`mt-3 font-semibold`,styles.font]}>Email *</Text>
+                            <Text style={[tw`mt-3 font-semibold`, styles.font]}>Email *</Text>
                             <TextInput style={[tw`h-9 mt-2 w-full rounded-md pl-2`, styles.textbox]} placeholder="โปรดระบุ Email"
                                 value={email}
                                 onChangeText={nextValue => setEmail(nextValue)}
                             />
-                            <Text style={[tw`mt-3 font-semibold`,styles.font]}>เบอร์โทรศัพท์ *</Text>
+                            <Text style={[tw`mt-3 font-semibold`, styles.font]}>เบอร์โทรศัพท์ *</Text>
                             <TextInput style={[tw`h-9 mt-2 w-full rounded-md pl-2`, styles.textbox]} placeholder="โปรดระบุเบอร์โทรศัพท์"
                                 value={telephone}
                                 onChangeText={nextValue => setTelephone(nextValue)}
                             />
-                            <Text style={[tw`mt-3 font-semibold`,styles.font]}>ตำแหน่ง *</Text>
+                            <Text style={[tw`mt-3 font-semibold`, styles.font]}>ตำแหน่ง *</Text>
                             <View style={[tw`h-9 mt-2 w-full rounded-md pl-2 pt-2`, styles.textbox]}>
                                 <RNPickerSelect
                                     placeholder={{ label: "เลือกตำแหน่ง", value: null }}
@@ -109,9 +139,9 @@ export default function Register_users({ navigation }) {
                     </View>
                 </KeyboardAwareScrollView>
             </View>
-            
+
             <View style={styles.pic1}>
-                <Image source={require("../Icon/Regis-Doc/Doc01.png")}/>
+                <Image source={require("../Icon/Regis-Doc/Doc01.png")} />
             </View>
 
             <View style={[tw`flex flex-row w-full justify-evenly items-center`, styles.footer]} >
@@ -257,12 +287,12 @@ const styles = StyleSheet.create({
         borderColor: '#633974',
         borderWidth: 1,
     },
-    
+
     font: {
         color: '#633974',
     },
 
-    pic1:{
+    pic1: {
         position: "absolute",
         bottom: 15,
         right: 80,
