@@ -11,6 +11,7 @@ import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
 import { TouchableWithoutFeedback } from 'react-native';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 
+
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 const URL_DOCTOR = `http://178.128.90.50:3333/users`
 
@@ -107,8 +108,8 @@ export default function DocterMeet({ navigation }) {
             <DataTable key={index}>
 
                 <DataTable.Row >
-                    <DataTable.Cell style={tw`flex justify-center`}>{item.date_meet}</DataTable.Cell>
-                    <DataTable.Cell style={tw`flex justify-center`}>{item.time} ถึง {item.time_to}</DataTable.Cell>
+                    <DataTable.Cell style={tw`flex justify-center`}>{moment(item.date_meet).format("DD/MM/YYYY")}</DataTable.Cell>
+                    <DataTable.Cell style={tw`flex justify-center`}>{item.time } ถึง {item.time_to}</DataTable.Cell>
                     <DataTable.Cell style={tw`flex justify-center`}>{item.topic}</DataTable.Cell>
                     <DataTable.Cell style={tw`flex justify-center`}>{item.details}</DataTable.Cell>
                 </DataTable.Row>
@@ -117,7 +118,7 @@ export default function DocterMeet({ navigation }) {
         )))
 
 
-
+       
 
 
     }

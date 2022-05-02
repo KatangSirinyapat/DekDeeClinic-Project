@@ -5,7 +5,8 @@ import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import {  Icon, Datepicker } from '@ui-kitten/components';
+import moment from "moment";
 
 
 
@@ -21,7 +22,7 @@ export default function Register({ navigation }) {
     const [fname, setfname] = useState("");
     const [lname, setlname] = useState("");
     const [gender, setgender] = useState("");
-    const [bod, setbod] = useState("");
+    const [bod, setbod] = useState(new Date());
     const [age, setage] = useState("");
     const [telephone, settelephone] = useState("");
     const [drug_allergy, setdrug_allergy] = useState("");
@@ -74,13 +75,6 @@ export default function Register({ navigation }) {
         setMode(currentMode);
     };
 
-    const showDatepicker = () => {
-        showMode('date');
-    };
-
-    const showTimepicker = () => {
-        showMode('time');
-    };
 
 
 
@@ -94,7 +88,7 @@ export default function Register({ navigation }) {
                 fname: fname,
                 lname: lname,
                 gender: gender,
-                bod: bod,
+                bod: moment(bod).format("YYYY-MM-DD"),  
                 age: age,
                 telephone: telephone,
                 drug_allergy: drug_allergy,
@@ -122,6 +116,48 @@ export default function Register({ navigation }) {
             });
     };
 
+    
+    const CalendarIcon = (props) => (
+        <Icon {...props} name='calendar' />
+    );
+
+    const getMinStartDate = () => {
+        const minStartDate = new Date("01/01/1970");
+        minStartDate.setHours(0, 0, 0, 0);
+        return minStartDate;
+    };
+
+    const getMaxEndDate = () => {
+        const minStartDate = getMinStartDate();
+        const maxEndDate = new Date(minStartDate);
+        maxEndDate.setFullYear(maxEndDate.getFullYear() + 80);
+        return maxEndDate;
+    };
+
+
+    const onDate = (data) => {
+
+
+        let date_bod = moment(data).format("YYYY-MM-DD")
+        // let moment_bod = "moment(date_bod)"
+        
+        
+        // moment_bod =  moment(date_bod).format("YYYY-MM-DD")
+        setbod(data)
+        // console.log("DATA: ", data);
+        // console.log("FORM MEMENT: ", moment(data).format("YYYY-MM-DD"));
+        
+        let curDate = moment(new Date()).format("YYYY-MM-DD").toString() 
+        let tmpDate = moment(data).format("YYYY-MM-DD").toString()
+        
+        console.log("curDate: ", curDate);
+        console.log("TMP_DATE: ", tmpDate);
+        let tmpAge = parseInt(curDate.substring(0, 4).trim()) - parseInt(tmpDate.substring(0, 4).trim())
+        console.log("AGE: ",tmpAge);
+
+        setage(tmpAge.toString())
+        
+    }
 
 
     return (
@@ -164,30 +200,29 @@ export default function Register({ navigation }) {
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>วันเกิด</Text>
                                 {/* <TextInput 
                                     onChangeText={(text) => setbod(text)} /> */}
-                                <View style={[tw`h-9 mt-1 w-2/4 rounded-md`, styles.textbox]}>
-                                    <DateTimePicker themeVariant="light"
-                                        testID="dateTimePicker"
-                                        value={date}
-                                        mode={'date'}
-                                        is24Hour={true}
-                                        display="default"
-                                        onChange={onChange}
+                                <View style={tw`h-9 mt-1 w-2/4 rounded-md`}>
+                                    <Datepicker
+                                        min={getMinStartDate()}
+                                        max={getMaxEndDate()}
+                                        placeholder={moment(Date()).format('DD/MM/YYYY')}
+                                        date={bod}
+                                        onSelect={nextDate => onDate(nextDate)}
+                                        accessoryRight={CalendarIcon}
+
                                     />
                                 </View>
 
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/3`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>อายุ</Text>
-                                {/* <TextInput 
-                                    onChangeText={(text) => setage(text)} /> */}
+          
                                 <View style={[tw`h-9 mt-1 w-3/4 rounded-md pl-2`, styles.textbox]}>
                                     <Text style={tw`mt-2`}>{age} ปี</Text>
                                 </View>
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/4`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>เพศ</Text>
-                                {/* <TextInput sty[le={tw`h-9 mt-1 w-full rounded-md pl-2`,styles.textbox]}
-                          onChangeText={(text) => setgender(text)}/> */}
+           
                                 <View style={[tw`h-9 mt-1 w-full rounded-md pl-2 pt-2`, styles.textbox]}>
                                     <RNPickerSelect
                                         placeholder={{ label: "เลือกเพศ", value: null }}
@@ -206,37 +241,15 @@ export default function Register({ navigation }) {
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>ประวัติการแพ้ยา</Text>
                                 <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setdrug_allergy(text)} />
-                                {/* <View style={tw`h-9 mt-1 w-full rounded-md pl-2 py-2`}>
-                                    <RNPickerSelect
-                                        placeholder={{ label: "ประวัติการแพ้ยา", value: null }}
-                                        onValueChange={(value) => setdrug_allergy(value)}
-                                        items={[
-                                            { label: "ไม่มีประวัติการแพ้ยา", value: "ไม่มีประวัติการแพ้ยา" },
-                                            { label: "แพ้ยากลุ่ม Penicillins", value: "แพ้ยากลุ่ม Penicillins" },
-                                        ]}
-                                    />
-                                </View> */}
+             
                             </View>
                             <View style={tw`flex flex-col justify-start w-1/2 pl-10`}>
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>ประวัติโรคประจำตัว</Text>
                                 <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
                                     onChangeText={(text) => setcongenital_disease(text)} />
-                                {/* <View style={tw`h-9 mt-1 w-full rounded-md pl-2 py-2`}>
-                                    <RNPickerSelect
-                                        placeholder={{ label: "โรคประจำตัว", value: null }}
-                                        onValueChange={(value) => setcongenital_disease(value)}
-                                        items={[
-                                            { label: "ไม่มีโรคประจำตัว", value: "ไม่มีโรคประจำตัว" },
-                                            { label: "หอบหืด", value: "หอบหืด" },
-                                        ]}
-                                    />
-                                </View> */}
+               
                             </View>
-                            {/* <View style={tw`flex flex-col justify-start w-1/4`}>
-                                <Text style={[tw`font-semibold text-base`, styles.font]}>เบอร์โทรศัพท์</Text>
-                                <TextInput style={[tw`h-9 mt-1 w-full rounded-md pl-2`, styles.textbox]}
-                                    onChangeText={(text) => settelephone(text)} />
-                            </View> */}
+             
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-6`}>

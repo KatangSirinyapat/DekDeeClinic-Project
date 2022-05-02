@@ -8,7 +8,7 @@ import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
 import { TouchableWithoutFeedback } from 'react-native';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import { set } from "react-native-reanimated";
-
+import moment from "moment";
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 const URL_DOCTOR = `http://178.128.90.50:3333/users`
 const URL_MEET = `http://178.128.90.50:3333/meets`
@@ -305,7 +305,7 @@ export default function PatientMeet({ navigation }) {
                                 <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่นัดหมาย</Text>
                                 {/* <TextInput style={tw`h-9 mt-2 w-11/12  pl-2`} /> */}
                                 <View style={[tw`h-9 mt-2 w-11/12 pl-2`, styles.textshow]}>
-                                    <Text>{date_meet}</Text>
+                                    <Text>{(date_meet)? moment(date_meet).format("DD/MM/YYYY"): " "}</Text> 
                                 </View>
                             </View>
                             <View style={tw`flex flex-col w-1/2`}></View>

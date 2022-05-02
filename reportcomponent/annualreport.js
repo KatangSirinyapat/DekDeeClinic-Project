@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, Image} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import axios from 'axios';
-import { Layout, RangeDatepicker, Datepicker } from '@ui-kitten/components';
+import { Layout, RangeDatepicker, Datepicker, Icon } from '@ui-kitten/components';
 import moment from "moment";
 
 
@@ -17,7 +17,7 @@ export default function AnnualReport({ navigation }) {
 
     const [summary, setSummary] = useState({})
     const [range, setRange] = React.useState({});
-    const [costs, setCosts ] = useState()
+    const [costs, setCosts] = useState()
     const [service, setService] = useState()
     const [count_of_patient, setcount_of_patient] = useState()
 
@@ -84,75 +84,96 @@ export default function AnnualReport({ navigation }) {
 
     }
 
+    const getMinStartDate = () => {
+        const minStartDate = new Date("01/01/2010");
+        minStartDate.setHours(0, 0, 0, 0);
+        return minStartDate;
+    };
+
+    const getMaxEndDate = () => {
+        const minStartDate = getMinStartDate();
+        const maxEndDate = new Date(minStartDate);
+        maxEndDate.setFullYear(maxEndDate.getFullYear() + 30);
+        return maxEndDate;
+    };
+
+    const CalendarIcon = (props) => (
+        <Icon {...props} name='calendar' />
+    );
+
     // const navigation = useNavigation()
     return (
-         <View style={tw`flex h-full items-center`}>
+        <View style={tw`flex h-full items-center`}>
 
-        <View style={[tw`flex w-full justify-center items-center`,styles.containertop]}> 
-          <View style={[tw`w-full`,styles.top]}>
-            <Text style={[tw`font-bold`,styles.title]}>สรุปรายปี</Text> 
-          </View>
-        </View>
+            <View style={[tw`flex w-full justify-center items-center`, styles.containertop]}>
+                <View style={[tw`w-full`, styles.top]}>
+                    <Text style={[tw`font-bold`, styles.title]}>สรุปรายปี</Text>
+                </View>
+            </View>
 
             <View style={[tw`w-4/5 ml-20`, styles.menu]}>
                 <KeyboardAwareScrollView style={tw``}>
                     <View style={[tw`flex flex-col justify-between items-start p-10 rounded-xl`, styles.content]}>
                         <View style={tw`flex flex-row w-full justify-start items-center`}>
-                            <Image source={require("../Icon/Annual/icons8-calendar-plus-30.png")}/>
-                            <Text style={[tw`font-semibold text-lg ml-2`,styles.font]}>ช่วงในการให้บริการ</Text>
+                            <Image source={require("../Icon/Annual/icons8-calendar-plus-30.png")} />
+                            <Text style={[tw`font-semibold text-lg ml-2`, styles.font]}>ช่วงในการให้บริการ</Text>
                         </View>
 
                         <View style={tw`flex flex-row justify-start w-full ml-10`}>
-                            <View style={tw`flex flex-row justify-start items-center w-1/3`}>
-                                <Text style={[tw`font-semibold text-base mr-4`,styles.font]}>วันที่</Text>
+                            <View style={tw`flex flex-row justify-start items-center w-1/2`}>
+                                <Text style={[tw`font-semibold text-base mr-4`, styles.font]}>วันที่</Text>
                                 <RangeDatepicker
-                                        style={styles.textbox}
-                                        range={range}
-                                        onSelect={nextRange => onRange(nextRange)}
-                                    />
+                                    placeholder={"DD/MM/YYYY - DD/MM/YYYY"}
+                                    min={getMinStartDate()}
+                                    max={getMaxEndDate()}
+                                    style={styles.textbox}
+                                    range={range}
+                                    onSelect={nextRange => onRange(nextRange)}
+                                    accessoryRight={CalendarIcon}
+                                />
                             </View>
                         </View>
 
 
                         <View style={tw`flex flex-row justify-between w-full mt-4 ml-10`}>
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`,styles.font]}>จำนวนการให้บริการทั้งหมด</Text>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>จำนวนการให้บริการทั้งหมด</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`,styles.textshow]}>{service}</Text>
+                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`, styles.textshow]}>{service}</Text>
 
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4 ml-10`}>
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`,styles.font]}>จำนวนผู้เข้ารับการรักษา</Text>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>จำนวนผู้เข้ารับการรักษา</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`,styles.textshow]}>{count_of_patient}</Text>
+                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`, styles.textshow]}>{count_of_patient}</Text>
                             </View>
                         </View>
-                        
+
                         <View style={tw`flex flex-row w-full justify-start items-center mt-4`}>
-                            <Image source={require("../Icon/Annual/icons8-calendar-30.png")}/>
-                            <Text style={[tw`font-semibold text-lg ml-2`,styles.font]}>วันที่เริ่มต้นใช้งาน - ปัจจุบัน</Text>
+                            <Image source={require("../Icon/Annual/icons8-calendar-30.png")} />
+                            <Text style={[tw`font-semibold text-lg ml-2`, styles.font]}>วันที่เริ่มต้นใช้งาน - ปัจจุบัน</Text>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4 ml-10`}>
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`,styles.font]}>จำนวนการให้บริการทั้งหมด</Text>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>จำนวนการให้บริการทั้งหมด</Text>
                             </View>
                             <View style={tw`flex flex-row items-center w-3/5`}>
-                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`,styles.textshow]}>{summary.service}</Text>
+                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`, styles.textshow]}>{summary.service}</Text>
                             </View>
                         </View>
 
                         <View style={tw`flex flex-row justify-between w-full mt-4 ml-10`}>
                             <View style={tw`flex flex-row justify-start items-center w-2/5`}>
-                                <Text style={[tw`font-semibold text-base`,styles.font]}>จำนวนผู้เข้ารับการรักษา</Text>
+                                <Text style={[tw`font-semibold text-base`, styles.font]}>จำนวนผู้เข้ารับการรักษา</Text>
                             </View>
                             <View style={tw`flex flex-row  items-center w-3/5`}>
-                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`,styles.textshow]}>{summary.count_of_patient}</Text>
+                                <Text style={[tw`h-8 w-2/4 rounded-md pl-2 pt-2`, styles.textshow]}>{summary.count_of_patient}</Text>
                             </View>
                         </View>
 
@@ -161,7 +182,7 @@ export default function AnnualReport({ navigation }) {
             </View>
 
             <View style={styles.pic1}>
-                <Image source={require("../Icon/Annual/Doc-Report.png")}/>
+                <Image source={require("../Icon/Annual/Doc-Report.png")} />
             </View>
 
             <View style={[tw`flex flex-row w-full justify-evenly items-center`, styles.footer]} >
@@ -257,14 +278,14 @@ const styles = StyleSheet.create({
     },
 
     textbox: {
-       width: 218,
+        width: 272,
     },
 
     font: {
         color: '#633974',
     },
 
-    pic1:{
+    pic1: {
         position: "absolute",
         bottom: 45,
         right: 0,
@@ -303,7 +324,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: "#4A235A",
         marginLeft: 12,
-        
+
 
     },
 });

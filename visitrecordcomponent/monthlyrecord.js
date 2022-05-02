@@ -3,9 +3,8 @@ import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import axios from "axios";
-import DateTimePicker from '@react-native-community/datetimepicker';
-import MonthPicker from 'react-native-month-year-picker';
 import moment from "moment";
+import { Datepicker, Icon, Layout } from '@ui-kitten/components';
 
 const URL_COST = `http://178.128.90.50:3333/costs`
 
@@ -75,13 +74,13 @@ export default function MonthlyRecord({ navigation }) {
 
         costs.map((item, index) => {
             tmp = item.date
-            tmp = tmp.substring(0, 7)
+            // tmp = tmp.substring(0, 7)
             // console.log("------------");
-            console.log(tmp);
-            console.log(date);
-            let input_date =  moment(date).format('YYYY/MM/DD');
-            let database_date = moment(item.date).format('YYYY/MM/DD');
-            if (tmp == date) {
+            console.log("TMP: ", tmp);
+            console.log("DATE: ", date);
+            let input_date = moment(date).format('YYYY/MM/');
+            let database_date = moment(item.date).format('YYYY/MM/');
+            if (input_date == database_date) {
 
                 tmp_cost_of_doctor += item.cost_of_doctor
                 tmp_cost_of_medicine += item.cost_of_medicine
@@ -129,6 +128,23 @@ export default function MonthlyRecord({ navigation }) {
 
     }
 
+    const CalendarIcon = (props) => (
+        <Icon {...props} name='calendar' />
+    );
+
+    const getMinStartDate = () => {
+        const minStartDate = new Date("01/01/2010");
+        minStartDate.setHours(0, 0, 0, 0);
+        return minStartDate;
+    };
+
+    const getMaxEndDate = () => {
+        const minStartDate = getMinStartDate();
+        const maxEndDate = new Date(minStartDate);
+        maxEndDate.setFullYear(maxEndDate.getFullYear() + 30);
+        return maxEndDate;
+    };
+
     return (
         <View style={tw`flex h-full items-center`}>
 
@@ -142,18 +158,19 @@ export default function MonthlyRecord({ navigation }) {
                 <KeyboardAwareScrollView style={tw``}>
                     <View style={[tw`flex flex-col items-center p-4`, styles.content]}>
                         <View style={tw`flex flex-row w-4/5 items-center justify-center mt-10 pr-10`}>
-                            <View style={tw`flex flex-row items-center w-3/5 pr-20`}>
+                            <View style={tw`flex flex-row items-center w-3/5`}>
                                 <Text style={[tw`font-semibold text-lg`, styles.font]}>เดือนที่ต้องการทราบค่าบริการ</Text>
-                                <DateTimePicker themeVariant="light" style={tw`h-10 w-1/2`}
-                                    testID="dateTimePicker"
-                                    value={date1}
-                                    mode={'date'}
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={onChange}
+                                <Datepicker
+                                    min={getMinStartDate()}
+                                    max={getMaxEndDate()}
+                                    placeholder={moment(Date()).format('DD/MM/YYYY')}
+                                    date={date}
+                                    onSelect={nextDate => setDate(nextDate)}
+                                    accessoryRight={CalendarIcon}
+                                    style={styles.textboxDate}
                                 />
 
-                   
+
 
                             </View>
                             <View style={styles.button}>
@@ -401,6 +418,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 6,
     },
+
+    textboxDate: {
+        paddingLeft: 10,
+        width: 170,
+    },
+
 
     font: {
         color: '#633974',

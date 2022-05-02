@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import tw from "tailwind-react-native-classnames";
 import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
+import { Autocomplete, AutocompleteItem, Icon, Datepicker } from '@ui-kitten/components';
 import { Keyboard, Platform } from 'react-native';
 import { concat, set } from "react-native-reanimated";
 import { TouchableWithoutFeedback } from 'react-native';
@@ -12,6 +12,7 @@ import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import Autocomplete_doctor from "./Autocomplete/autocomplete_doctor";
 import Autocomplete_patient from "./Autocomplete/autocomplete_patient";
 import moment from "moment";
+
 
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 
@@ -65,66 +66,9 @@ export default function VisitRecord({ navigation }) {
     const [cost_of_psychologist2, setCost_of_psychologist2] = useState(0)
     const [cost_of_psychologist3, setCost_of_psychologist3] = useState(0)
 
-    //Date time
-    const [date1, setDate1] = useState(new Date());
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
-
-    let tmp_total =0;
-
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate1(currentDate);
-
-        let curDate = new Date().toString()
-        let tmpDate = currentDate.toString()
-
-        let data = currentDate.toJSON()
-        let dataBoD = JSON.stringify(data);
-        let tmp = dataBoD.substring(1, 11)
-        let tmp0 = tmp.substring(0, 8)
-        let tmp1 = tmp.substring(8, 11)
-
-        let int_tmp1 = parseInt(tmp1) 
-        tmp = tmp0 + int_tmp1
-        if (int_tmp1 >= 0 && int_tmp1 <= 9) {
-            tmp = tmp0 + 0 + int_tmp1
-
-        }
-        else {
-            tmp = tmp0 + int_tmp1
-        }
-        // console.log(tmp);
-
-        let TrueDay_From_Calendar = new Date();
-        TrueDay_From_Calendar = moment(tmp).format('YYYY/MM/DD');
 
 
-        console.log(TrueDay_From_Calendar);
-        setDate(TrueDay_From_Calendar)
-
-        // console.log(dataBoD.substring(1,11)); 
-
-    };
-
-    const findPatient = () => {
-        patients.map((item, index) => {
-            if (item.clinic_number == idPatient) {
-                // setPatient(item)
-                setFname_patient(item.fname)
-                setLname_patient(item.lname)
-                setAge_patient(item.age)
-            }
-            else if (item.clinic_number != idPatient) {
-                // alert('กรุณากรอกรหัสประจำตัวแพทย์ให้ถูกต้อง')
-
-                console.log("ItemIDpatient: " + item.clinic_number);
-            }
-        })
-    }
-
-
+    let tmp_total = 0;
 
     useEffect(() => {
         getPatient(),
@@ -137,19 +81,6 @@ export default function VisitRecord({ navigation }) {
         return result;
     }
 
-    const calculate_money = () => {
-        let result;
-
-        if (bank_transfer > 0) {
-            result = total - bank_transfer
-            setCash(result)
-        }
-        else if (cash > 0) {
-            result = total - cash
-            setBank_transfer(result)
-        }
-
-    }
 
     const calculate_total_cost = () => {
 
@@ -159,7 +90,7 @@ export default function VisitRecord({ navigation }) {
             cost_of_practitioner +
             cost_of_occupational_therapist +
             cost_of_teacher
-        
+
         tmp_total = result
 
         return result
@@ -203,56 +134,47 @@ export default function VisitRecord({ navigation }) {
     }
 
     const check_bank_transfer = (data) => {
-        
-        if(+data > +tmp_total)
-        {
+
+        if (+data > +tmp_total) {
             alert("กรุณากรอกยอดเงินให้ถูกต้อง")
         }
-        else if (data < tmp_total)
-        {
+        else if (data < tmp_total) {
             setBank_transfer(data)
-            let cash  =  tmp_total - data
+            let cash = tmp_total - data
             setCash(cash.toString())
         }
-        else if(data == tmp_total)
-        {
+        else if (data == tmp_total) {
             setCash(0)
         }
-        else if(data == 0)
-        {
+        else if (data == 0) {
             setCash(tmp_total.toString())
         }
     }
 
     const check_cash = (data) => {
 
-        if(+data > +tmp_total)
-        {
+        if (+data > +tmp_total) {
             alert("กรุณากรอกยอดเงินให้ถูกต้อง")
         }
-        else if(+data < +tmp_total)
-        {
+        else if (+data < +tmp_total) {
             setCash(data)
-            let bank_transfer  =  tmp_total - data
+            let bank_transfer = tmp_total - data
             setBank_transfer(bank_transfer.toString())
         }
-        else if(data == tmp_total)
-        {
+        else if (data == tmp_total) {
             setBank_transfer(0)
         }
-        else if(data == 0)
-        {
+        else if (data == 0) {
             setBank_transfer(tmp_total.toString())
         }
     }
 
     const postCost = async () => {
 
-        
-        if( parseInt(cash) + parseInt(bank_transfer)  === tmp_total)
-        {
+
+        if (parseInt(cash) + parseInt(bank_transfer) === tmp_total) {
             await axios.post(URL_COST, {
-                date: moment(date).format('YYYY-MM-DD'), 
+                date: moment(date).format('YYYY-MM-DD'),
                 cost_of_doctor: cost_of_doctor,
                 cost_of_medicine: cost_of_medicine,
                 cost_of_psychologist: calculate_cost_of_psychologist(),
@@ -264,18 +186,18 @@ export default function VisitRecord({ navigation }) {
                 total: calculate_total_cost(),
                 user_id: idDoctor,
                 patient_id: idPatient,
-    
-    
+
+
             })
                 .then(function (response) {
                     alert("บันทึกข้อมูลเสร็จสิ้น")
-    
+
                 })
                 .catch(function (error) {
                     alert(error.message)
                 })
         }
-        else{
+        else {
             alert("กรุณากรอกข้อมูลให้ถูกต้อง")
         }
     }
@@ -385,6 +307,23 @@ export default function VisitRecord({ navigation }) {
         />
     );
 
+    const CalendarIcon = (props) => (
+        <Icon {...props} name='calendar' />
+    );
+
+    const getMinStartDate = () => {
+        const minStartDate = new Date("01/01/2010");
+        minStartDate.setHours(0, 0, 0, 0);
+        return minStartDate;
+    };
+
+    const getMaxEndDate = () => {
+        const minStartDate = getMinStartDate();
+        const maxEndDate = new Date(minStartDate);
+        maxEndDate.setFullYear(maxEndDate.getFullYear() + 30);
+        return maxEndDate;
+    };
+
 
     return (
 
@@ -402,15 +341,14 @@ export default function VisitRecord({ navigation }) {
                             <View style={tw`flex flex-row justify-between w-full`}>
                                 <View style={tw`flex flex-col w-1/3 mt-2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่</Text>
-                                    <View style={[tw`flex h-10 mt-1 w-11/12 justify-center`, styles.textbox]}>
-                                        <DateTimePicker themeVariant="light"
-                                            style={tw`mr-32`}
-                                            testID="dateTimePicker"
-                                            value={date1}
-                                            mode={'date'}
-                                            is24Hour={true}
-                                            display="default"
-                                            onChange={onChange}
+                                    <View style={tw`flex h-10 mt-1 w-11/12 justify-center`}>
+                                        <Datepicker
+                                            min={getMinStartDate()}
+                                            max={getMaxEndDate()}
+                                            placeholder={moment(Date()).format('DD/MM/YYYY')}
+                                            date={date}
+                                            onSelect={nextDate => setDate(nextDate)}
+                                            accessoryRight={CalendarIcon}
                                         />
                                     </View>
                                 </View>
@@ -523,7 +461,7 @@ export default function VisitRecord({ navigation }) {
                                     </View>
                                 </View>
 
-                                
+
 
                                 <View style={tw`flex flex-row justify-between w-full mt-4`}>
                                     <View style={tw`flex flex-row justify-start items-center w-1/4`}>
@@ -548,7 +486,7 @@ export default function VisitRecord({ navigation }) {
                                     </View>
                                 </View>
 
-                              
+
                                 <View style={tw`flex flex-row justify-center w-full mt-4 pr-16`}>
                                     <View style={tw`flex flex-row items-center`}>
                                         <Text style={[tw`font-semibold text-lg`, styles.font]}>รวมทั้งหมด</Text>
@@ -589,14 +527,14 @@ export default function VisitRecord({ navigation }) {
                                     <View style={tw`flex flex-row items-center w-1/3 ml-4`}>
                                         <TextInput style={[tw`h-8 w-full pl-2`, styles.textbox]}
                                             onChangeText={text => check_cash(parseInt(text))}
-                                            value= {cash}
+                                            value={cash}
                                             placeholder="จำนวนเงิน"
                                         />
                                         <Text style={[tw`font-semibold text-base pl-2`, styles.font]}>บาท</Text>
                                     </View>
                                 </View>
 
-                              
+
                             </View>
 
                             <View style={tw`flex flex-row justify-end w-full mt-4 mr-8`}>

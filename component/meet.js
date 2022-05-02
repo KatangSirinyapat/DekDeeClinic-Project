@@ -7,8 +7,9 @@ import axios from "axios";
 import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
-import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
+import { Autocomplete, AutocompleteItem, Icon, Datepicker } from '@ui-kitten/components';
 import moment from "moment";
+
 
 import { TouchableWithoutFeedback } from 'react-native';
 
@@ -47,7 +48,7 @@ export default function Meet({ navigation }) {
     //MEET
     const [details, setDetails] = useState("")
     const [topic, setTopic] = useState("")
-    const [date_meet, setDate_meet] = useState("")
+    const [date_meet, setDate_meet] = useState(new Date())
     const [time, setTime] = useState("")
     const [time_to, setTime_to] = useState("")
 
@@ -57,33 +58,7 @@ export default function Meet({ navigation }) {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate(currentDate);
-
-        let curDate = new Date().toString()
-        let tmpDate = currentDate.toString()
-
-        let data = currentDate.toJSON()
-        let dataBoD = JSON.stringify(data);
-        let tmp = dataBoD.substring(1, 11)
-        let tmp0 = tmp.substring(0, 8)
-        let tmp1 = tmp.substring(8, 11)
-        console.log(tmp);
-        // let int_tmp1 = parseInt(tmp1)+1 
-        // tmp = tmp0+int_tmp1
-
-        let TrueDay_From_Calendar = new Date();
-        TrueDay_From_Calendar = moment(tmp).format('YYYY/MM/DD');
-        console.log(TrueDay_From_Calendar);
-        setDate_meet(TrueDay_From_Calendar)
-        // console.log(date_meet);
-        // console.log(dataBoD.substring(1,11)); 
-
-
-
-    };
+  
 
     const onChangeTime = (event, selectedDate) => {
         const currentDate = selectedDate || date.toLocaleDateString();
@@ -166,11 +141,11 @@ export default function Meet({ navigation }) {
                 break;
         }
         let tmpString = tmp1Int.toString() + tmp2
-
-        setTime_to(tmpString)
+        
+        setTime_to(tmpString) 
         // console.log(tmp1Int);
-        // console.log(tmpString);
-
+        console.log(tmpString);
+        // console.log(date_meet);
     };
 
     const showMode = (currentMode) => {
@@ -178,13 +153,7 @@ export default function Meet({ navigation }) {
         setMode(currentMode);
     };
 
-    const showDatepicker = () => {
-        showMode('date');
-    };
 
-    const showTimepicker = () => {
-        showMode('time');
-    };
 
 
 
@@ -200,34 +169,9 @@ export default function Meet({ navigation }) {
 
     }
 
-    const updateQuery = (input) => {
-        setIdDoctor(parseInt(input));
-        findDoctor()
-        console.log('---------------------');
-        // console.log('ID: ' + idDoctor);
-        // console.log('DoctorId: ' + doctor.doctor_id);
-    }
+  
 
-    const updateIdPatient = (input) => {
-        setIdPatient(parseInt(input));
-        findPatient()
-        console.log('---------------------');
-        // console.log('ID: ' + idPatient);
-        // console.log('PatientId: ' + patient.clinic_number);
-    }
 
-    const findPatient = () => {
-        patients.map((item, index) => {
-            if (item.clinic_number == idPatient) {
-                setPatient(item)
-            }
-            else if (item.doctor_id != idPatient) {
-                // alert('กรุณากรอกรหัสประจำตัวแพทย์ให้ถูกต้อง')
-
-                console.log("ItemIDpatient: " + item.clinic_number);
-            }
-        })
-    }
 
 
     const findDoctor = () => {
@@ -286,7 +230,7 @@ export default function Meet({ navigation }) {
         axios.post(URL_MEET, {
             details: details,
             topic: topic,
-            date_meet: date_meet,
+            date_meet:    moment(date_meet).format("YYYY-MM-DD"), 
             time: time,
             time_to: time_to,
             user_id: idDoctor,
@@ -419,9 +363,24 @@ export default function Meet({ navigation }) {
         />
     );
 
+    const CalendarIcon = (props) => (
+        <Icon {...props} name='calendar' />
+    );
 
+    const getMinStartDate = () => {
+        const minStartDate = new Date("01/01/2010");
+        minStartDate.setHours(0, 0, 0, 0);
+        return minStartDate;
+    };
 
-
+    const getMaxEndDate = () => {
+        const minStartDate = getMinStartDate();
+        const maxEndDate = new Date(minStartDate);
+        maxEndDate.setFullYear(maxEndDate.getFullYear() + 30);
+        return maxEndDate;
+    };
+    
+   
     return (
         <View style={tw`flex h-full items-center`}>
 
@@ -481,15 +440,15 @@ export default function Meet({ navigation }) {
                             <View style={tw`flex flex-row justify-between w-full mt-2`}>
                                 <View style={tw`flex flex-col w-1/2`}>
                                     <Text style={[tw`font-semibold text-base`, styles.font]}>วันที่นัดหมาย</Text>
-                                    <View style={[tw`h-10 mt-1 w-1/3 justify-center`, styles.textbox]}>
-                                        <DateTimePicker themeVariant="light"
-                                            style={tw``}
-                                            testID="dateTimePicker"
-                                            value={date}
-                                            mode={'date'}
-                                            is24Hour={true}
-                                            display="default"
-                                            onChange={onChange}
+                                    <View style={tw`h-10 mt-1 w-1/3 justify-center`}>
+                                        <Datepicker
+                                            min={getMinStartDate()}
+                                            max={getMaxEndDate()}
+                                            placeholder={moment(Date()).format('DD/MM/YYYY')}
+                                            date={date_meet}
+                                            onSelect={nextDate => setDate_meet(nextDate)}
+                                            accessoryRight={CalendarIcon}
+
                                         />
                                     </View>
                                 </View>
@@ -695,7 +654,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
     },
 
-    font: {  
+    font: {
         color: '#633974',
     },
 

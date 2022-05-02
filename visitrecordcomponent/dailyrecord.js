@@ -5,6 +5,7 @@ import tw from "tailwind-react-native-classnames";
 import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from "moment";
+import { Datepicker, Icon, Layout } from '@ui-kitten/components';
 
 const URL_COST = `http://178.128.90.50:3333/costs`
 
@@ -29,55 +30,13 @@ export default function DailyRecord({ navigation }) {
     const [cash, setCash] = useState(0)
     const [total, setTotal] = useState(0)
 
-    //Date time
-    const [date1, setDate1] = useState(new Date());
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate1(currentDate);
-
-        let curDate = new Date().toString()
-        let test = new Date().toLocaleDateString()
-        let tmpDate = currentDate.toString()
-
-        let data = currentDate.toJSON()
-        let dataBoD = JSON.stringify(data);
-        let tmp = dataBoD.substring(1, 11)
-        let tmp0 = tmp.substring(0, 8)
-        let tmp1 = tmp.substring(8, 11)
-
-        let int_tmp1 = parseInt(tmp1)
-        // console.log(int_tmp1);
-        if (int_tmp1 >= 0 && int_tmp1 <= 9) {
-            tmp = tmp0 + 0 + int_tmp1
-
-        }
-        else {
-            tmp = tmp0 + int_tmp1
-        }
-
-        let TrueDay_From_Calendar = new Date();
-        TrueDay_From_Calendar = moment(tmp).format('YYYY-MM-DD');
-
-        console.log(TrueDay_From_Calendar);
-
-        setDate(TrueDay_From_Calendar)
-
-    };
 
 
     useEffect(() => {
         getCost()
     }, [])
 
-
-    const inputDate = (input) => {
-        setDate(input)
-        // findCost()
-    }
 
     const findCost = async () => {
 
@@ -86,10 +45,10 @@ export default function DailyRecord({ navigation }) {
         await costs.map((item, index) => {
 
             console.log("Test:" + date);
-         let input_date =  moment(date).format('YYYY/MM/DD');
-         let database_date = moment(item.date).format('YYYY/MM/DD');
+            let input_date = moment(date).format('YYYY/MM/DD');
+            let database_date = moment(item.date).format('YYYY/MM/DD');
             if (database_date === input_date) {
-                
+
                 setCost(item)
                 console.log("T" + index);
                 costOBJ.push(item)
@@ -99,10 +58,10 @@ export default function DailyRecord({ navigation }) {
 
             }
             else {
-                
+
                 console.log("F" + index);
                 console.log("F: " + item.date);
-                console.log(date.concat("T00:00:00.007Z"));
+                console.log(date);
             }
 
         })
@@ -167,6 +126,23 @@ export default function DailyRecord({ navigation }) {
 
     }
 
+    const CalendarIcon = (props) => (
+        <Icon {...props} name='calendar' />
+    );
+
+    const getMinStartDate = () => {
+        const minStartDate = new Date("01/01/2010");
+        minStartDate.setHours(0, 0, 0, 0);
+        return minStartDate;
+    };
+
+    const getMaxEndDate = () => {
+        const minStartDate = getMinStartDate();
+        const maxEndDate = new Date(minStartDate);
+        maxEndDate.setFullYear(maxEndDate.getFullYear() + 30);
+        return maxEndDate;
+    };
+
 
 
 
@@ -185,13 +161,18 @@ export default function DailyRecord({ navigation }) {
                         <View style={tw`flex flex-row w-4/5 items-center justify-center mt-10 pr-10`}>
                             <View style={tw`flex flex-row items-center w-3/5 pr-20`}>
                                 <Text style={[tw`font-semibold text-lg`, styles.font]}>วันที่ที่ต้องการทราบค่าบริการ</Text>
-                                <DateTimePicker themeVariant="light" style={tw`h-10 w-1/2`}
-                                    testID="dateTimePicker"
-                                    value={date1}
-                                    mode={'date'}
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={onChange}
+
+
+                                <Datepicker
+                                    
+                                    min={getMinStartDate()}
+                                    max={getMaxEndDate()}
+                                    placeholder={moment(Date()).format('DD/MM/YYYY')}
+                                    date={date}
+                                    onSelect={nextDate => setDate(nextDate)}
+                                    accessoryRight={CalendarIcon}
+                                    style={styles.textboxDate}
+
                                 />
                             </View>
                             <View style={styles.button}>
@@ -438,6 +419,11 @@ const styles = StyleSheet.create({
         borderColor: '#633974',
         borderWidth: 1,
         borderRadius: 6,
+    },
+
+    textboxDate: {
+        paddingLeft: 10,
+        width: 170,
     },
 
     font: {

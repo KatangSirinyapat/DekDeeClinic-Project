@@ -7,7 +7,7 @@ import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
 
 import { TouchableWithoutFeedback } from 'react-native';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
-
+import moment from "moment";
 const URL_PATIENT = `http://178.128.90.50:3333/patients`
 
 const StarIcon = (props) => (
@@ -344,7 +344,7 @@ export default function PatientProfile({ navigation }) {
                                 <View style={tw`flex flex-col justify-start w-1/3`}>
                                     <Text style={[tw`font-semibold text-base`,styles.font]}>วันเกิด </Text>
                                     <View style={[tw`flex justify-center h-8 mt-2 w-3/4 rounded-md pl-2`,styles.textbox]}>
-                                        <Text>{bod}</Text>
+                                        <Text>{(bod)?moment(bod).format("DD/MM/YYYY"):" "}</Text> 
                                     </View>
 
                                 </View>

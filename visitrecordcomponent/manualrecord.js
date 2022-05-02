@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, CheckBox, TouchableOpacity, 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "tailwind-react-native-classnames";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Layout, RangeDatepicker, Datepicker } from '@ui-kitten/components';
+import { Layout, RangeDatepicker, Datepicker, Icon } from '@ui-kitten/components';
 import moment from "moment";
 import axios from "axios";
 import { flex } from "styled-system";
@@ -69,6 +69,23 @@ export default function ManualRecord({ navigation }) {
         // setRange2(nextRange)
     }
 
+    const getMinStartDate = () => {
+        const minStartDate = new Date("01/01/2010");
+        minStartDate.setHours(0, 0, 0, 0);
+        return minStartDate;
+    };
+
+    const getMaxEndDate = () => {
+        const minStartDate = getMinStartDate();
+        const maxEndDate = new Date(minStartDate);
+        maxEndDate.setFullYear(maxEndDate.getFullYear() + 30);
+        return maxEndDate;
+    };
+
+    const CalendarIcon = (props) => (
+        <Icon {...props} name='calendar'/>
+      );
+
     return (
         <View style={tw`flex h-full items-center`}>
 
@@ -81,13 +98,18 @@ export default function ManualRecord({ navigation }) {
                 <KeyboardAwareScrollView style={tw``}>
                     <View style={[tw`flex flex-col items-center p-4`, styles.content]}>
                         <View style={tw`flex flex-row w-full items-center justify-center mt-10`}>
-                            <View style={tw`flex flex-row items-center justify-center w-1/2`}>
+                            <View style={tw`flex flex-row items-center justify-center w-full`}>
                                 <Text style={[tw`font-semibold text-lg ml-8`, styles.font]}>ช่วงวันที่ที่ต้องการทราบค่าบริการ</Text>
-                                <View style={tw`flex flex-row w-3/5 justify-start items-center ml-4`}>
-                                    <RangeDatepicker style={styles.textbox}
+                                <View style={tw`flex flex-row justify-start items-center ml-4`}>
+                                    <RangeDatepicker
+                                        placeholder={"DD/MM/YYYY - DD/MM/YYYY"}
+                                        min={getMinStartDate()}
+                                        max={getMaxEndDate()}
+                                        style={styles.textbox}
                                         range={range}
                                         onSelect={nextRange => onRange(nextRange)}
-                                        
+                                        accessoryRight={CalendarIcon}
+
                                     />
                                 </View>
                             </View>
@@ -327,7 +349,7 @@ const styles = StyleSheet.create({
     },
 
     textbox: {
-        width: 218,
+        width: 272,
     },
 
     font: {
